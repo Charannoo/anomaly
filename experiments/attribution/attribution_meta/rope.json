@@ -1,0 +1,135 @@
+{
+  "category": "rope",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "rope/train/good/000",
+    "rope/train/good/001",
+    "rope/train/good/002",
+    "rope/train/good/003",
+    "rope/train/good/004",
+    "rope/train/good/005",
+    "rope/train/good/006",
+    "rope/train/good/007",
+    "rope/train/good/008",
+    "rope/train/good/009",
+    "rope/train/good/010",
+    "rope/train/good/011",
+    "rope/train/good/012",
+    "rope/train/good/013",
+    "rope/train/good/014",
+    "rope/train/good/015",
+    "rope/train/good/016",
+    "rope/train/good/017",
+    "rope/train/good/018",
+    "rope/train/good/019",
+    "rope/train/good/020",
+    "rope/train/good/021",
+    "rope/train/good/022",
+    "rope/train/good/023",
+    "rope/train/good/024",
+    "rope/train/good/025",
+    "rope/train/good/026",
+    "rope/train/good/027",
+    "rope/train/good/028",
+    "rope/train/good/029",
+    "rope/train/good/030",
+    "rope/train/good/031",
+    "rope/train/good/032",
+    "rope/train/good/033",
+    "rope/train/good/034",
+    "rope/train/good/035",
+    "rope/train/good/036",
+    "rope/train/good/037",
+    "rope/train/good/038",
+    "rope/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.16272944957017899,
+      "scale": 0.05328497379273176
+    },
+    "depth": {
+      "median": 0.02006608061492443,
+      "scale": 0.017568668312206864
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

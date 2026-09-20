@@ -1,0 +1,36 @@
+# Environment & dependencies
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+third_party/
+
+# Large binary checkpoints & models
+*.pth
+*.pt
+*.onnx
+*.bin
+*.zip
+*.tar
+*.gz
+checkpoints/
+
+# Large prediction & attribution binary arrays (>100MB)
+*.npz
+experiments/attribution/attribution_data/
+experiments/high_accuracy/kaggle_output/
+experiments/high_accuracy/features/
+experiments/high_accuracy/memory_banks/
+experiments/high_accuracy/predictions/
+experiments/high_accuracy/runs/
+experiments/predictions/
+experiments/artifacts/
+data/
+features_dinov2/
+rate

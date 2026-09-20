@@ -1,0 +1,159 @@
+{
+  "sample_id": "cookie_combined_000",
+  "category": "cookie",
+  "decision": "anomalous",
+  "image_anomaly_score": 0.65715,
+  "detection_confidence_percent": 79.4,
+  "operating_threshold": 0.5,
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 2,
+  "defects": [
+    {
+      "id": 1,
+      "importance_rank": 1,
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          145,
+          79
+        ],
+        "centroid_normalized": [
+          0.6498,
+          0.3534
+        ],
+        "relative_to_object": true
+      },
+      "size": {
+        "width_px": 19,
+        "height_px": 20,
+        "area_px": 303,
+        "area_fraction_object_percent": 0.61,
+        "major_length_mm": 9.69,
+        "minor_length_mm": 8.12,
+        "bounding_depth_mm": 0.43,
+        "projected_area_mm2": 61.85,
+        "surface_area_3d_mm2": 68.38,
+        "physical_units_available": true
+      },
+      "shape": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.24,
+        "circularity": 1.0,
+        "solidity": 1.0,
+        "extent": 0.8,
+        "eccentricity": 0.59,
+        "orientation_deg": 49.4
+      },
+      "geometry": {
+        "label": "rough raised protrusion",
+        "mean_deviation": 0.446,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 0.68,
+        "rms_deviation": 0.463,
+        "surface_z_score": 8.93,
+        "roughness_ratio": 2.97,
+        "planarity": 0.699,
+        "surface_variation": 0.001,
+        "measurement_confidence": 0.97,
+        "unit": "mm"
+      },
+      "appearance": {
+        "deviation_label": "strong",
+        "score": 0.88,
+        "delta_e_lab": 27.52,
+        "contrast_ratio": 1.27
+      },
+      "evidence": {
+        "rgb_evidence_score": 0.56,
+        "rgb_level": "Moderate",
+        "xyz_evidence_score": 0.56,
+        "xyz_level": "Moderate",
+        "topology_disagreement_score": 0.684,
+        "topology_level": "High",
+        "gate_strength": 0.622,
+        "gate_level": "High"
+      },
+      "scores": {
+        "mean_anomaly_score": 0.6217,
+        "max_anomaly_score": 0.7582,
+        "integrated_importance": 10.8223
+      },
+      "explanation": "A compact circular region was detected in the central surface, measuring approximately 9.69 mm \u00d7 8.12 mm. Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab \u0394E = 27.52). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High)."
+    },
+    {
+      "id": 2,
+      "importance_rank": 2,
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          111,
+          119
+        ],
+        "centroid_normalized": [
+          0.497,
+          0.5338
+        ],
+        "relative_to_object": true
+      },
+      "size": {
+        "width_px": 13,
+        "height_px": 13,
+        "area_px": 144,
+        "area_fraction_object_percent": 0.29,
+        "major_length_mm": 6.12,
+        "minor_length_mm": 5.76,
+        "bounding_depth_mm": 0.28,
+        "projected_area_mm2": 27.68,
+        "surface_area_3d_mm2": 31.13,
+        "physical_units_available": true
+      },
+      "shape": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.07,
+        "circularity": 1.0,
+        "solidity": 1.0,
+        "extent": 0.85,
+        "eccentricity": 0.35,
+        "orientation_deg": 41.6
+      },
+      "geometry": {
+        "label": "raised protrusion",
+        "mean_deviation": 0.441,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 0.59,
+        "rms_deviation": 0.448,
+        "surface_z_score": 8.81,
+        "roughness_ratio": 2.1,
+        "planarity": 0.877,
+        "surface_variation": 0.001,
+        "measurement_confidence": 0.97,
+        "unit": "mm"
+      },
+      "appearance": {
+        "deviation_label": "strong",
+        "score": 0.86,
+        "delta_e_lab": 26.8,
+        "contrast_ratio": 1.26
+      },
+      "evidence": {
+        "rgb_evidence_score": 0.517,
+        "rgb_level": "Moderate",
+        "xyz_evidence_score": 0.517,
+        "xyz_level": "Moderate",
+        "topology_disagreement_score": 0.632,
+        "topology_level": "High",
+        "gate_strength": 0.574,
+        "gate_level": "Moderate"
+      },
+      "scores": {
+        "mean_anomaly_score": 0.5745,
+        "max_anomaly_score": 0.6536,
+        "integrated_importance": 6.8935
+      },
+      "explanation": "A compact circular region was detected in the central surface, measuring approximately 6.12 mm \u00d7 5.76 mm. The geometry exhibits a raised protrusion extending up to 0.59 mm above the local reference plane (surface deviation z-score = 8.81). Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab \u0394E = 26.8). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High)."
+    }
+  ],
+  "summary_explanation": "Multiple anomalies (2 regions) detected in cookie sample cookie_combined_000 (79.4% confidence). Primary defect located in central surface (compact circular region, rough raised protrusion).",
+  "technical_report": "================================================================================\nPNTC DEFECT CHARACTERIZATION REPORT \u2014 COOKIE (Sample: cookie_combined_000)\n================================================================================\nOverall Decision     : ANOMALOUS\nImage Anomaly Score  : 0.65715\nDetection Confidence : 79.4%\nOperating Threshold  : 0.50000\nCoordinate Units     : mm (Physical Calibrated: True)\nDefect Regions Count : 2\n--------------------------------------------------------------------------------\n\n[DEFECT REGION #1] (Importance Rank: #1)\n  Location            : central surface (Normalized: (0.6498, 0.3534))\n  Bounding Dimensions : 9.69 mm \u00d7 8.12 mm (Depth: 0.43 mm)\n  Estimated 3D Area   : 68.38 mm\u00b2 (Projected: 61.85 mm\u00b2)\n  2D Morphology       : compact circular region (Aspect Ratio: 1.24, Circularity: 1.0)\n  3D Surface Structure: rough raised protrusion (Z-score: 8.93, Roughness Ratio: 2.97\u00d7)\n  Maximum Protrusion  : 0.68 mm\n  Appearance Contrast : STRONG (CIE Lab \u0394E = 27.52)\n  Detection Evidence  : RGB=Moderate (0.56), 3D=Moderate (0.56), Topology Disagreement=High (0.684)\n  Measurement Conf.   : 97.0%\n  Explanation Rationale:\n    \"A compact circular region was detected in the central surface, measuring approximately 9.69 mm \u00d7 8.12 mm. Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab \u0394E = 27.52). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High).\"\n\n[DEFECT REGION #2] (Importance Rank: #2)\n  Location            : central surface (Normalized: (0.497, 0.5338))\n  Bounding Dimensions : 6.12 mm \u00d7 5.76 mm (Depth: 0.28 mm)\n  Estimated 3D Area   : 31.13 mm\u00b2 (Projected: 27.68 mm\u00b2)\n  2D Morphology       : compact circular region (Aspect Ratio: 1.07, Circularity: 1.0)\n  3D Surface Structure: raised protrusion (Z-score: 8.81, Roughness Ratio: 2.1\u00d7)\n  Maximum Protrusion  : 0.59 mm\n  Appearance Contrast : STRONG (CIE Lab \u0394E = 26.8)\n  Detection Evidence  : RGB=Moderate (0.517), 3D=Moderate (0.517), Topology Disagreement=High (0.632)\n  Measurement Conf.   : 97.0%\n  Explanation Rationale:\n    \"A compact circular region was detected in the central surface, measuring approximately 6.12 mm \u00d7 5.76 mm. The geometry exhibits a raised protrusion extending up to 0.59 mm above the local reference plane (surface deviation z-score = 8.81). Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab \u0394E = 26.8). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High).\"\n\n================================================================================"
+}

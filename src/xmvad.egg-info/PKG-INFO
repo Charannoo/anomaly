@@ -1,0 +1,214 @@
+Metadata-Version: 2.4
+Name: xmvad
+Version: 0.1.0
+Summary: XMV-AD: Lightweight Modality-Preserving Cross-Attention for Explainable RGB-D Industrial Anomaly Detection
+License: MIT
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch>=2.2
+Requires-Dist: torchvision>=0.17
+Requires-Dist: numpy>=1.26
+Requires-Dist: scipy>=1.11
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: opencv-python>=4.8
+Requires-Dist: Pillow>=10.0
+Requires-Dist: tifffile>=2023.4
+Requires-Dist: imagecodecs
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: pandas>=2.0
+Requires-Dist: PyYAML>=6.0
+Requires-Dist: tqdm>=4.66
+Requires-Dist: onnx>=1.15
+Requires-Dist: onnxruntime>=1.17
+Requires-Dist: openvino>=2023.3
+Requires-Dist: captum>=0.7
+Requires-Dist: psutil>=5.9
+Requires-Dist: pytest>=8.0
+Requires-Dist: tabulate>=0.9
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: ruff>=0.3; extra == "dev"
+Provides-Extra: tensorboard
+Requires-Dist: tensorboard>=2.15; extra == "tensorboard"
+Provides-Extra: wandb
+Requires-Dist: wandb>=0.16; extra == "wandb"
+Dynamic: license-file
+
+# XMV-AD: Lightweight Modality-Preserving Cross-Attention for Explainable RGB-D Industrial Anomaly Detection
+
+> **Status: PHASE 1 (data pipeline only). No training, no results yet.**
+
+## 1. Project summary
+
+Factories need automatic visual inspection for defects such as cracks, scratches,
+dents, bumps, discoloration, deformation, missing material and surface
+irregularities. RGB cameras capture appearance defects; depth/3D sensors capture
+geometric defects. XMV-AD investigates whether a **lightweight RGB-D anomaly
+detector** with **direct bidirectional cross-modal interaction** can deliver
+useful detection + localization **while retaining separate RGB and depth
+evidence**, **validating modality attribution**, and **running on CPU**.
+
+Three objectives are optimized jointly:
+
+- **A.** anomaly detection / localization accuracy
+- **B.** computational efficiency (CPU-deployable)
+- **C.** modality-aware explainability (which sensor contributed, and is that claim faithful?)
+
+## 2. Research motivation
+
+Multimodal industrial anomaly detection (e.g. M3DM, CVPR 2023) has shown RGB and
+3D are complementary, but typical designs rely on heavy pretrained image +
+point-cloud backbones, alignment, fusion, and multiple memory banks.
+
+XMV-AD explores a different design philosophy:
+
+```
+M3DM:  heavy RGB + point-cloud reps -> alignment -> fusion -> memory banks -> decision
+XMV-AD: light RGB encoder <-> compact bidirectional cross-attention <-> light depth encoder
+        -> modality-preserving heads -> RGB map + Depth map -> calibrated fusion
+        -> final map -> validated modality attribution
+```
+
+Intended contribution (to be *tested*, not assumed):
+
+> A compact modality-preserving RGB-D anomaly detector using bidirectional
+> cross-attention that enables efficient localization while retaining and
+> quantitatively validating sensor-specific RGB/depth evidence.
+
+## 3. Base paper
+
+Primary baseline: **M3DM / Multi-3D-Memory** — Yue Wang et al.,
+"Multimodal Industrial Anomaly Detection via Hybrid Fusion", CVPR 2023.
+See `docs/BASELINES.md`. Shared metrics: Image-AUROC, Pixel-AUROC, AUPRO/PRO.
+
+Fairness note: M3DM uses RGB + full XYZ point-cloud features; XMV-AD v1 uses
+RGB + aligned Z-depth. They do **not** consume identical representations
+(see `docs/BASELINES.md`).
+
+## 4. Architecture (Phase 1: data pipeline only)
+
+```
+RGB ──> light encoder ──┐                    ┌──> A_RGB
+                        ├─< cross-attn >─────┤
+Depth ─> light encoder ─┘                    └──> A_DEPTH ──> fusion ──> A_FINAL ──> attribution
+```
+
+Details: `docs/ARCHITECTURE.md`. Model code lands in Phase 4; Phase 1 builds
+only the RGB + Z-depth data pipeline.
+
+## 5. Installation
+
+```powershell
+cd xmv-ad
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -e .
+```
+
+Requires Python >= 3.11. Inference targets CPU-only; training may use CUDA
+when available but must never require it.
+
+## 6. Dataset preparation
+
+**Primary benchmark: MVTec 3D-AD** (RGB + organized XYZ, normal-only train).
+
+MVTec 3D-AD is **not** included in this repository.
+
+```
+Dataset required: MVTec 3D-AD. Download it from the official MVTec 3D-AD
+dataset page and extract/copy it to data/raw/mvtec3d/.
+```
+
+Do NOT use Kaggle mirrors unless explicitly approved.
+
+Expected layout (`docs/DATASET.md`):
+
+```
+data/raw/mvtec3d/<category>/{train,validation,test}/...
+```
+
+Validate with:
+
+```powershell
+python scripts/inspect_dataset.py --data data/raw/mvtec3d
+python scripts/visualize_sample.py --data data/raw/mvtec3d --out experiments/figures/data_checks --num-per-category 25
+```
+
+## 7. Preprocessing
+
+```powershell
+python scripts/preprocess_mvtec3d.py --input data/raw/mvtec3d --output data/processed/mvtec3d
+```
+
+Never modifies `data/raw`. Depth stats are fit on **train-normal only**.
+
+## 8–12. Baselines / training / evaluation / benchmarking / explainability
+
+| Stage | Command | Status |
+|---|---|---|
+| RGB baseline | `python scripts/train.py --config configs/baseline_rgb.yaml` | Phase 2 — not implemented |
+| Depth baseline | `python scripts/train.py --config configs/baseline_depth.yaml` | Phase 2 — not implemented |
+| Late/concat fusion | `python scripts/train.py --config configs/late_fusion.yaml` | Phase 3 — not implemented |
+| XMV-AD | `python scripts/train.py --config configs/xmv_ad.yaml` | Phase 4 — not implemented |
+| Evaluation | `python scripts/evaluate.py --config ... --checkpoint ...` | Phase 6 — not implemented |
+| CPU benchmark | `python scripts/benchmark.py --checkpoint ... --device cpu` | Phase 7 — not implemented |
+| Explainability eval | see `docs/EXPLAINABILITY.md` | Phase 5 — not implemented |
+| Full reproduction | `bash scripts/reproduce_all.sh` | after dataset + weights present |
+
+## 13. Results
+
+All result tables are **TBD** until real experiments run. No metric values are
+claimed in Phase 1.
+
+| Method | I-AUROC | P-AUROC | AUPRO | Params | CPU p95 | Explanation |
+|---|---|---|---|---|---|---|
+| M3DM (reported) | TBD | TBD | TBD | TBD | TBD | — |
+| XMV-AD | TBD | TBD | TBD | TBD | TBD | TBD |
+
+See `docs/EXPERIMENTS.md` and `experiments/tables/`.
+
+## 14. Reproduction instructions
+
+Phase 1 reproduction:
+
+```powershell
+pip install -r requirements.txt
+pip install -e .
+pytest -q
+python scripts/inspect_dataset.py --data data/raw/mvtec3d
+python scripts/visualize_sample.py --data data/raw/mvtec3d --out experiments/figures/data_checks
+```
+
+Later phases: `bash scripts/reproduce_all.sh` (requires dataset + weights).
+
+## 15. Citation
+
+```bibtex
+@misc{xmvad2026,
+  title  = {XMV-AD: Lightweight Modality-Preserving Cross-Attention for Explainable RGB-D Industrial Anomaly Detection},
+  author = {XMV-AD Contributors},
+  year   = {2026},
+  note   = {Phase 1 research implementation; results TBD}
+}
+```
+
+Base comparison:
+
+```bibtex
+@inproceedings{wang2023m3dm,
+  title     = {Multimodal Industrial Anomaly Detection via Hybrid Fusion},
+  author    = {Wang, Yue and et al.},
+  booktitle = {CVPR},
+  year      = {2023}
+}
+```
+
+## Research integrity
+
+- No fabricated data, results, or metric values.
+- No tuning on test; normal-only training.
+- Attention maps are interaction visualizations, not causal proof.
+- Report per-category metrics incl. failures; disclose RGB+Z vs RGB+XYZ gap.
+- See `docs/RESEARCH_PLAN.md`.

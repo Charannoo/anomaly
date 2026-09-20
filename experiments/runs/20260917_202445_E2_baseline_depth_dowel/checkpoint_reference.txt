@@ -1,0 +1,1 @@
+checkpoints\E2_baseline_depth\dowel_best.pt

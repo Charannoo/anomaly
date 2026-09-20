@@ -1,0 +1,5 @@
+backend,model_p50_ms,model_p95_ms,e2e_p50_ms,e2e_p95_ms,model_fps,e2e_fps,peak_rss_model_mb,peak_rss_e2e_mb,artifact_size_mb,params_m,params_source,mean_I_AUROC,mean_P_AUROC,mean_AUPRO,mean_abs_d_I_AUROC,mean_abs_d_P_AUROC,mean_abs_d_AUPRO,int8_verdict
+pytorch,29.42,34.41,31.97,36.49,34.0,31.3,381.3,382.2,7.71,1.9,in-memory wrapper (incl unused teacher wts),0.6536,0.9562,0.853,0.0,0.0,0.0,
+onnx,8.36,10.53,10.94,12.88,119.7,91.4,390.2,391.0,2.32,0.48,ONNX runtime graph (traced student path),0.6536,0.9562,0.853,0.0,0.0,0.0,
+openvino_fp32,11.52,13.2,14.07,16.32,86.8,71.1,411.7,414.3,1.02,0.48,ONNX runtime graph (traced student path),0.6565,0.9548,0.8487,0.005,0.0014,0.0044,
+openvino_int8,12.25,13.77,14.3,15.91,81.6,69.9,451.6,453.7,1.22,0.48,ONNX runtime graph (traced student path),0.5707,0.8657,0.641,0.113,0.0905,0.212,FAIL

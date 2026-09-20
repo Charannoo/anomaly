@@ -1,0 +1,1 @@
+checkpoints\E2_baseline_depth\bagel_best.pt

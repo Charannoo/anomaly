@@ -1,0 +1,48 @@
+# E6: Depth <- RGB cross-attention only (Phase 4B).
+# One-way directional ablation. Frozen Phase 2 branches; ONLY the XMV
+# attention module trains. Identical protocol to E4 (fair comparison); only
+# the interaction module differs.
+_base_: default.yaml
+
+experiment: E6_cross_attn_depth
+
+model:
+  name: xmv_attention
+  mode: depth_from_rgb     # Depth queries RGB; rgb pathway untouched
+  fusion_location: stage16_only
+  attention_dim: 32        # pre-registered primary setting
+  num_heads: 2             # head_dim = 16
+  gamma_init: 0.0          # identity start (reproduces Phase 2)
+  smooth_sigma: 0.0
+
+data:
+  root: data/raw/mvtec3d
+  processed_root: data/processed/mvtec3d
+  cache_dir: data/cache
+  categories: null
+  input_size: [256, 256]
+  rgb_mean: [0.485, 0.456, 0.406]
+  rgb_std: [0.229, 0.224, 0.225]
+  depth_norm: robust_median
+  depth_clip: [-3.0, 3.0]
+  num_workers: 0
+
+loss:
+  lambda_res: 0.0001        # same coefficient as E4
+
+training:
+  seed: 42
+  epochs: 50
+  batch_size: 8
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw
+  early_stopping: true
+  patience: 8
+  train_on: normal_only     # train + validation-normal splits; never test
+
+evaluation:
+  batch_size: 8
+
+runtime:
+  device: auto

@@ -1,0 +1,38 @@
+================================================================================
+PNTC DEFECT CHARACTERIZATION REPORT — COOKIE (Sample: cookie_combined_000)
+================================================================================
+Overall Decision     : ANOMALOUS
+Image Anomaly Score  : 0.65715
+Detection Confidence : 79.4%
+Operating Threshold  : 0.50000
+Coordinate Units     : mm (Physical Calibrated: True)
+Defect Regions Count : 2
+--------------------------------------------------------------------------------
+
+[DEFECT REGION #1] (Importance Rank: #1)
+  Location            : central surface (Normalized: (0.6498, 0.3534))
+  Bounding Dimensions : 9.69 mm × 8.12 mm (Depth: 0.43 mm)
+  Estimated 3D Area   : 68.38 mm² (Projected: 61.85 mm²)
+  2D Morphology       : compact circular region (Aspect Ratio: 1.24, Circularity: 1.0)
+  3D Surface Structure: rough raised protrusion (Z-score: 8.93, Roughness Ratio: 2.97×)
+  Maximum Protrusion  : 0.68 mm
+  Appearance Contrast : STRONG (CIE Lab ΔE = 27.52)
+  Detection Evidence  : RGB=Moderate (0.56), 3D=Moderate (0.56), Topology Disagreement=High (0.684)
+  Measurement Conf.   : 97.0%
+  Explanation Rationale:
+    "A compact circular region was detected in the central surface, measuring approximately 9.69 mm × 8.12 mm. Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab ΔE = 27.52). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High)."
+
+[DEFECT REGION #2] (Importance Rank: #2)
+  Location            : central surface (Normalized: (0.497, 0.5338))
+  Bounding Dimensions : 6.12 mm × 5.76 mm (Depth: 0.28 mm)
+  Estimated 3D Area   : 31.13 mm² (Projected: 27.68 mm²)
+  2D Morphology       : compact circular region (Aspect Ratio: 1.07, Circularity: 1.0)
+  3D Surface Structure: raised protrusion (Z-score: 8.81, Roughness Ratio: 2.1×)
+  Maximum Protrusion  : 0.59 mm
+  Appearance Contrast : STRONG (CIE Lab ΔE = 26.8)
+  Detection Evidence  : RGB=Moderate (0.517), 3D=Moderate (0.517), Topology Disagreement=High (0.632)
+  Measurement Conf.   : 97.0%
+  Explanation Rationale:
+    "A compact circular region was detected in the central surface, measuring approximately 6.12 mm × 5.76 mm. The geometry exhibits a raised protrusion extending up to 0.59 mm above the local reference plane (surface deviation z-score = 8.81). Visual inspection reveals strong appearance deviation from the normal reference ring (CIE Lab ΔE = 26.8). Both visual and geometric branches contribute consistent anomaly evidence (RGB: Moderate, 3D: Moderate, Topology: High)."
+
+================================================================================

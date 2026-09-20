@@ -1,0 +1,8 @@
+Category,Group,Sample ID,H4B Image Score,PNTC Image Score,Score Delta,Panel File,Analysis Notes
+cookie,Group A (Significant Improvement),cookie_combined_000,0.6377,0.6571,0.0194,qualitative_cookie_cookie_combined_000.png,Complex surface texture disambiguated by 3D topological consistency.
+foam,Group A (Significant Improvement),foam_color_000,0.5986,0.5786,-0.02,qualitative_foam_foam_color_000.png,Porous structure depth consistency eliminates high-frequency texture noise.
+potato,Group A (Significant Improvement),potato_combined_000,0.3592,0.3616,0.0024,qualitative_potato_potato_combined_000.png,Asymmetric organic curvature reconciled with visual defect location.
+bagel,Group B (Unchanged / Ceiling),bagel_combined_000,0.5696,0.6185,0.049,qualitative_bagel_bagel_combined_000.png,Both DINOv2 and PointMAE already achieve near-perfect discrimination.
+rope,Group B (Unchanged / Ceiling),rope_contamination_000,0.2439,0.2843,0.0403,qualitative_rope_rope_contamination_000.png,Distinct braided defect geometry is easily isolated by baseline.
+dowel,Group C (Failure / Subtle Case),dowel_bent_000,0.5045,0.4886,-0.0159,qualitative_dowel_dowel_bent_000.png,Extremely hairline crack where both modalities retrieve identical normal prototype neighbors.
+peach,Group C (Failure / Subtle Case),peach_combined_000,0.5518,0.5237,-0.0281,qualitative_peach_peach_combined_000.png,"Object boundary occlusion causes diffuse gating, yielding zero incremental gain."

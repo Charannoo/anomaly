@@ -1,0 +1,1 @@
+checkpoints\E2_baseline_depth\tire_best.pt

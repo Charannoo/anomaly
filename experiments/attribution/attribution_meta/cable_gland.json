@@ -1,0 +1,135 @@
+{
+  "category": "cable_gland",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "cable_gland/train/good/000",
+    "cable_gland/train/good/001",
+    "cable_gland/train/good/002",
+    "cable_gland/train/good/003",
+    "cable_gland/train/good/004",
+    "cable_gland/train/good/005",
+    "cable_gland/train/good/006",
+    "cable_gland/train/good/007",
+    "cable_gland/train/good/008",
+    "cable_gland/train/good/009",
+    "cable_gland/train/good/010",
+    "cable_gland/train/good/011",
+    "cable_gland/train/good/012",
+    "cable_gland/train/good/013",
+    "cable_gland/train/good/014",
+    "cable_gland/train/good/015",
+    "cable_gland/train/good/016",
+    "cable_gland/train/good/017",
+    "cable_gland/train/good/018",
+    "cable_gland/train/good/019",
+    "cable_gland/train/good/020",
+    "cable_gland/train/good/021",
+    "cable_gland/train/good/022",
+    "cable_gland/train/good/023",
+    "cable_gland/train/good/024",
+    "cable_gland/train/good/025",
+    "cable_gland/train/good/026",
+    "cable_gland/train/good/027",
+    "cable_gland/train/good/028",
+    "cable_gland/train/good/029",
+    "cable_gland/train/good/030",
+    "cable_gland/train/good/031",
+    "cable_gland/train/good/032",
+    "cable_gland/train/good/033",
+    "cable_gland/train/good/034",
+    "cable_gland/train/good/035",
+    "cable_gland/train/good/036",
+    "cable_gland/train/good/037",
+    "cable_gland/train/good/038",
+    "cable_gland/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.07637257874011993,
+      "scale": 0.044786997981369495
+    },
+    "depth": {
+      "median": 0.1203167513012886,
+      "scale": 0.05590726061314344
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

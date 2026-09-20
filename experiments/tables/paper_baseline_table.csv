@@ -1,0 +1,13 @@
+method,group,input,i_auroc,p_auroc,aupro,params,ckpt_kb,latency_ms,explanation,resolution,provenance
+Voxel f-AnoGAN,MVTec-3D-AD 2022 (initial benchmark),3D only,0.538,--,0.583,--,--,--,Not applicable,native,Reported by prior paper
+Voxel f-AnoGAN,MVTec-3D-AD 2022 (initial benchmark),3D+RGB,0.517,--,0.639,--,--,--,Not applicable,native,Reported by prior paper
+Voxel AE,MVTec-3D-AD 2022 (initial benchmark),3D+RGB,0.538,--,0.564,--,--,--,Not applicable,native,Reported by prior paper
+Voxel Variation Model,MVTec-3D-AD 2022 (initial benchmark),3D only,0.699,--,0.492,--,--,--,Not applicable,native,Reported by prior paper
+Voxel Variation Model,MVTec-3D-AD 2022 (initial benchmark),3D+RGB,0.609,--,0.471,--,--,--,Not applicable,native,Reported by prior paper
+Depth Variation Model,MVTec-3D-AD 2022 (initial benchmark),3D+RGB,0.555,--,0.335,--,--,--,Not applicable,native,Reported by prior paper
+"M3DM (Wang et al., CVPR 2023)",Later comparator (not directly comparable),RGB+3D point cloud,0.945,--,0.964,--,--,--,N/A (pre-trained ViT + point-cloud memory banks),native,Reported by prior paper
+E1 RGB (Phase 2 student),XMV-AD pipeline,RGB only,0.6401,0.895,0.6855,959097,4007.1,14.8,No (single modality),256,Measured by us
+E2 Depth (Phase 2 student),XMV-AD pipeline,Z-depth only,0.534,0.7542,0.4918,959097,4005.1,15.0,No (single modality),256,Measured by us
+E3A Fixed fusion (ex-pred score mean),XMV-AD pipeline,RGB+Z-depth (late),0.64,0.9148,0.7224,0,0.0,30.3,Partial (heatmap only),256,Measured by us
+E4 XMV-AD Residual Fusion,XMV-AD pipeline,RGB+Z-depth (feature),0.6536,0.9582,0.8572,8738,42.3,34.0,Yes (A_RGB / A_DEPTH / A_FINAL + relative evidence),native-GT,Measured by us
+E7 XMV-Attention Ablation,XMV-AD ablation,RGB+Z-depth (feature),0.6337,0.9179,0.7312,12770,60.2,38.0,Yes (evidence) | ablated cross-attention,256,Measured by us

@@ -1,0 +1,135 @@
+{
+  "category": "foam",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "foam/train/good/000",
+    "foam/train/good/001",
+    "foam/train/good/002",
+    "foam/train/good/003",
+    "foam/train/good/004",
+    "foam/train/good/005",
+    "foam/train/good/006",
+    "foam/train/good/007",
+    "foam/train/good/008",
+    "foam/train/good/009",
+    "foam/train/good/010",
+    "foam/train/good/011",
+    "foam/train/good/012",
+    "foam/train/good/013",
+    "foam/train/good/014",
+    "foam/train/good/015",
+    "foam/train/good/016",
+    "foam/train/good/017",
+    "foam/train/good/018",
+    "foam/train/good/019",
+    "foam/train/good/020",
+    "foam/train/good/021",
+    "foam/train/good/022",
+    "foam/train/good/023",
+    "foam/train/good/024",
+    "foam/train/good/025",
+    "foam/train/good/026",
+    "foam/train/good/027",
+    "foam/train/good/028",
+    "foam/train/good/029",
+    "foam/train/good/030",
+    "foam/train/good/031",
+    "foam/train/good/032",
+    "foam/train/good/033",
+    "foam/train/good/034",
+    "foam/train/good/035",
+    "foam/train/good/036",
+    "foam/train/good/037",
+    "foam/train/good/038",
+    "foam/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.15376341342926025,
+      "scale": 0.05421749107316136
+    },
+    "depth": {
+      "median": 0.11217628419399261,
+      "scale": 0.057762729138135904
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

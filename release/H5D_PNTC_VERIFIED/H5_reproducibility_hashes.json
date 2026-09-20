@@ -1,0 +1,40 @@
+{
+  "code_hash": "d3024b596a099c6ac88b6ecfd14cf661338c32ce444122dc9feb5abbf229b995",
+  "config_hash": "c0c9f7a043a3abe4638ea2f97785d3131a549ace02a2bf142f500c59f6c251a5",
+  "feature_manifest_hash": "33f064bd0a987a190d9e82b4aac2285e7c8f3dc38670bae34810ea05d5630222",
+  "rgb_feature_cache_hash": "b720168f8ca2c65407301186e2a6e895b8dda49362bdc5576bd839b41e4123e2",
+  "xyz_feature_cache_hash": "a0842317a5724232b59e88d1f4a1ce22a38e5874f25e18b4c2c4675773d246bd",
+  "coreset_hash_per_seed": {
+    "seed_42": "033db63ff7a1027ad3215aa52aa03273183aa37ce9f39009949f5fe66b8823c1",
+    "seed_100": "c2eb391152a55986fc0dcf92faef22c54433068fbf18a93a104043b2f5b610c1",
+    "seed_2026": "6e0d0fe3d30b910e5aa370ea832968378dbebb4cf9787ffdf8f3b1456209be37"
+  },
+  "raw_h4b_prediction_hash": "0a756bc71b049e30ecccfbacbb5a409e734bf86226c32db999b0b21de799e622",
+  "raw_h5d_prediction_hash": "1889038bb9a5fff5b7ddcbf1743ae40f6abf1de0b742a80b42b0343232bbe030",
+  "raw_h5d_replay_prediction_hash": "1889038bb9a5fff5b7ddcbf1743ae40f6abf1de0b742a80b42b0343232bbe030",
+  "metric_script_hash": "d736866dca73f24d1aec39065113e65eda6f9c81ff1bd79666139ba265fba4b0",
+  "environment_metadata": {
+    "python_version": "3.13.6",
+    "pytorch_version": "2.14.0+cpu",
+    "cuda_version": "None (CPU Host / CUDA Optional)",
+    "gpu": "Intel/NVIDIA Host",
+    "dinov2_model_identifier": "vit_base_patch14_dinov2.lvd142m (224x224, 256 tokens, D=768)",
+    "pointmae_checkpoint_sha256": "27ded932ff769d469f10cb99477e77b67b61a91cfca44ec2b25458021c385b0d",
+    "k": 5,
+    "lambda": 0.35,
+    "M": 15000,
+    "image_aggregation_rule": "mean_top_0.5%"
+  },
+  "verified_metrics": {
+    "H4B_Baseline": {
+      "I": 0.95401,
+      "P": 0.99109,
+      "AUPRO": 0.95852
+    },
+    "H5D_PNTC": {
+      "I": 0.96541,
+      "P": 0.99416,
+      "AUPRO": 0.96939
+    }
+  }
+}

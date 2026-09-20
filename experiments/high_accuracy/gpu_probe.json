@@ -1,0 +1,24 @@
+{
+  "probed_at": "2026-09-18T22:56:00Z",
+  "discovery": "GPU present on Windows host, WSL2 Debian available. Earlier H0.1 audit recorded cuda_available=False because the project venv torch is a CPU-only build (2.14.0+cpu); the hardware itself is CUDA-capable.",
+  "gpu": {
+    "name": "NVIDIA GeForce GTX 1650",
+    "driver_version": "555.97",
+    "driver_cuda_runtime": "12.5",
+    "vram_mib": 4096,
+    "bus": "00000000:01:00.0",
+    "driver_model": "WDDM",
+    "presence": "confirmed via nvidia-smi"
+  },
+  "expectations_for_m3dm": {
+    "compute_capability": "7.5 (Turing) - supported by CUDA 11.3",
+    "vram": "4 GiB - feature extraction per-sample is small; memory banks are built on CPU and projected; coreset greedy loop runs on GPU in official code",
+    "main_risk": "system RAM (8.42 GB total) during per-class memory-bank concat + SparseRandomProjection (float64) in run_coreset; largest classes may exceed RAM"
+  },
+  "wsl2": {
+    "default_distro": "Debian",
+    "default_version": "2",
+    "state": "stopped",
+    "other": ["docker-desktop"]
+  }
+}

@@ -1,0 +1,57 @@
+================================================================================
+XMV-AD-H COLAB RUNTIME ENVIRONMENT — session xmvad-ha
+Recorded: 2026-09-20T08:30:00Z via official google-colab-cli (exec runtime_env_report.py)
+================================================================================
+
+SESSION: xmvad-ha
+ENDPOINT: gpu-t4-s-kkb-ass1c1-30p3ab5v396hb
+
+--- nvidia-smi ---
+Driver Version: 580.82.07   CUDA Version: 13.0
+GPU: Tesla T4 (Off, 37C, P8, 12W/70W, 3MiB/15360MiB, 0% util)
+Memory: 3MiB / 15360MiB
+No running processes
+
+--- pytorch/CUDA ---
+torch:                2.11.0+cu128
+cuda_build:           12.8
+cudnn:                91900
+cuda_available:       True
+device_count:         1
+device_name:          Tesla T4
+vram_total_bytes:     15637086208
+vram_total_gb:        15.64
+capability:           (7, 5)   [T4: no bf16 tensor cores on sm_75? -> bf16_supported True via torch, verify AMP usage carefully]
+bf16_supported:       True
+
+--- python/system ---
+python:               3.13.15
+platform:             Linux-6.6.122+-x86_64-with-glibc2.39
+ram_total_gb:         13.61
+ram_used_gb:          1.32
+disk_total_gb:        120.94
+disk_free_gb:         70.06
+cpu_cores:            2
+
+--- key packages ---
+timm:                 1.0.29
+sklearn:              1.6.1
+numpy:                2.1.3
+scipy:                1.16.3
+PIL:                  11.3.0
+tifffile:             2026.8.23
+torchvision:          0.26.0+cu128
+einops:               0.8.2
+skimage:              0.25.2
+pandas:               2.2.3
+transformers:         5.16.1
+faiss:                NOT INSTALLED
+open3d:               NOT INSTALLED
+pointnet2_ops:        NOT INSTALLED
+
+NOTES:
+- T4 = 15.64 GB VRAM, sm_75. fp16 available via autocast; no bf16 tensor-core
+  acceleration on sm_75 (bf16 unsupported at hardware level), prefer torch.float16.
+- Only 2 CPU cores -> dataset/transform parallelism limited; keep GPU the bottleneck.
+- 70 GB free hot disk (/content) is large enough for dataset + caches + archives.
+================================================================================

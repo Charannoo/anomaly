@@ -1,0 +1,1 @@
+checkpoints\E1_baseline_rgb\foam_best.pt

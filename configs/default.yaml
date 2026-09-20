@@ -1,0 +1,36 @@
+# XMV-AD default configuration (Phase 1: data pipeline only)
+# Later phases add optimizer / model / loss sections; data contract is frozen here.
+
+project: xmv-ad
+phase: 1
+
+data:
+  root: data/raw/mvtec3d
+  processed_root: data/processed/mvtec3d
+  cache_dir: data/cache
+  categories: null        # null = discover all dynamically; or list e.g. [bagel, rope]
+  input_size: [256, 256]  # H, W — shared by RGB, depth, masks
+  rgb_mean: [0.485, 0.456, 0.406]  # ImageNet
+  rgb_std: [0.229, 0.224, 0.225]
+  depth_norm: robust_median  # robust_median | percentile
+  depth_clip: [-3.0, 3.0]
+  depth_percentiles: [5.0, 95.0]
+  num_workers: 4
+  train_split: train
+  val_split: validation
+  test_split: test
+
+preprocessing:
+  fit_stats_on: train_normal_only
+  keep_xyz: true
+  rgb_interpolation: bilinear
+  depth_interpolation: nearest
+  mask_interpolation: nearest
+
+reproducibility:
+  seeds: [42, 123, 2026]
+  deterministic: true
+
+device: auto
+num_threads: 4
+batch_size: 8

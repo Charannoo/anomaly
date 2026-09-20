@@ -1,0 +1,5 @@
+experiment,trainable_params,checkpoint_kb,predict_mean_ms,predict_p50_ms,device,batch_size,resolution
+E4_concat_fusion,8738,42.3,34.0,34.0,cpu,1,256
+E5_cross_attn_rgb,12770,60.2,38.0,38.1,cpu,1,256
+E6_cross_attn_depth,12770,60.2,37.2,36.9,cpu,1,256
+E7_xmv_bidirectional,12770,60.2,38.0,37.4,cpu,1,256

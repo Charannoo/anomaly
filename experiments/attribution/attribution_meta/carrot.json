@@ -1,0 +1,135 @@
+{
+  "category": "carrot",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "carrot/train/good/000",
+    "carrot/train/good/001",
+    "carrot/train/good/002",
+    "carrot/train/good/003",
+    "carrot/train/good/004",
+    "carrot/train/good/005",
+    "carrot/train/good/006",
+    "carrot/train/good/007",
+    "carrot/train/good/008",
+    "carrot/train/good/009",
+    "carrot/train/good/010",
+    "carrot/train/good/011",
+    "carrot/train/good/012",
+    "carrot/train/good/013",
+    "carrot/train/good/014",
+    "carrot/train/good/015",
+    "carrot/train/good/016",
+    "carrot/train/good/017",
+    "carrot/train/good/018",
+    "carrot/train/good/019",
+    "carrot/train/good/020",
+    "carrot/train/good/021",
+    "carrot/train/good/022",
+    "carrot/train/good/023",
+    "carrot/train/good/024",
+    "carrot/train/good/025",
+    "carrot/train/good/026",
+    "carrot/train/good/027",
+    "carrot/train/good/028",
+    "carrot/train/good/029",
+    "carrot/train/good/030",
+    "carrot/train/good/031",
+    "carrot/train/good/032",
+    "carrot/train/good/033",
+    "carrot/train/good/034",
+    "carrot/train/good/035",
+    "carrot/train/good/036",
+    "carrot/train/good/037",
+    "carrot/train/good/038",
+    "carrot/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.06464889645576477,
+      "scale": 0.025373120331019162
+    },
+    "depth": {
+      "median": 0.066893570125103,
+      "scale": 0.03710565620474517
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

@@ -1,0 +1,135 @@
+{
+  "category": "potato",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "potato/train/good/000",
+    "potato/train/good/001",
+    "potato/train/good/002",
+    "potato/train/good/003",
+    "potato/train/good/004",
+    "potato/train/good/005",
+    "potato/train/good/006",
+    "potato/train/good/007",
+    "potato/train/good/008",
+    "potato/train/good/009",
+    "potato/train/good/010",
+    "potato/train/good/011",
+    "potato/train/good/012",
+    "potato/train/good/013",
+    "potato/train/good/014",
+    "potato/train/good/015",
+    "potato/train/good/016",
+    "potato/train/good/017",
+    "potato/train/good/018",
+    "potato/train/good/019",
+    "potato/train/good/020",
+    "potato/train/good/021",
+    "potato/train/good/022",
+    "potato/train/good/023",
+    "potato/train/good/024",
+    "potato/train/good/025",
+    "potato/train/good/026",
+    "potato/train/good/027",
+    "potato/train/good/028",
+    "potato/train/good/029",
+    "potato/train/good/030",
+    "potato/train/good/031",
+    "potato/train/good/032",
+    "potato/train/good/033",
+    "potato/train/good/034",
+    "potato/train/good/035",
+    "potato/train/good/036",
+    "potato/train/good/037",
+    "potato/train/good/038",
+    "potato/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.06399447098374367,
+      "scale": 0.032619177098572254
+    },
+    "depth": {
+      "median": 0.11878228187561035,
+      "scale": 0.06288303268253803
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

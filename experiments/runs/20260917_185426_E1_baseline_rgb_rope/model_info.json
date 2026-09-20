@@ -1,0 +1,7 @@
+{
+  "total": 946169,
+  "trainable": 19161,
+  "frozen_teacher": 927008,
+  "checkpoint_mb": 4.103317,
+  "checkpoint": "checkpoints\\E1_baseline_rgb\\rope_best.pt"
+}

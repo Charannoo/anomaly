@@ -1,0 +1,107 @@
+{
+  "num_tested_pairs": 2500,
+  "failure_count": 0,
+  "passed": true,
+  "sample_inspections": [
+    {
+      "prototype_idx": 0,
+      "category": "peach",
+      "sample_id": 28,
+      "spatial_coord": [
+        14,
+        42
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 1,
+      "category": "potato",
+      "sample_id": 20,
+      "spatial_coord": [
+        38,
+        18
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 2,
+      "category": "peach",
+      "sample_id": 10,
+      "spatial_coord": [
+        10,
+        23
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 3,
+      "category": "dowel",
+      "sample_id": 35,
+      "spatial_coord": [
+        39,
+        23
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 4,
+      "category": "carrot",
+      "sample_id": 21,
+      "spatial_coord": [
+        52,
+        1
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 5,
+      "category": "potato",
+      "sample_id": 29,
+      "spatial_coord": [
+        37,
+        1
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 6,
+      "category": "dowel",
+      "sample_id": 32,
+      "spatial_coord": [
+        11,
+        21
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 7,
+      "category": "rope",
+      "sample_id": 26,
+      "spatial_coord": [
+        41,
+        27
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 8,
+      "category": "carrot",
+      "sample_id": 2,
+      "spatial_coord": [
+        36,
+        50
+      ],
+      "rgb_xyz_aligned": true
+    },
+    {
+      "prototype_idx": 9,
+      "category": "peach",
+      "sample_id": 20,
+      "spatial_coord": [
+        8,
+        38
+      ],
+      "rgb_xyz_aligned": true
+    }
+  ]
+}

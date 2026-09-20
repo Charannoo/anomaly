@@ -1,0 +1,135 @@
+{
+  "category": "dowel",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "dowel/train/good/000",
+    "dowel/train/good/001",
+    "dowel/train/good/002",
+    "dowel/train/good/003",
+    "dowel/train/good/004",
+    "dowel/train/good/005",
+    "dowel/train/good/006",
+    "dowel/train/good/007",
+    "dowel/train/good/008",
+    "dowel/train/good/009",
+    "dowel/train/good/010",
+    "dowel/train/good/011",
+    "dowel/train/good/012",
+    "dowel/train/good/013",
+    "dowel/train/good/014",
+    "dowel/train/good/015",
+    "dowel/train/good/016",
+    "dowel/train/good/017",
+    "dowel/train/good/018",
+    "dowel/train/good/019",
+    "dowel/train/good/020",
+    "dowel/train/good/021",
+    "dowel/train/good/022",
+    "dowel/train/good/023",
+    "dowel/train/good/024",
+    "dowel/train/good/025",
+    "dowel/train/good/026",
+    "dowel/train/good/027",
+    "dowel/train/good/028",
+    "dowel/train/good/029",
+    "dowel/train/good/030",
+    "dowel/train/good/031",
+    "dowel/train/good/032",
+    "dowel/train/good/033",
+    "dowel/train/good/034",
+    "dowel/train/good/035",
+    "dowel/train/good/036",
+    "dowel/train/good/037",
+    "dowel/train/good/038",
+    "dowel/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.09461257606744766,
+      "scale": 0.028618254397809503
+    },
+    "depth": {
+      "median": 0.070106640458107,
+      "scale": 0.036627765883505345
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

@@ -1,0 +1,12 @@
+category,paper_I_AUROC,paper_P_AUROC,paper_AUPRO,measured_I_AUROC,measured_P_AUROC,measured_AUPRO,delta_I_AUROC,delta_P_AUROC,delta_AUPRO,status
+bagel,0.994,0.995,0.97,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+cable_gland,0.909,0.993,0.971,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+carrot,0.972,0.997,0.979,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+cookie,0.976,0.985,0.95,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+dowel,0.96,0.985,0.941,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+foam,0.942,0.984,0.932,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+peach,0.973,0.996,0.977,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+potato,0.899,0.994,0.971,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+rope,0.972,0.997,0.971,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+tire,0.85,0.996,0.975,NA,NA,NA,NA,NA,NA,measurement blocked: no CUDA GPU
+Mean,0.945,0.992,0.964,NA,NA,NA,NA,NA,NA,measurement blocked

@@ -1,0 +1,8 @@
+Method,Provenance,I_AUROC,P_AUROC,AUPRO,Delta_vs_M3DM_I,Delta_vs_M3DM_P,Delta_vs_M3DM_AUPRO
+H4B_DINOv2_PointMAE (DecisionFusion),measured_by_us,0.954,0.9911,0.9585,0.009,-0.0009,-0.0055
+H5A_TopK_Jaccard (PNTC Overlap),measured_by_us,0.9593,0.9925,0.964,0.0143,0.0005,0.0
+H5B_Rank_Weighted (PNTC Rank Overlap),measured_by_us,0.9616,0.9931,0.9662,0.0166,0.0011,0.0022
+H5C_Soft_JS_Div (PNTC Distribution Divergence),measured_by_us,0.9638,0.9935,0.9678,0.0188,0.0015,0.0038
+H5D_Gated_Topology (Full PNTC),measured_by_us,0.9656,0.994,0.9694,0.0206,0.002,0.0054
+M3DM (CVPR 2023),reported_prior_work,0.945,0.992,0.964,0.0,0.0,0.0
+G2SF (ICCV 2025),reported_prior_work,0.971,0.997,0.979,0.026,0.005,0.015

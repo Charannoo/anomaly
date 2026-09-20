@@ -1,0 +1,19 @@
+{
+  "schema": "XMV-AD-H colab_cli_environment v1",
+  "recorded": "2026-09-20T02:55:00Z",
+  "wsl_distro": "Debian 13 (trixie)",
+  "cli_name": "google-colab-cli (official)",
+  "cli_version": "0.6.0",
+  "cli_path": "/home/hiran/.local/bin/colab",
+  "python_version_used": "3.12.14",
+  "python_path": "/home/hiran/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/bin/python3.12",
+  "python_install_method": "uv python install 3.12",
+  "uv_version": "0.12.17",
+  "uv_path": "/home/hiran/.local/bin/uv",
+  "install_method": "curl -LsSf https://astral.sh/uv/install.sh | sh; then uv tool install --python 3.12 google-colab-cli",
+  "support_commands": ["sessions","new","status","exec","upload","download","drivemount","install","ls","rm","stop","run","console","repl","url","edit","log","update","version"],
+  "gpu_variants_supported_by_new": ["T4","L4","G4","H100","A100"],
+  "tpu_variants_supported_by_new": ["v5e1","v6e1"],
+  "high_mem_flag_available": false,
+  "notes": "Version 0.6.0 of the official CLI does not expose --high-mem. GPU selection via --gpu. Availability varies by Colab subscription tier. Install done ONLY in WSL, NOT on Windows PowerShell."
+}

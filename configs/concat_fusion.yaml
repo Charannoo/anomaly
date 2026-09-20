@@ -1,0 +1,44 @@
+# E4: lightweight residual feature concatenation (Phase 4A).
+# Frozen Phase 2 branches; ONLY the 1/16 concat-fusion module trains.
+_base_: default.yaml
+
+experiment: E4_concat_fusion
+
+data:
+  root: data/raw/mvtec3d
+  processed_root: data/processed/mvtec3d
+  cache_dir: data/cache
+  categories: null
+  input_size: [256, 256]
+  rgb_mean: [0.485, 0.456, 0.406]
+  rgb_std: [0.229, 0.224, 0.225]
+  depth_norm: robust_median
+  depth_clip: [-3.0, 3.0]
+  num_workers: 0
+
+model:
+  name: e4_concat_fusion
+  fusion_location: stage16_only
+  projection_dim: 32        # declared E4 setting; do not sweep on test
+  gamma_init: 0.0           # identity start (reproduces Phase 2)
+  smooth_sigma: 0.0
+
+loss:
+  lambda_res: 0.0001        # pre-registered residual-magnitude regularizer
+
+training:
+  seed: 42
+  epochs: 50
+  batch_size: 8
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw
+  early_stopping: true
+  patience: 8
+  train_on: normal_only     # train + validation-normal splits; never test
+
+evaluation:
+  batch_size: 8
+
+runtime:
+  device: auto

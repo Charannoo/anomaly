@@ -1,0 +1,1044 @@
+==================================================================
+XMV-AD-H run_kaggle   gpu=cuda  colab=True
+dataset              : /kaggle/input/datasets/rhlow1234/mvtec-3d-anomaly-detection/mvtec_3d_anomaly_detection
+==================================================================
+[checkpoint] pointmae_pretrain.pth OK (348288755 bytes)
+
+==================================================================
+CATEGORY bagel
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY bagel
+==============================================================
+
+==============================================================
+EXTRACT [bagel train] RGB DINO (244 samples)
+==============================================================
+   -> bagel_train_rgb finished (191296 x 768)
+
+==============================================================
+EXTRACT [bagel train] XYZ Point-MAE (244 samples)
+==============================================================
+   [OOM] bagel_train_xyz at batch=16, retrying with a smaller batch...
+   -> bagel_train_xyz finished (765184 x 1152)
+
+==============================================================
+EXTRACT [bagel test] RGB DINO (110 samples)
+==============================================================
+   -> bagel_test_rgb finished (86240 x 768)
+
+==============================================================
+EXTRACT [bagel test] XYZ Point-MAE (110 samples)
+==============================================================
+   [OOM] bagel_test_xyz at batch=16, retrying with a smaller batch...
+   -> bagel_test_xyz finished (344960 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (122.4s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] bagel_h1_rgb (191296, 768) -> selecting 15000 items...
+   [CORESET DONE] bagel_h1_rgb -> 15000 indices saved
+[H1] bagel        I=0.9607 P=0.9920 AUPRO=0.9517 (23.9s)
+
+---> H1 MEAN  I=0.9607 P=0.9920 AUPRO=0.9517  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] bagel_h2_xyz (765184, 1152) -> selecting 15000 items...
+   [CORESET DONE] bagel_h2_xyz -> 15000 indices saved
+[H2] bagel        I=0.8476 P=0.9850 AUPRO=0.9498 (86.3s)
+
+---> H2 MEAN  I=0.8476 P=0.9850 AUPRO=0.9498  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] bagel_h3_rgb (191296, 768) -> selecting 15000 items...
+   [CORESET DONE] bagel_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] bagel_h2_xyz (765184, 1152) -> 15000 indices
+   [CORESET FIT] bagel_h3_concat (765184, 1920) -> selecting 15000 items...
+   [CORESET DONE] bagel_h3_concat -> 15000 indices saved
+[H3] bagel        A:0.9726 B:0.9607 C:0.9773 (I) (127.9s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9726 P=0.9932 AUPRO=0.9591
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9607 P=0.9920 AUPRO=0.9517
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9773 P=0.5326 AUPRO=0.1820
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] bagel finished in 375s
+
+---> H1 MEAN  I=0.9607 P=0.9920 AUPRO=0.9517  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.8476 P=0.9850 AUPRO=0.9498  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9726 P=0.9932 AUPRO=0.9591
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9607 P=0.9920 AUPRO=0.9517
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9773 P=0.5326 AUPRO=0.1820
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   no results         -        -        -       
+carrot        no results         -        -        -       
+cookie        no results         -        -        -       
+dowel         no results         -        -        -       
+foam          no results         -        -        -       
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9773      0.5326      0.1820     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY cable_gland
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY cable_gland
+==============================================================
+
+==============================================================
+EXTRACT [cable_gland train] RGB DINO (223 samples)
+==============================================================
+   -> cable_gland_train_rgb finished (174832 x 768)
+
+==============================================================
+EXTRACT [cable_gland train] XYZ Point-MAE (223 samples)
+==============================================================
+   [OOM] cable_gland_train_xyz at batch=16, retrying with a smaller batch...
+   -> cable_gland_train_xyz finished (699328 x 1152)
+
+==============================================================
+EXTRACT [cable_gland test] RGB DINO (108 samples)
+==============================================================
+   -> cable_gland_test_rgb finished (84672 x 768)
+
+==============================================================
+EXTRACT [cable_gland test] XYZ Point-MAE (108 samples)
+==============================================================
+   [OOM] cable_gland_test_xyz at batch=16, retrying with a smaller batch...
+   -> cable_gland_test_xyz finished (338688 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (93.2s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] cable_gland_h1_rgb (174832, 768) -> selecting 15000 items...
+   [CORESET DONE] cable_gland_h1_rgb -> 15000 indices saved
+[H1] cable_gland  I=0.9524 P=0.9939 AUPRO=0.9737 (21.5s)
+
+---> H1 MEAN  I=0.9524 P=0.9939 AUPRO=0.9737  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] cable_gland_h2_xyz (699328, 1152) -> selecting 15000 items...
+   [CORESET DONE] cable_gland_h2_xyz -> 15000 indices saved
+[H2] cable_gland  I=0.4247 P=0.9326 AUPRO=0.7659 (76.7s)
+
+---> H2 MEAN  I=0.4247 P=0.9326 AUPRO=0.7659  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] cable_gland_h3_rgb (174832, 768) -> selecting 15000 items...
+   [CORESET DONE] cable_gland_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] cable_gland_h2_xyz (699328, 1152) -> 15000 indices
+   [CORESET FIT] cable_gland_h3_concat (699328, 1920) -> selecting 15000 items...
+   [CORESET DONE] cable_gland_h3_concat -> 15000 indices saved
+[H3] cable_gland  A:0.9256 B:0.9524 C:0.9403 (I) (118.2s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9256 P=0.9938 AUPRO=0.9734
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9524 P=0.9939 AUPRO=0.9737
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9403 P=0.5648 AUPRO=0.2251
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] cable_gland finished in 313s
+
+---> H1 MEAN  I=0.9566 P=0.9929 AUPRO=0.9627  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.6362 P=0.9588 AUPRO=0.8579  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9491 P=0.9935 AUPRO=0.9663
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9566 P=0.9929 AUPRO=0.9627
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9588 P=0.5487 AUPRO=0.2035
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        no results         -        -        -       
+cookie        no results         -        -        -       
+dowel         no results         -        -        -       
+foam          no results         -        -        -       
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9648      0.7633      0.5778     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY carrot
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY carrot
+==============================================================
+
+==============================================================
+EXTRACT [carrot train] RGB DINO (286 samples)
+==============================================================
+   -> carrot_train_rgb finished (224224 x 768)
+
+==============================================================
+EXTRACT [carrot train] XYZ Point-MAE (286 samples)
+==============================================================
+   [OOM] carrot_train_xyz at batch=16, retrying with a smaller batch...
+   -> carrot_train_xyz finished (896896 x 1152)
+
+==============================================================
+EXTRACT [carrot test] RGB DINO (159 samples)
+==============================================================
+   -> carrot_test_rgb finished (124656 x 768)
+
+==============================================================
+EXTRACT [carrot test] XYZ Point-MAE (159 samples)
+==============================================================
+   [OOM] carrot_test_xyz at batch=16, retrying with a smaller batch...
+   -> carrot_test_xyz finished (498624 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (136.4s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] carrot_h1_rgb (224224, 768) -> selecting 15000 items...
+   [CORESET DONE] carrot_h1_rgb -> 15000 indices saved
+[H1] carrot       I=0.9220 P=0.9944 AUPRO=0.9735 (27.9s)
+
+---> H1 MEAN  I=0.9220 P=0.9944 AUPRO=0.9735  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] carrot_h2_xyz (896896, 1152) -> selecting 15000 items...
+   [CORESET DONE] carrot_h2_xyz -> 15000 indices saved
+[H2] carrot       I=0.6801 P=0.9908 AUPRO=0.9622 (99.4s)
+
+---> H2 MEAN  I=0.6801 P=0.9908 AUPRO=0.9622  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] carrot_h3_rgb (224224, 768) -> selecting 15000 items...
+   [CORESET DONE] carrot_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] carrot_h2_xyz (896896, 1152) -> 15000 indices
+   [CORESET FIT] carrot_h3_concat (896896, 1920) -> selecting 15000 items...
+   [CORESET DONE] carrot_h3_concat -> 15000 indices saved
+[H3] carrot       A:0.9169 B:0.9220 C:0.9116 (I) (156.5s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9169 P=0.9951 AUPRO=0.9746
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9220 P=0.9944 AUPRO=0.9735
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9116 P=0.6955 AUPRO=0.2358
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] carrot finished in 425s
+
+---> H1 MEAN  I=0.9450 P=0.9934 AUPRO=0.9663  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.6508 P=0.9695 AUPRO=0.8926  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9384 P=0.9940 AUPRO=0.9690
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9450 P=0.9934 AUPRO=0.9663
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9431 P=0.5977 AUPRO=0.2143
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        no results         -        -        -       
+dowel         no results         -        -        -       
+foam          no results         -        -        -       
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9506      0.8403      0.7097     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY cookie
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY cookie
+==============================================================
+
+==============================================================
+EXTRACT [cookie train] RGB DINO (210 samples)
+==============================================================
+   -> cookie_train_rgb finished (164640 x 768)
+
+==============================================================
+EXTRACT [cookie train] XYZ Point-MAE (210 samples)
+==============================================================
+   [OOM] cookie_train_xyz at batch=16, retrying with a smaller batch...
+   -> cookie_train_xyz finished (658560 x 1152)
+
+==============================================================
+EXTRACT [cookie test] RGB DINO (131 samples)
+==============================================================
+   -> cookie_test_rgb finished (102704 x 768)
+
+==============================================================
+EXTRACT [cookie test] XYZ Point-MAE (131 samples)
+==============================================================
+   [OOM] cookie_test_xyz at batch=16, retrying with a smaller batch...
+   -> cookie_test_xyz finished (410816 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (107.1s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] cookie_h1_rgb (164640, 768) -> selecting 15000 items...
+   [CORESET DONE] cookie_h1_rgb -> 15000 indices saved
+[H1] cookie       I=0.7209 P=0.9707 AUPRO=0.8802 (21.3s)
+
+---> H1 MEAN  I=0.7209 P=0.9707 AUPRO=0.8802  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] cookie_h2_xyz (658560, 1152) -> selecting 15000 items...
+   [CORESET DONE] cookie_h2_xyz -> 15000 indices saved
+[H2] cookie       I=0.9331 P=0.9580 AUPRO=0.9287 (74.4s)
+
+---> H2 MEAN  I=0.9331 P=0.9580 AUPRO=0.9287  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] cookie_h3_rgb (164640, 768) -> selecting 15000 items...
+   [CORESET DONE] cookie_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] cookie_h2_xyz (658560, 1152) -> 15000 indices
+   [CORESET FIT] cookie_h3_concat (658560, 1920) -> selecting 15000 items...
+   [CORESET DONE] cookie_h3_concat -> 15000 indices saved
+[H3] cookie       A:0.8918 B:0.7209 C:0.7146 (I) (117.6s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.8918 P=0.9751 AUPRO=0.9144
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.7209 P=0.9707 AUPRO=0.8802
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.7146 P=0.5549 AUPRO=0.1857
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] cookie finished in 324s
+
+---> H1 MEAN  I=0.8890 P=0.9877 AUPRO=0.9448  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7214 P=0.9666 AUPRO=0.9017  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9267 P=0.9893 AUPRO=0.9554
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8890 P=0.9877 AUPRO=0.9448
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8860 P=0.5870 AUPRO=0.2071
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         no results         -        -        -       
+foam          no results         -        -        -       
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9462      0.8697      0.7645     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY dowel
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY dowel
+==============================================================
+
+==============================================================
+EXTRACT [dowel train] RGB DINO (288 samples)
+==============================================================
+   -> dowel_train_rgb finished (225792 x 768)
+
+==============================================================
+EXTRACT [dowel train] XYZ Point-MAE (288 samples)
+==============================================================
+   [OOM] dowel_train_xyz at batch=16, retrying with a smaller batch...
+   -> dowel_train_xyz finished (903168 x 1152)
+
+==============================================================
+EXTRACT [dowel test] RGB DINO (130 samples)
+==============================================================
+   -> dowel_test_rgb finished (101920 x 768)
+
+==============================================================
+EXTRACT [dowel test] XYZ Point-MAE (130 samples)
+==============================================================
+   [OOM] dowel_test_xyz at batch=16, retrying with a smaller batch...
+   -> dowel_test_xyz finished (407680 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (112.9s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] dowel_h1_rgb (225792, 768) -> selecting 15000 items...
+   [CORESET DONE] dowel_h1_rgb -> 15000 indices saved
+[H1] dowel        I=0.9308 P=0.9966 AUPRO=0.9726 (27.3s)
+
+---> H1 MEAN  I=0.9308 P=0.9966 AUPRO=0.9726  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] dowel_h2_xyz (903168, 1152) -> selecting 15000 items...
+   [CORESET DONE] dowel_h2_xyz -> 15000 indices saved
+[H2] dowel        I=0.7544 P=0.9607 AUPRO=0.8762 (97.2s)
+
+---> H2 MEAN  I=0.7544 P=0.9607 AUPRO=0.8762  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] dowel_h3_rgb (225792, 768) -> selecting 15000 items...
+   [CORESET DONE] dowel_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] dowel_h2_xyz (903168, 1152) -> 15000 indices
+   [CORESET FIT] dowel_h3_concat (903168, 1920) -> selecting 15000 items...
+   [CORESET DONE] dowel_h3_concat -> 15000 indices saved
+[H3] dowel        A:0.9349 B:0.9308 C:0.9453 (I) (150.4s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9349 P=0.9966 AUPRO=0.9757
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9308 P=0.9966 AUPRO=0.9726
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9453 P=0.6729 AUPRO=0.3006
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] dowel finished in 392s
+
+---> H1 MEAN  I=0.8974 P=0.9895 AUPRO=0.9503  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7280 P=0.9654 AUPRO=0.8966  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9284 P=0.9907 AUPRO=0.9595
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8974 P=0.9895 AUPRO=0.9503
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8978 P=0.6042 AUPRO=0.2258
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          no results         -        -        -       
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9460      0.8304      0.6717     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY foam
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY foam
+==============================================================
+
+==============================================================
+EXTRACT [foam train] RGB DINO (236 samples)
+==============================================================
+   -> foam_train_rgb finished (185024 x 768)
+
+==============================================================
+EXTRACT [foam train] XYZ Point-MAE (236 samples)
+==============================================================
+   [OOM] foam_train_xyz at batch=16, retrying with a smaller batch...
+   -> foam_train_xyz finished (740096 x 1152)
+
+==============================================================
+EXTRACT [foam test] RGB DINO (100 samples)
+==============================================================
+   -> foam_test_rgb finished (78400 x 768)
+
+==============================================================
+EXTRACT [foam test] XYZ Point-MAE (100 samples)
+==============================================================
+   [OOM] foam_test_xyz at batch=16, retrying with a smaller batch...
+   -> foam_test_xyz finished (313600 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (123.4s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] foam_h1_rgb (185024, 768) -> selecting 15000 items...
+   [CORESET DONE] foam_h1_rgb -> 15000 indices saved
+[H1] foam         I=0.7450 P=0.9529 AUPRO=0.8352 (22.3s)
+
+---> H1 MEAN  I=0.7450 P=0.9529 AUPRO=0.8352  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] foam_h2_xyz (740096, 1152) -> selecting 15000 items...
+   [CORESET DONE] foam_h2_xyz -> 15000 indices saved
+[H2] foam         I=0.7137 P=0.9306 AUPRO=0.7393 (80.1s)
+
+---> H2 MEAN  I=0.7137 P=0.9306 AUPRO=0.7393  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] foam_h3_rgb (185024, 768) -> selecting 15000 items...
+   [CORESET DONE] foam_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] foam_h2_xyz (740096, 1152) -> 15000 indices
+   [CORESET FIT] foam_h3_concat (740096, 1920) -> selecting 15000 items...
+   [CORESET DONE] foam_h3_concat -> 15000 indices saved
+[H3] foam         A:0.7869 B:0.7450 C:0.7637 (I) (121.9s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.7869 P=0.9687 AUPRO=0.8810
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.7450 P=0.9529 AUPRO=0.8352
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.7637 P=0.4778 AUPRO=0.1540
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] foam finished in 352s
+
+---> H1 MEAN  I=0.8720 P=0.9834 AUPRO=0.9312  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7256 P=0.9596 AUPRO=0.8704  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9048 P=0.9871 AUPRO=0.9464
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8720 P=0.9834 AUPRO=0.9312
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8755 P=0.5831 AUPRO=0.2139
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         no results         -        -        -       
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9156      0.7716      0.5854     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY peach
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY peach
+==============================================================
+
+==============================================================
+EXTRACT [peach train] RGB DINO (361 samples)
+==============================================================
+   -> peach_train_rgb finished (283024 x 768)
+
+==============================================================
+EXTRACT [peach train] XYZ Point-MAE (361 samples)
+==============================================================
+   [OOM] peach_train_xyz at batch=16, retrying with a smaller batch...
+   -> peach_train_xyz finished (1132096 x 1152)
+
+==============================================================
+EXTRACT [peach test] RGB DINO (132 samples)
+==============================================================
+   -> peach_test_rgb finished (103488 x 768)
+
+==============================================================
+EXTRACT [peach test] XYZ Point-MAE (132 samples)
+==============================================================
+   [OOM] peach_test_xyz at batch=16, retrying with a smaller batch...
+   -> peach_test_xyz finished (413952 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (148.7s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] peach_h1_rgb (283024, 768) -> selecting 15000 items...
+   [CORESET DONE] peach_h1_rgb -> 15000 indices saved
+[H1] peach        I=0.9361 P=0.9936 AUPRO=0.9699 (32.7s)
+
+---> H1 MEAN  I=0.9361 P=0.9936 AUPRO=0.9699  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] peach_h2_xyz (1132096, 1152) -> selecting 15000 items...
+   [CORESET DONE] peach_h2_xyz -> 15000 indices saved
+[H2] peach        I=0.8578 P=0.9898 AUPRO=0.9520 (121.7s)
+
+---> H2 MEAN  I=0.8578 P=0.9898 AUPRO=0.9520  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] peach_h3_rgb (283024, 768) -> selecting 15000 items...
+   [CORESET DONE] peach_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] peach_h2_xyz (1132096, 1152) -> 15000 indices
+   [CORESET FIT] peach_h3_concat (1132096, 1920) -> selecting 15000 items...
+   [CORESET DONE] peach_h3_concat -> 15000 indices saved
+[H3] peach        A:0.9641 B:0.9361 C:0.9013 (I) (185.5s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9641 P=0.9946 AUPRO=0.9733
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9361 P=0.9936 AUPRO=0.9699
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9013 P=0.6435 AUPRO=0.2202
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] peach finished in 493s
+
+---> H1 MEAN  I=0.8811 P=0.9849 AUPRO=0.9367  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7445 P=0.9640 AUPRO=0.8820  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9133 P=0.9881 AUPRO=0.9502
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8811 P=0.9849 AUPRO=0.9367
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8792 P=0.5917 AUPRO=0.2148
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         H1_RGB             0.9361   0.9936   0.9699  
+potato        no results         -        -        -       
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.9186      0.8033      0.6403     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY potato
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY potato
+==============================================================
+
+==============================================================
+EXTRACT [potato train] RGB DINO (300 samples)
+==============================================================
+   -> potato_train_rgb finished (235200 x 768)
+
+==============================================================
+EXTRACT [potato train] XYZ Point-MAE (300 samples)
+==============================================================
+   [OOM] potato_train_xyz at batch=16, retrying with a smaller batch...
+   -> potato_train_xyz finished (940800 x 1152)
+
+==============================================================
+EXTRACT [potato test] RGB DINO (114 samples)
+==============================================================
+   -> potato_test_rgb finished (89376 x 768)
+
+==============================================================
+EXTRACT [potato test] XYZ Point-MAE (114 samples)
+==============================================================
+   [OOM] potato_test_xyz at batch=16, retrying with a smaller batch...
+   -> potato_test_xyz finished (357504 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (129.3s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] potato_h1_rgb (235200, 768) -> selecting 15000 items...
+   [CORESET DONE] potato_h1_rgb -> 15000 indices saved
+[H1] potato       I=0.6107 P=0.9896 AUPRO=0.9515 (27.7s)
+
+---> H1 MEAN  I=0.6107 P=0.9896 AUPRO=0.9515  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] potato_h2_xyz (940800, 1152) -> selecting 15000 items...
+   [CORESET DONE] potato_h2_xyz -> 15000 indices saved
+[H2] potato       I=0.6299 P=0.9894 AUPRO=0.9613 (101.2s)
+
+---> H2 MEAN  I=0.6299 P=0.9894 AUPRO=0.9613  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] potato_h3_rgb (235200, 768) -> selecting 15000 items...
+   [CORESET DONE] potato_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] potato_h2_xyz (940800, 1152) -> 15000 indices
+   [CORESET FIT] potato_h3_concat (940800, 1920) -> selecting 15000 items...
+   [CORESET DONE] potato_h3_concat -> 15000 indices saved
+[H3] potato       A:0.6606 B:0.6107 C:0.6438 (I) (153.3s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.6606 P=0.9913 AUPRO=0.9578
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.6107 P=0.9896 AUPRO=0.9515
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.6438 P=0.4851 AUPRO=0.2046
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] potato finished in 418s
+
+---> H1 MEAN  I=0.8473 P=0.9855 AUPRO=0.9385  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7302 P=0.9671 AUPRO=0.8919  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.8817 P=0.9885 AUPRO=0.9512
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8473 P=0.9855 AUPRO=0.9385
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8497 P=0.5784 AUPRO=0.2135
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         H1_RGB             0.9361   0.9936   0.9699  
+potato        H3C_Concat_Fusion  0.6438   0.4851   0.2046  
+rope          no results         -        -        -       
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.8842      0.7635      0.5859     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY rope
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY rope
+==============================================================
+
+==============================================================
+EXTRACT [rope train] RGB DINO (298 samples)
+==============================================================
+   -> rope_train_rgb finished (233632 x 768)
+
+==============================================================
+EXTRACT [rope train] XYZ Point-MAE (298 samples)
+==============================================================
+   [OOM] rope_train_xyz at batch=16, retrying with a smaller batch...
+   -> rope_train_xyz finished (934528 x 1152)
+
+==============================================================
+EXTRACT [rope test] RGB DINO (101 samples)
+==============================================================
+   -> rope_test_rgb finished (79184 x 768)
+
+==============================================================
+EXTRACT [rope test] XYZ Point-MAE (101 samples)
+==============================================================
+   [OOM] rope_test_xyz at batch=16, retrying with a smaller batch...
+   -> rope_test_xyz finished (316736 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (119.3s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] rope_h1_rgb (233632, 768) -> selecting 15000 items...
+   [CORESET DONE] rope_h1_rgb -> 15000 indices saved
+[H1] rope         I=0.9860 P=0.9940 AUPRO=0.9552 (27.1s)
+
+---> H1 MEAN  I=0.9860 P=0.9940 AUPRO=0.9552  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] rope_h2_xyz (934528, 1152) -> selecting 15000 items...
+   [CORESET DONE] rope_h2_xyz -> 15000 indices saved
+[H2] rope         I=0.9063 P=0.9208 AUPRO=0.7300 (99.3s)
+
+---> H2 MEAN  I=0.9063 P=0.9208 AUPRO=0.7300  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] rope_h3_rgb (233632, 768) -> selecting 15000 items...
+   [CORESET DONE] rope_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] rope_h2_xyz (934528, 1152) -> 15000 indices
+   [CORESET FIT] rope_h3_concat (934528, 1920) -> selecting 15000 items...
+   [CORESET DONE] rope_h3_concat -> 15000 indices saved
+[H3] rope         A:0.9914 B:0.9860 C:0.9914 (I) (149.3s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.9914 P=0.9956 AUPRO=0.9677
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.9860 P=0.9940 AUPRO=0.9552
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.9914 P=0.7881 AUPRO=0.3067
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] rope finished in 402s
+
+---> H1 MEAN  I=0.8627 P=0.9864 AUPRO=0.9404  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7497 P=0.9620 AUPRO=0.8739  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.8939 P=0.9893 AUPRO=0.9530
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8627 P=0.9864 AUPRO=0.9404
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8655 P=0.6017 AUPRO=0.2238
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         H1_RGB             0.9361   0.9936   0.9699  
+potato        H3C_Concat_Fusion  0.6438   0.4851   0.2046  
+rope          H3C_Concat_Fusion  0.9914   0.7881   0.3067  
+tire          no results         -        -        -       
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.8961      0.7663      0.5549     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+==================================================================
+CATEGORY tire
+==================================================================
+[extractor] loading RGB backbone  : vit_base_patch8_224_dino
+/usr/local/lib/python3.12/dist-packages/timm/models/_factory.py:138: UserWarning: Mapping deprecated model name vit_base_patch8_224_dino to current vit_base_patch8_224.dino.
+  model = create_fn(
+[extractor] loading XYZ backbone  : Point_MAE (pure torch) from /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth
+[PointTransformer] loaded /kaggle/working/bundle/work_local/checkpoints/pointmae_pretrain.pth  missing=0 unexpected=53
+[extractor] ready on cuda
+
+==============================================================
+CATEGORY tire
+==============================================================
+
+==============================================================
+EXTRACT [tire train] RGB DINO (210 samples)
+==============================================================
+   -> tire_train_rgb finished (164640 x 768)
+
+==============================================================
+EXTRACT [tire train] XYZ Point-MAE (210 samples)
+==============================================================
+   [OOM] tire_train_xyz at batch=16, retrying with a smaller batch...
+   -> tire_train_xyz finished (658560 x 1152)
+
+==============================================================
+EXTRACT [tire test] RGB DINO (112 samples)
+==============================================================
+   -> tire_test_rgb finished (87808 x 768)
+
+==============================================================
+EXTRACT [tire test] XYZ Point-MAE (112 samples)
+==============================================================
+   [OOM] tire_test_xyz at batch=16, retrying with a smaller batch...
+   -> tire_test_xyz finished (351232 x 1152)
+
+==============================================
+EXTRACTION SUMMARY  (102.7s)
+  RGB  : extracted=2 cached=0
+  XYZ  : extracted=2 cached=0
+  manifest: /kaggle/working/bundle/work_local/features/cache_manifest.json
+==============================================
+   [CORESET FIT] tire_h1_rgb (164640, 768) -> selecting 15000 items...
+   [CORESET DONE] tire_h1_rgb -> 15000 indices saved
+[H1] tire         I=0.8791 P=0.9948 AUPRO=0.9694 (20.8s)
+
+---> H1 MEAN  I=0.8791 P=0.9948 AUPRO=0.9694  -> /kaggle/working/bundle/results/H1_RGB.csv
+   [CORESET FIT] tire_h2_xyz (658560, 1152) -> selecting 15000 items...
+   [CORESET DONE] tire_h2_xyz -> 15000 indices saved
+[H2] tire         I=0.5857 P=0.9240 AUPRO=0.7472 (73.3s)
+
+---> H2 MEAN  I=0.5857 P=0.9240 AUPRO=0.7472  -> /kaggle/working/bundle/results/H2_XYZ.csv
+   [CORESET FIT] tire_h3_rgb (164640, 768) -> selecting 15000 items...
+   [CORESET DONE] tire_h3_rgb -> 15000 indices saved
+   [CORESET CACHE HIT] tire_h2_xyz (658560, 1152) -> 15000 indices
+   [CORESET FIT] tire_h3_concat (658560, 1920) -> selecting 15000 items...
+   [CORESET DONE] tire_h3_concat -> 15000 indices saved
+[H3] tire         A:0.8547 B:0.8791 C:0.8322 (I) (114.3s)
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.8547 P=0.9929 AUPRO=0.9635
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8791 P=0.9948 AUPRO=0.9694
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8322 P=0.5343 AUPRO=0.1528
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+[category] tire finished in 317s
+
+---> H1 MEAN  I=0.8644 P=0.9872 AUPRO=0.9433  -> /kaggle/working/bundle/results/H1_RGB.csv
+
+---> H2 MEAN  I=0.7333 P=0.9582 AUPRO=0.8613  -> /kaggle/working/bundle/results/H2_XYZ.csv
+
+---> H3 H3A_Calibrated_50_50   MEAN  I=0.8899 P=0.9897 AUPRO=0.9540
+
+---> H3 H3B_Max_Fusion         MEAN  I=0.8644 P=0.9872 AUPRO=0.9433
+
+---> H3 H3C_Concat_Fusion      MEAN  I=0.8622 P=0.5949 AUPRO=0.2167
+    -> /kaggle/working/bundle/results/H3_multimodal.csv
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         H1_RGB             0.9361   0.9936   0.9699  
+potato        H3C_Concat_Fusion  0.6438   0.4851   0.2046  
+rope          H3C_Concat_Fusion  0.9914   0.7881   0.3067  
+tire          H1_RGB             0.8791   0.9948   0.9694  
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.8944      0.7891      0.5963     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+
+
+==================================================================
+FINAL: best-of-ours per category  vs  published M3DM
+==================================================================
+category      best_method        I        P        AUPRO   
+-----------------------------------------------------------
+bagel         H3C_Concat_Fusion  0.9773   0.5326   0.1820  
+cable_gland   H1_RGB             0.9524   0.9939   0.9737  
+carrot        H1_RGB             0.9220   0.9944   0.9735  
+cookie        H2_XYZ             0.9331   0.9580   0.9287  
+dowel         H3C_Concat_Fusion  0.9453   0.6729   0.3006  
+foam          H3C_Concat_Fusion  0.7637   0.4778   0.1540  
+peach         H1_RGB             0.9361   0.9936   0.9699  
+potato        H3C_Concat_Fusion  0.6438   0.4851   0.2046  
+rope          H3C_Concat_Fusion  0.9914   0.7881   0.3067  
+tire          H1_RGB             0.8791   0.9948   0.9694  
+-----------------------------------------------------------
+
+                       I-AUROC     P-AUROC     AUPRO@0.3  
+  best-of-ours (measured) 0.8944      0.7891      0.5963     
+  M3DM (reported by prior work) 0.9450      0.9920      0.9640     
+
+summary CSV -> /kaggle/working/bundle/results/M3DM_comparison.csv
+
+===== DONE in 3811s =====
+results -> /kaggle/working/bundle/results

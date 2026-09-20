@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-09-20T09:20:00+05:30",
+  "handoff_agent": "Antigravity",
+  "hardware": {
+    "host_os": "Windows 11 AMD64",
+    "wsl_distro": "Debian",
+    "host_ram_gb": 8.42,
+    "wsl_guest_ram_gb": 2.8,
+    "wsl_swap_gb": 20.0,
+    "gpu": "NVIDIA GeForce GTX 1650 (4096 MiB VRAM)",
+    "cuda_driver_version": "555.97 / CUDA 12.5",
+    "pytorch_version": "1.9.0+cu111 (in /opt/m3dm/bin/python)"
+  },
+  "current_processes": {
+    "active_stage1_pids": [],
+    "active_watchdog_pids": [],
+    "status": "ALL_IDLE"
+  },
+  "categories_status": {
+    "bagel": {
+      "stage1_repro": "COMPLETE",
+      "stage1_metrics": {"image_rocauc": 0.988, "pixel_rocauc": 0.994, "au_pro": 0.966},
+      "patch_lib_train_samples": 244,
+      "train_total": 244,
+      "feature_status": "COMPLETE"
+    },
+    "cable_gland": {
+      "stage1_repro": "COMPLETE",
+      "stage1_metrics": {"image_rocauc": 0.872, "pixel_rocauc": 0.994, "au_pro": 0.974},
+      "patch_lib_train_samples": 223,
+      "train_total": 223,
+      "feature_status": "COMPLETE"
+    },
+    "carrot": {
+      "stage1_repro": "ABORTED_DURING_EVAL",
+      "patch_lib_train_samples": 286,
+      "train_total": 286,
+      "feature_status": "COMPLETE_TRAIN"
+    },
+    "cookie": {
+      "stage1_repro": "ABORTED_DURING_EVAL",
+      "patch_lib_train_samples": 210,
+      "train_total": 210,
+      "feature_status": "COMPLETE_TRAIN"
+    },
+    "dowel": {
+      "stage1_repro": "ABORTED",
+      "patch_lib_train_samples": 5,
+      "train_total": 288,
+      "feature_status": "PARTIAL"
+    },
+    "foam": {
+      "stage1_repro": "ABORTED",
+      "patch_lib_train_samples": 11,
+      "train_total": 236,
+      "feature_status": "PARTIAL"
+    },
+    "peach": {
+      "stage1_repro": "ABORTED",
+      "patch_lib_train_samples": 18,
+      "train_total": 361,
+      "feature_status": "PARTIAL"
+    },
+    "potato": {
+      "stage1_repro": "ABORTED",
+      "patch_lib_train_samples": 12,
+      "train_total": 300,
+      "feature_status": "PARTIAL"
+    },
+    "tire": {
+      "stage1_repro": "ABORTED",
+      "patch_lib_train_samples": 23,
+      "train_total": 210,
+      "feature_status": "PARTIAL"
+    },
+    "rope": {
+      "stage1_repro": "NOT_STARTED",
+      "patch_lib_train_samples": 0,
+      "train_total": 298,
+      "feature_status": "NOT_STARTED"
+    }
+  },
+  "dataset_inventory": {
+    "total_categories": 10,
+    "total_train_samples": 2656,
+    "total_test_samples": 1197,
+    "total_validation_samples": 294,
+    "preprocessed_location": "/opt/mvtec3d",
+    "preprocessed_tiffs_verified": true
+  },
+  "checkpoints": {
+    "pointmae": {
+      "path": "/opt/m3dm_ws/m3dm/checkpoints/pointmae_pretrain.pth",
+      "sha256": "27ded932bb0a2625d5a8eb006df199b2578598c774aee6d86b985300b6a5fd20"
+    },
+    "dino": {
+      "path": "/root/.cache/torch/hub/checkpoints/dino_vitbase8_pretrain.pth",
+      "sha256": "575f0efc4838938314afa09897a62ed2b87919928b5edcd133abb907328995eb"
+    }
+  },
+  "fast_track_strategy": {
+    "step_order": [
+      "1. Audit completed and handoff state saved",
+      "2. Disable old slow per-sample pipeline / verify no runaway jobs",
+      "3. Benchmark /mnt/c vs WSL ext4 I/O",
+      "4. Safely optimize WSL memory / environment parameters if needed",
+      "5. Implement fast batched canonical feature extractor with exact numerical parity",
+      "6. Extract and cache all RGB + Point-MAE features into canonical cache once",
+      "7. Execute H1 (DINO RGB), H2 (Point-MAE XYZ), H3 (Multimodal) baselines directly from cache",
+      "8. Report results and evaluate PMCF / H4 against reported M3DM 0.945/0.992/0.964"
+    ]
+  }
+}

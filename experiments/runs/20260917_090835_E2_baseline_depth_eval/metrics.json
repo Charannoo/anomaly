@@ -1,0 +1,33 @@
+{
+  "experiment": "E2_baseline_depth",
+  "eval_resolution": [
+    256,
+    256
+  ],
+  "categories": [
+    {
+      "category": "bagel",
+      "image_auroc": 0.5320247933884298,
+      "image_auprc": 0.8187618337722876,
+      "pixel_auroc": 0.49525817225048846,
+      "pixel_auprc": 0.00459109193814927,
+      "aupro": 0.026537988979208404,
+      "num_test_images": 110,
+      "num_anomalous": 88,
+      "dev_latency_note": "development-only forward timing, not deployment benchmark",
+      "dev_latency_mean_ms": 17.134297999946284,
+      "dev_latency_p50_ms": 17.206950000399956,
+      "dev_latency_device": "cpu"
+    }
+  ],
+  "mean": {
+    "category": "MEAN",
+    "image_auroc": 0.5320247933884298,
+    "image_auprc": 0.8187618337722876,
+    "pixel_auroc": 0.49525817225048846,
+    "pixel_auprc": 0.00459109193814927,
+    "aupro": 0.026537988979208404,
+    "num_test_images": 110,
+    "num_anomalous": 88
+  }
+}

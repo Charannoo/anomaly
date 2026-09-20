@@ -1,0 +1,135 @@
+{
+  "category": "tire",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "tire/train/good/000",
+    "tire/train/good/001",
+    "tire/train/good/002",
+    "tire/train/good/003",
+    "tire/train/good/004",
+    "tire/train/good/005",
+    "tire/train/good/006",
+    "tire/train/good/007",
+    "tire/train/good/008",
+    "tire/train/good/009",
+    "tire/train/good/010",
+    "tire/train/good/011",
+    "tire/train/good/012",
+    "tire/train/good/013",
+    "tire/train/good/014",
+    "tire/train/good/015",
+    "tire/train/good/016",
+    "tire/train/good/017",
+    "tire/train/good/018",
+    "tire/train/good/019",
+    "tire/train/good/020",
+    "tire/train/good/021",
+    "tire/train/good/022",
+    "tire/train/good/023",
+    "tire/train/good/024",
+    "tire/train/good/025",
+    "tire/train/good/026",
+    "tire/train/good/027",
+    "tire/train/good/028",
+    "tire/train/good/029",
+    "tire/train/good/030",
+    "tire/train/good/031",
+    "tire/train/good/032",
+    "tire/train/good/033",
+    "tire/train/good/034",
+    "tire/train/good/035",
+    "tire/train/good/036",
+    "tire/train/good/037",
+    "tire/train/good/038",
+    "tire/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.12375450134277344,
+      "scale": 0.05140543553084135
+    },
+    "depth": {
+      "median": 0.06299997866153717,
+      "scale": 0.059274974703043694
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

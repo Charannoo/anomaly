@@ -1,0 +1,14 @@
+metric,value
+total_samples,3600
+injected_kinds,"depth_only,joint,rgb_only"
+clean_included,True
+predicted_classes,"DEPTH-DOMINANT,JOINT,RGB-DOMINANT,UNCERTAIN"
+uncertain_present,True
+dominant_modality_accuracy,0.781389
+macro_f1_3class_MISS_as_wrong,0.872873
+uncertain_fraction_rgb_only,0.0000
+uncertain_fraction_depth_only,0.0000
+uncertain_fraction_joint,0.0025
+acc_severity_medium,0.8125
+acc_severity_mild,0.7125
+acc_severity_strong,0.8192

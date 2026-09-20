@@ -1,0 +1,101 @@
+{
+  "dataset": "MVTec-3D-AD (official, 10 categories reproduced here)",
+  "repo": {
+    "path": "data/m3dm_repro/m3dm",
+    "pin_commit": "bd8151a4563ee7445bdc32d01b2a3b384e4d54f5",
+    "verify": {
+      "git_commit": "bd8151a4563ee7445bdc32d01b2a3b384e4d54f5",
+      "git_diff_ignore_all_space_lines": 0,
+      "modifications": "none (only CRLF line-ending noise on Windows checkout; official code unmodified)",
+      "dataset_path_arg": "/opt/mvtec3d"
+    },
+    "compat_patches": [
+      {
+        "file": "env/deps",
+        "reason": "3GB-RAM WSL2 Debian on 8GB host, torch 1.9.0+cu111, Python 3.8.20, CUDA 11-compat libs"
+      },
+      {
+        "file": "run_stage1.py (workflow wrapper, under /opt, NOT under data/m3dm_repro/m3dm)",
+        "reason": "run one category per OS process so a single process stays under the 3GB guest cap; main.py walks all 10 in one process"
+      },
+      {
+        "file": "feature_extractors/features.py get_coreset_idx_randomp (via lean_coreset monkeypatch)",
+        "reason": "official path builds full float64 random-projection matrix and full z_lib in RAM -> out-of-memory under 3GB. Lean path: SparseRandomProjection fit on zero-sparse (fit uses shape only), transform in fp32 chunks cast to fp16; greedy selection identical (fp16 on GPU, per-index argmin update).",
+        "math_impact": "identical ordering/composition to official fp64:fp16 rounding only; documented"
+      },
+      {
+        "file": "feature_extractors/features.py late_fusion add_sample_to_late_fusion_mem_bank + compute_s_s_map",
+        "reason": "official torch.cdist(patch, lib) / min over full cross product recurses RAM; lean path computes cdist row-chunks (bit-identical chaining of argmin) and s*s*map per integration point with identical arithmetic",
+        "math_impact": "bit-identical results (per-row cdist values unchanged)"
+      },
+      {
+        "file": "feature_extractors/features.py compute_single_s_s_map (s_star/w/D)",
+        "reason": "kept EXACT official arithmetic incl. /1000 normalizations and cross-wired normalization quirk (xyz_mean from patch_xyz_lib vs xyz_std from patch_rgb_lib); reproduced, NOT fixed"
+      }
+    ],
+    "score_paths": "unerrored official metrics: roc_auc_score, calculate_au_pro"
+  },
+  "checkpoints": {
+    "point_mae": {
+      "runtime_path": "/opt/m3dm_ws/m3dm/checkpoints/pointmae_pretrain.pth",
+      "size_bytes": 348288755,
+      "sha256": "27ded932bb0a2625d5a8eb006df199b2578598c774aee6d86b985300b6a5fd20"
+    },
+    "dino_runtime": {
+      "note": "timm hub checkpoint used by vit_base_patch8_224_dino (pretrained=True); NOT the repo-local dino_vitb8_state_dict.pt",
+      "path": "/root/.cache/torch/hub/checkpoints/dino_vitbase8_pretrain.pth",
+      "size_bytes": 343279349,
+      "sha256": "575f0efc4838938314afa09897a62ed2b87919928b5edcd133abb907328995eb",
+      "source_url": "https://dl.fbaipublicfiles.com/dino/dino_vitbase8_pretrain/dino_vitbase8_pretrain.pth"
+    },
+    "repolocal_dino_unused": {
+      "path": "/opt/m3dm_ws/m3dm/checkpoints/dino_vitb8_state_dict.pt",
+      "size_bytes": 343284245,
+      "sha256": "cbff1f0b9c4d7754cd370afaa447054cfffcd2bf0eb18a0ad7df34b465bdcca2",
+      "note": "NOT loaded by the runner (DINO comes from timm hub); documented for completeness"
+    }
+  },
+  "stage_status": {
+    "preprocessing": {
+      "status": "COMPLETE_ON_DISK",
+      "note": "all 4147 tiffs present per category in /opt/mvtec3d (train/test/validation); loader census see loaded manifest",
+      "source_copy": "data/raw/mvtec3d (raw, never mutated); repro copy data/m3dm_repro/mvtec3d and WSL /opt/mvtec3d"
+    },
+    "dino_extraction": {
+      "status": "COMPLETE",
+      "note": "computed on the fly during stage-1 fit (no persisted patch_lib unless save_feature)"
+    },
+    "pointmae_extraction": {
+      "status": "COMPLETE",
+      "note": "computed on the fly during stage-1 fit"
+    },
+    "stage1_baseline": {
+      "status": "COMPLETE_bagel_PENDING_9",
+      "ran": ["bagel"],
+      "results_csv": "/opt/tmp/stage1_results.csv",
+      "bagel": {"image_rocauc": 0.988, "pixel_rocauc": 0.994, "au_pro": 0.966}
+    },
+    "feature_cache": {
+      "status": "NOT_STARTED",
+      "note": "patch_lib / feature cache generation happens in the UFF stage via --save_feature"
+    },
+    "uff": {
+      "status": "NOT_STARTED"
+    },
+    "full_m3dm": {
+      "status": "NOT_STARTED"
+    },
+    "final_eval": {
+      "status": "NOT_STARTED"
+    }
+  },
+  "splits": {
+    "loader_train": 2656,
+    "loader_test": 1197,
+    "loader_validation": 294,
+    "paper_test_count": 1137,
+    "test_count_discrepancy": "documented honestly: loader counts 1197, paper text counts 1137; no deletion/forcing of counts",
+    "per_class_train": {"bagel":244,"cable_gland":223,"carrot":286,"cookie":210,"dowel":288,"foam":236,"peach":361,"potato":300,"rope":298,"tire":210},
+    "per_class_test": {"bagel":110,"cable_gland":108,"carrot":159,"cookie":131,"dowel":130,"foam":100,"peach":132,"potato":114,"rope":101,"tire":112}
+  }
+}

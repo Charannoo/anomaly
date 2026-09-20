@@ -1,0 +1,57 @@
+# ==============================================================================
+# CANONICAL H5-D PNTC REPRODUCIBILITY CONFIGURATION
+# ==============================================================================
+
+model:
+  name: "H5D_Gated_Topology_PNTC"
+  framework: "Paired Neighborhood Topology Consistency"
+  claim: "Paired normal-prototype retrieval topology consistency for RGB-3D industrial anomaly detection"
+
+backbones:
+  rgb:
+    architecture: "DINOv2 ViT-B/14"
+    model_identifier: "vit_base_patch14_dinov2.lvd142m"
+    input_resolution: [224, 224]
+    patch_size: 14
+    grid_size: [16, 16]
+    token_count: 256
+    feature_dimension: 768
+    feature_layer: "final_block_patch_tokens"
+  xyz:
+    architecture: "Point-MAE"
+    checkpoint_file: "pointmae_pretrain.pth"
+    checkpoint_sha256: "27ded932ff769d469f10cb99477e77b67b61a91cfca44ec2b25458021c385b0d"
+    input_points: 2048
+    feature_dimension: 1152
+    spatial_alignment_grid: [56, 56]
+
+memory_bank:
+  coreset_policy: "Paired Joint MinMax Subsampling"
+  selection_descriptor: "concat(1/sqrt(2) * norm(r_j), 1/sqrt(2) * norm(x_j))"
+  coreset_budget_M: 15000
+  deterministic_seeds: [42, 100, 2026]
+  pairing_guarantee: "1-to-1 unified physical patch index j preserved across RGB and XYZ"
+
+retrieval_and_topology:
+  k_neighbors: 5
+  distance_metric: "Euclidean"
+  temperature_tau_rule: "Median 1-NN distance on nominal training features (train-normal only)"
+  soft_js_divergence_epsilon: 1.0e-6
+  lambda_topology_weight: 0.35
+
+confidence_gate:
+  formula: "clip(sigma(max(z_rgb, z_xyz)) * C(p), 0.0, 1.0)"
+  z_standardization: "Sample mean and std of 1-NN distances on nominal training set"
+  compactness_C: "exp(- (std(d_rgb_k) + std(d_xyz_k)) / (2 * sigma_dispersion))"
+
+spatial_and_image_scoring:
+  raw_grid_size: [56, 56]
+  interpolation: "Bilinear upsampling to (224, 224)"
+  spatial_smoothing: "Gaussian filter sigma=3.8"
+  image_aggregation_rule: "mean_top_0.5%"
+
+evaluation:
+  image_metric: "scikit-learn roc_auc_score(image_labels, image_scores)"
+  pixel_metric: "scikit-learn roc_auc_score(gt_masks.ravel(), anomaly_maps.ravel())"
+  aupro_metric: "Official MVTec 3D-AD 8-connectivity trapezoid integration at fpr_limit=0.3"
+  dataset: "MVTec 3D-AD (10 categories, 1197 test samples)"

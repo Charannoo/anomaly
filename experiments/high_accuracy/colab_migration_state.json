@@ -1,0 +1,104 @@
+{
+  "schema": "XMV-AD-H colab_migration_state v1",
+  "timestamp": "2026-09-20T02:50:00Z",
+  "audit_reason": "Phase C0 - record local state BEFORE any migration action",
+  "located": {
+    "project_windows": "C:\\Users\\CharanOp\\xmv-ad",
+    "project_wsl": "/mnt/c/Users/CharanOp/xmv-ad",
+    "wsl_distro": "Debian",
+    "wsl_guest_ram_gb": 2.8,
+    "wsl_swap_gb": 4.0,
+    "wsl_heavy_processes_running": false,
+    "wsl_notes": "Heavy WSL /opt environment (m3dm_ws, mvtec3d prep copy, pointnet2) has been cleaned/gone; no extractor currently running; nothing to stop."
+  },
+  "completed_m3dm_categories": {
+    "bagel": {"stage1_repro": "COMPLETE", "image_rocauc": 0.988, "pixel_rocauc": 0.994, "au_pro": 0.966},
+    "cable_gland": {"stage1_repro": "COMPLETE", "image_rocauc": 0.872, "pixel_rocauc": 0.994, "au_pro": 0.974}
+  },
+  "partial_m3dm_categories": {
+    "carrot": "ABORTED_DURING_EVAL (train features computed locally, no persisted results)",
+    "cookie": "ABORTED_DURING_EVAL (train features computed locally, no persisted results)",
+    "dowel": "ABORTED (train features PARTIAL)",
+    "foam": "ABORTED (train features PARTIAL)",
+    "peach": "ABORTED (train features PARTIAL)",
+    "potato": "ABORTED (train features PARTIAL)",
+    "tire": "ABORTED (train features PARTIAL)",
+    "rope": "NOT_STARTED"
+  },
+  "canonical_cache_status": {
+    "root_windows": "C:\\Users\\CharanOp\\xmv-ad\\experiments\\high_accuracy\\features\\canonical",
+    "categories_present": {"bagel": {"train": {"samples": 213, "total": 244, "status": "PARTIAL"}}},
+    "format": "per-sample torch .pt dictionary (rgb_patch 784x768, xyz_patch 3136x1152, rgb_patch_resized 3136x768, combined_patch 3136x1920, gt, label, paths)",
+    "size_gb": 5.7,
+    "coverage": "ONLY bagel/train, 213 of 244; validation/test for bagel and all other categories MISSING",
+    "decision": "Do not upload this partial per-sample cache as-is. Colab will rebuild a canonical SHARDED cache (one .pt per category+split+modality) from the source dataset. Local cache preserved, not deleted."
+  },
+  "dataset_status": {
+    "preprocessed_root_windows": "C:\\Users\\CharanOp\\xmv-ad\\data\\raw\\mvtec3d",
+    "categories": ["bagel","cable_gland","carrot","cookie","dowel","foam","peach","potato","rope","tire"],
+    "total_train": 2656,
+    "total_validation": 294,
+    "total_test": 1197,
+    "total_tiff_count_on_disk": 4147,
+    "layout": "M3DM-loader-compatible: {cat}/train/good/{rgb,xyz}, {cat}/test/{defect}/{rgb,xyz,gt}, {cat}/validation",
+    "preprocessed_tiffs_verified": true,
+    "size_gb": 24,
+    "raw_copy_exists_windows": "C:\\Users\\CharanOp\\xmv-ad\\data\\raw\\mvtec3d (this IS the preprocessed M3DM-format copy per previous work)",
+    "decision": "Prefer direct download into Colab from canonical source if fast/reproducible; else ONE compressed tar+zstd archive uploaded to Drive."
+  },
+  "checkpoints": {
+    "pointmae_pretrain.pth": {
+      "source": "https://github.com/Pang-Yatian/Point-MAE/releases/download/main/pretrain.pth",
+      "size_bytes": 348288755,
+      "sha256": "27ded932bb0a2625d5a8eb006df199b2578598c774aee6d86b985300b6a5fd20",
+      "local_present": false,
+      "note": "was at /opt/m3dm_ws/m3dm/checkpoints/ in WSL; that tree is gone. Download on Colab and persist to Drive."
+    },
+    "dino_vitbase8_pretrain.pth": {
+      "source": "https://dl.fbaipublicfiles.com/dino/dino_vitbase8_pretrain/dino_vitbase8_pretrain.pth",
+      "size_bytes": 343279349,
+      "sha256": "575f0efc4838938314afa09897a62ed2b87919928b5edcd133abb907328995eb",
+      "local_present": false,
+      "note": "timm hub checkpoint used by Model(rgb_backbone_name='vit_base_patch8_224_dino'). Check for an already-installed timm hub cache on Colab; verify sha256."
+    }
+  },
+  "existing_h_track_scripts": [
+    "scripts/high_accuracy/audit_environment.py",
+    "scripts/high_accuracy/benchmark_m3dm_cpu_estimate.py",
+    "scripts/high_accuracy/build_h0_reproduction_table.py",
+    "scripts/high_accuracy/dataset_inventory.py",
+    "scripts/high_accuracy/debug_sample.py",
+    "scripts/high_accuracy/extract_canonical_features.py",
+    "scripts/high_accuracy/generate_colab_notebook.py",
+    "scripts/high_accuracy/hash_frozen_artifacts.py",
+    "scripts/high_accuracy/run_cached_baselines.py",
+    "scripts/high_accuracy/test_feature_parity.py"
+  ],
+  "existing_experiment_tables": [
+    "experiments/high_accuracy/tables/H0_m3dm_paper_metrics.md",
+    "experiments/high_accuracy/tables/H0_m3dm_reproduction.csv",
+    "experiments/high_accuracy/tables/m3dm_loaded_counts_by_split.csv",
+    "experiments/high_accuracy/tables/m3dm_loaded_sample_manifest.csv",
+    "experiments/high_accuracy/tables/m3dm_preprocessing_manifest.csv",
+    "experiments/high_accuracy/tables/stage1_results.csv",
+    "experiments/high_accuracy/m3dm_repro_mvtec3d_copy_manifest.csv",
+    "experiments/high_accuracy/frozen_artifact_manifest.csv"
+  ],
+  "prior_state_docs": [
+    "experiments/high_accuracy/antigravity_handoff_state.json",
+    "experiments/high_accuracy/h0r_state.json",
+    "experiments/high_accuracy/checkpoint_provenance.json",
+    "experiments/high_accuracy/dataset_inventory.json",
+    "experiments/high_accuracy/environment.json",
+    "docs/H0_M3DM_REPRODUCTION.md",
+    "docs/H0R_FEATURE_PIPELINE.md",
+    "docs/HIGH_ACCURACY_TRACK.md",
+    "docs/HIGH_ACCURACY_TRACK_START.md"
+  ],
+  "m3dm_repo": {
+    "path_windows": "C:\\Users\\CharanOp\\xmv-ad\\third_party\\m3dm",
+    "pin_commit": "bd8151a4563ee7445bdc32d01b2a3b384e4d54f5",
+    "diff_status": "only CRLF line-ending noise on Windows checkout; official code unmodified (documented in h0r_state.json)"
+  },
+  "local_machine_policy": "Local machine used only for: source code, orchestration, manifests, light analysis, artifact download. NOT for DINO/Point-MAE extraction."
+}

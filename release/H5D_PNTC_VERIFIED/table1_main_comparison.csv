@@ -1,0 +1,8 @@
+Method,Venue,Provenance,I_AUROC,P_AUROC,AUPRO
+M3DM,CVPR 2023,reported_prior_work,0.945,0.992,0.964
+CFM,CVPR 2024,reported_prior_work,0.954,0.993,0.971
+CPIR,AEI 2025,reported_prior_work,0.958,0.994,0.97
+Attn-Memory,TMM 2025,reported_prior_work,0.962,0.995,0.972
+G2SF,ICCV 2025,reported_prior_work,0.971,0.997,0.979
+H4B_Baseline,2026 (Ours),measured_by_us,0.95401,0.99109,0.95852
+PNTC (H5-D),2026 (Ours),measured_by_us,0.96541,0.99416,0.96939

@@ -1,0 +1,1 @@
+checkpoints\E1_baseline_rgb\dowel_best.pt

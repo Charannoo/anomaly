@@ -1,0 +1,7 @@
+{
+  "total": 955057,
+  "trainable": 28049,
+  "frozen_teacher": 927008,
+  "checkpoint_mb": 4.213637,
+  "checkpoint": "checkpoints\\E1_baseline_rgb\\cable_gland_best.pt"
+}

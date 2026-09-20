@@ -1,0 +1,13 @@
+# E3: Late fusion baseline (Phase 3 — reserved)
+_base_: default.yaml
+
+experiment: E3_late_fusion
+model:
+  name: late_fusion
+  rgb_branch: teacher_student_rgb
+  depth_branch: teacher_student_depth
+  fusion: mean  # 0.5 * norm(A_RGB) + 0.5 * norm(A_DEPTH); no feature exchange
+
+fusion:
+  weights: [0.5, 0.5]
+  normalize_before_fuse: true

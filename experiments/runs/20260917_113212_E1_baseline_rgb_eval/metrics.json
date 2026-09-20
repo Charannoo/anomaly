@@ -1,0 +1,47 @@
+{
+  "experiment": "E1_baseline_rgb",
+  "eval_resolution": [
+    256,
+    256
+  ],
+  "categories": [
+    {
+      "category": "bagel",
+      "image_auroc": 0.6787190082644629,
+      "image_auprc": 0.889300593499649,
+      "pixel_auroc": 0.9579019197118323,
+      "pixel_auprc": 0.10808129420566874,
+      "aupro": 0.847932481724189,
+      "num_test_images": 110,
+      "num_anomalous": 88,
+      "dev_latency_note": "development-only forward timing, not deployment benchmark",
+      "dev_latency_mean_ms": 24.34868699972867,
+      "dev_latency_p50_ms": 24.330650001502363,
+      "dev_latency_device": "cpu"
+    },
+    {
+      "category": "cable_gland",
+      "image_auroc": 0.4482758620689655,
+      "image_auprc": 0.805943042630087,
+      "pixel_auroc": 0.9425277769613027,
+      "pixel_auprc": 0.044161535167095034,
+      "aupro": 0.8167236379596576,
+      "num_test_images": 108,
+      "num_anomalous": 87,
+      "dev_latency_note": "development-only forward timing, not deployment benchmark",
+      "dev_latency_mean_ms": 23.461580999937723,
+      "dev_latency_p50_ms": 23.11424999788869,
+      "dev_latency_device": "cpu"
+    }
+  ],
+  "mean": {
+    "category": "MEAN",
+    "image_auroc": 0.5634974351667141,
+    "image_auprc": 0.847621818064868,
+    "pixel_auroc": 0.9502148483365676,
+    "pixel_auprc": 0.0761214146863819,
+    "aupro": 0.8323280598419234,
+    "num_test_images": 218,
+    "num_anomalous": 175
+  }
+}

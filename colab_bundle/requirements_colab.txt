@@ -1,0 +1,15 @@
+# XMV-AD-H Colab bundle - deliberately SMALL.
+# Colab already ships recent PyTorch + torchvision; we do NOT pin them.
+
+timm>=0.9
+tifffile
+scikit-learn
+scipy
+pandas
+tqdm
+pyyaml
+zstandard
+pillow
+
+# FAISS is optional: the evaluator tries `import faiss` and falls back to
+# a chunked PyTorch cdist if it is unavailable.  Do not block installs on it.

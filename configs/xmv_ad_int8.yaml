@@ -1,0 +1,9 @@
+# XMV-AD INT8 deployment config (Phase 7 — reserved)
+_base_: xmv_ad.yaml
+
+experiment: E14_xmv_ad_int8
+deployment:
+  precision: int8
+  quantization: post_training
+  calibration_on: train_normal_only
+  backend: openvino

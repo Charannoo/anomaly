@@ -1,0 +1,12 @@
+# CPU benchmark protocol (Phase 7 — data/model sections inherit xmv_ad.yaml)
+_base_: xmv_ad.yaml
+
+experiment: benchmark_cpu
+benchmark:
+  device: cpu
+  batch_size: 1
+  warmup: 50
+  iterations: 200
+  input_sizes: [[256, 256], [320, 320], [384, 384]]
+  num_threads: [1, 4]
+  report: [p50_ms, p95_ms, mean_ms, fps, peak_ram_mb, params, model_mb]

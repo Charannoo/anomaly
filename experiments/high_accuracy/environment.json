@@ -1,0 +1,40 @@
+{
+  "os": "Windows",
+  "os_release": "11",
+  "os_version": "10.0.26200",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 165 Stepping 2, GenuineIntel",
+  "python": "3.13.6",
+  "python_implementation": "CPython",
+  "hostname": "Hiran",
+  "cpu_physical_cores": 4,
+  "cpu_logical_cores": 8,
+  "ram_total_gb": 8.42,
+  "ram_available_gb": 0.91,
+  "torch_version": "2.14.0+cpu",
+  "cuda_available": false,
+  "cuda_version": null,
+  "gpus": [],
+  "modules": {
+    "numpy": "2.4.6",
+    "onnx": "1.22.0",
+    "onnxruntime": "1.30.0",
+    "openvino": "2026.4.0-22959-99c81491cc3-releases/2026/4",
+    "nncf": "3.4.0",
+    "torchvision": "0.29.0+cpu",
+    "transformers": "5.16.1",
+    "timm": null,
+    "einops": null,
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "matplotlib": "3.11.1",
+    "opencv-python": null
+  },
+  "torch_build_config": {
+    "cuda_build": null,
+    "cudnn_version": null,
+    "debug": false
+  },
+  "git": "git version 2.54.0.windows.1",
+  "recorded_at": "2026-09-18T16:51:21+00:00"
+}

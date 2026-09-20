@@ -1,0 +1,135 @@
+{
+  "category": "cookie",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "cookie/train/good/000",
+    "cookie/train/good/001",
+    "cookie/train/good/002",
+    "cookie/train/good/003",
+    "cookie/train/good/004",
+    "cookie/train/good/005",
+    "cookie/train/good/006",
+    "cookie/train/good/007",
+    "cookie/train/good/008",
+    "cookie/train/good/009",
+    "cookie/train/good/010",
+    "cookie/train/good/011",
+    "cookie/train/good/012",
+    "cookie/train/good/013",
+    "cookie/train/good/014",
+    "cookie/train/good/015",
+    "cookie/train/good/016",
+    "cookie/train/good/017",
+    "cookie/train/good/018",
+    "cookie/train/good/019",
+    "cookie/train/good/020",
+    "cookie/train/good/021",
+    "cookie/train/good/022",
+    "cookie/train/good/023",
+    "cookie/train/good/024",
+    "cookie/train/good/025",
+    "cookie/train/good/026",
+    "cookie/train/good/027",
+    "cookie/train/good/028",
+    "cookie/train/good/029",
+    "cookie/train/good/030",
+    "cookie/train/good/031",
+    "cookie/train/good/032",
+    "cookie/train/good/033",
+    "cookie/train/good/034",
+    "cookie/train/good/035",
+    "cookie/train/good/036",
+    "cookie/train/good/037",
+    "cookie/train/good/038",
+    "cookie/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.12325847148895264,
+      "scale": 0.053144311089813705
+    },
+    "depth": {
+      "median": 0.11601877212524414,
+      "scale": 0.08804920740276574
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

@@ -1,0 +1,7 @@
+Stage,Backbone,Fusion,I_AUROC,P_AUROC,AUPRO
+H1_RGB,DINO ViT-B/8,Single Modality,0.8644,0.9872,0.9433
+H2_XYZ,Point-MAE,Single Modality,0.7333,0.9582,0.8613
+H3D_DecisionFusion,DINO ViT-B/8 + Point-MAE,Calibrated Decision Fusion,0.8979,0.9897,0.954
+H4A_DINOv2_RGB,DINOv2 ViT-B/14,Single Modality,0.9443,0.9902,0.9513
+H4B_Baseline,DINOv2 ViT-B/14 + Point-MAE,Calibrated Decision Fusion,0.95401,0.99109,0.95852
+PNTC (H5-D),DINOv2 ViT-B/14 + Point-MAE,PNTC Gated Topology,0.96541,0.99416,0.96939

@@ -1,0 +1,82 @@
+{
+  "checkpoints/E1_baseline_rgb/bagel_best.pt": {
+    "bytes": 4103317,
+    "sha256": "66b722b5c1d253d7"
+  },
+  "checkpoints/E1_baseline_rgb/cable_gland_best.pt": {
+    "bytes": 4103317,
+    "sha256": "58e2bde60e3dd4ac"
+  },
+  "checkpoints/E1_baseline_rgb/carrot_best.pt": {
+    "bytes": 4103317,
+    "sha256": "e57658f336f77056"
+  },
+  "checkpoints/E1_baseline_rgb/cookie_best.pt": {
+    "bytes": 4103317,
+    "sha256": "1333ce9278a7be06"
+  },
+  "checkpoints/E1_baseline_rgb/dowel_best.pt": {
+    "bytes": 4103317,
+    "sha256": "5e44e42c4816f0f7"
+  },
+  "checkpoints/E1_baseline_rgb/foam_best.pt": {
+    "bytes": 4103317,
+    "sha256": "ad8537418da0e734"
+  },
+  "checkpoints/E1_baseline_rgb/peach_best.pt": {
+    "bytes": 4103317,
+    "sha256": "ae6e52ae4f9e9390"
+  },
+  "checkpoints/E1_baseline_rgb/potato_best.pt": {
+    "bytes": 4103317,
+    "sha256": "4ab7a86b5136791e"
+  },
+  "checkpoints/E1_baseline_rgb/rope_best.pt": {
+    "bytes": 4103317,
+    "sha256": "14b855794d1db651"
+  },
+  "checkpoints/E1_baseline_rgb/tire_best.pt": {
+    "bytes": 4103317,
+    "sha256": "14235705d0fc5b4b"
+  },
+  "checkpoints/E2_baseline_depth/bagel_best.pt": {
+    "bytes": 4101269,
+    "sha256": "87efdc257f58d8a2"
+  },
+  "checkpoints/E2_baseline_depth/cable_gland_best.pt": {
+    "bytes": 4101269,
+    "sha256": "8f333e9129379d5d"
+  },
+  "checkpoints/E2_baseline_depth/carrot_best.pt": {
+    "bytes": 4101269,
+    "sha256": "e39648ac2fd382c0"
+  },
+  "checkpoints/E2_baseline_depth/cookie_best.pt": {
+    "bytes": 4101269,
+    "sha256": "b96740c8f245de5f"
+  },
+  "checkpoints/E2_baseline_depth/dowel_best.pt": {
+    "bytes": 4101269,
+    "sha256": "7a3046927afecae7"
+  },
+  "checkpoints/E2_baseline_depth/foam_best.pt": {
+    "bytes": 4101269,
+    "sha256": "34df69c5dcd070d4"
+  },
+  "checkpoints/E2_baseline_depth/peach_best.pt": {
+    "bytes": 4101269,
+    "sha256": "70f6754146e7736a"
+  },
+  "checkpoints/E2_baseline_depth/potato_best.pt": {
+    "bytes": 4101269,
+    "sha256": "0b1dc476827098c5"
+  },
+  "checkpoints/E2_baseline_depth/rope_best.pt": {
+    "bytes": 4101269,
+    "sha256": "40bc89c59c5601b1"
+  },
+  "checkpoints/E2_baseline_depth/tire_best.pt": {
+    "bytes": 4101269,
+    "sha256": "031a9e252313b0e9"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "total": 945795,
+  "trainable": 19075,
+  "frozen_teacher": 926720,
+  "checkpoint_mb": 4.101269,
+  "checkpoint": "checkpoints\\E2_baseline_depth\\tire_best.pt"
+}

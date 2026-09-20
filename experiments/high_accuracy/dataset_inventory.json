@@ -1,0 +1,311 @@
+{
+  "root": "C:\\Users\\CharanOp\\xmv-ad\\data\\raw\\mvtec3d",
+  "categories": {
+    "bagel": {
+      "train_n": 244,
+      "validation_n": 22,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "crack",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 23,
+        "contamination": 22,
+        "crack": 22,
+        "good": 22,
+        "hole": 21
+      },
+      "test_n": 110,
+      "gt_suffix": ".png",
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "crack/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    },
+    "cable_gland": {
+      "train_n": 223,
+      "validation_n": 23,
+      "test_defect_types": [
+        "bent",
+        "cut",
+        "good",
+        "hole",
+        "thread"
+      ],
+      "test_by_type": {
+        "bent": 21,
+        "cut": 22,
+        "good": 21,
+        "hole": 22,
+        "thread": 22
+      },
+      "test_n": 108,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "bent/valid",
+        "cut/valid",
+        "good/valid",
+        "hole/valid",
+        "thread/valid",
+        "train/valid"
+      ]
+    },
+    "carrot": {
+      "train_n": 286,
+      "validation_n": 29,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "crack",
+        "cut",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 27,
+        "contamination": 27,
+        "crack": 26,
+        "cut": 26,
+        "good": 27,
+        "hole": 26
+      },
+      "test_n": 159,
+      "gt_suffix": ".png",
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "crack/valid",
+        "cut/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    },
+    "cookie": {
+      "train_n": 210,
+      "validation_n": 22,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "crack",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 25,
+        "contamination": 25,
+        "crack": 27,
+        "good": 28,
+        "hole": 26
+      },
+      "test_n": 131,
+      "gt_suffix": ".png",
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "crack/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    },
+    "dowel": {
+      "train_n": 288,
+      "validation_n": 34,
+      "test_defect_types": [
+        "bent",
+        "combined",
+        "contamination",
+        "cut",
+        "good"
+      ],
+      "test_by_type": {
+        "bent": 27,
+        "combined": 26,
+        "contamination": 26,
+        "cut": 25,
+        "good": 26
+      },
+      "test_n": 130,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "bent/valid",
+        "combined/valid",
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "train/valid"
+      ]
+    },
+    "foam": {
+      "train_n": 236,
+      "validation_n": 27,
+      "test_defect_types": [
+        "color",
+        "combined",
+        "contamination",
+        "cut",
+        "good"
+      ],
+      "test_by_type": {
+        "color": 20,
+        "combined": 20,
+        "contamination": 20,
+        "cut": 20,
+        "good": 20
+      },
+      "test_n": 100,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "color/valid",
+        "combined/valid",
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "train/valid"
+      ]
+    },
+    "peach": {
+      "train_n": 361,
+      "validation_n": 42,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "cut",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 25,
+        "contamination": 27,
+        "cut": 25,
+        "good": 26,
+        "hole": 29
+      },
+      "test_n": 132,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    },
+    "potato": {
+      "train_n": 300,
+      "validation_n": 33,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "cut",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 23,
+        "contamination": 23,
+        "cut": 23,
+        "good": 22,
+        "hole": 23
+      },
+      "test_n": 114,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    },
+    "rope": {
+      "train_n": 298,
+      "validation_n": 33,
+      "test_defect_types": [
+        "contamination",
+        "cut",
+        "good",
+        "open"
+      ],
+      "test_by_type": {
+        "contamination": 25,
+        "cut": 27,
+        "good": 32,
+        "open": 17
+      },
+      "test_n": 101,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "open/valid",
+        "train/valid"
+      ]
+    },
+    "tire": {
+      "train_n": 210,
+      "validation_n": 29,
+      "test_defect_types": [
+        "combined",
+        "contamination",
+        "cut",
+        "good",
+        "hole"
+      ],
+      "test_by_type": {
+        "combined": 5,
+        "contamination": 28,
+        "cut": 27,
+        "good": 25,
+        "hole": 27
+      },
+      "test_n": 112,
+      "gt_suffix": null,
+      "layout_ok": false,
+      "issues": [
+        "combined/valid",
+        "contamination/valid",
+        "cut/valid",
+        "good/valid",
+        "hole/valid",
+        "train/valid"
+      ]
+    }
+  },
+  "total_train": 2656,
+  "total_validation": 294,
+  "total_test": 1197,
+  "category_size_mb": {
+    "bagel": 0.0,
+    "cable_gland": 0.0,
+    "carrot": 0.0,
+    "cookie": 0.0,
+    "dowel": 0.0,
+    "foam": 0.0,
+    "peach": 0.0,
+    "potato": 0.0,
+    "rope": 0.0,
+    "tire": 0.0
+  },
+  "checked_at": "2026-09-18T16:53:57+00:00"
+}

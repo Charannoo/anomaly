@@ -1,0 +1,88 @@
+project: xmv-ad
+phase: 1
+data:
+  root: data/raw/mvtec3d
+  processed_root: data/processed/mvtec3d
+  cache_dir: data/cache
+  categories: null
+  input_size:
+  - 256
+  - 256
+  rgb_mean:
+  - 0.485
+  - 0.456
+  - 0.406
+  rgb_std:
+  - 0.229
+  - 0.224
+  - 0.225
+  depth_norm: robust_median
+  depth_clip:
+  - -3.0
+  - 3.0
+  depth_percentiles:
+  - 5.0
+  - 95.0
+  num_workers: 0
+  train_split: train
+  val_split: validation
+  test_split: test
+preprocessing:
+  fit_stats_on: train_normal_only
+  keep_xyz: true
+  rgb_interpolation: bilinear
+  depth_interpolation: nearest
+  mask_interpolation: nearest
+reproducibility:
+  seeds:
+  - 42
+  - 123
+  - 2026
+  deterministic: true
+device: auto
+num_threads: 4
+batch_size: 8
+experiment: E2_baseline_depth
+model:
+  name: teacher_student_depth
+  modality: depth
+  depth_encoder: mobilenetv3_small_1ch
+  pretrained: imagenet_avg_init
+  freeze_teacher: true
+  teacher_taps:
+    stage8: 3
+    stage16: 8
+  teacher_channels:
+    stage8: 24
+    stage16: 48
+  level_weights:
+  - 0.5
+  - 0.5
+  discrepancy: cosine
+  score_mode: max
+  topk_frac: 0.01
+  smooth_sigma: 0.0
+loss:
+  lambda_depth: 1.0
+  lambda_cross: 0.0
+training:
+  seed: 42
+  epochs: 50
+  batch_size: 8
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: adamw
+  scheduler: plateau
+  early_stopping_patience: 0
+  amp: false
+  tensorboard: false
+  train_on: normal_only
+evaluation:
+  batch_size: 8
+  num_viz: 10
+  num_failures: 5
+visualization:
+  colormap_vmin: 0.0
+  colormap_vmax: 1.0
+runtime:
+  device: auto

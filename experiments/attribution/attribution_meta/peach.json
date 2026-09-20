@@ -1,0 +1,135 @@
+{
+  "category": "peach",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "peach/train/good/000",
+    "peach/train/good/001",
+    "peach/train/good/002",
+    "peach/train/good/003",
+    "peach/train/good/004",
+    "peach/train/good/005",
+    "peach/train/good/006",
+    "peach/train/good/007",
+    "peach/train/good/008",
+    "peach/train/good/009",
+    "peach/train/good/010",
+    "peach/train/good/011",
+    "peach/train/good/012",
+    "peach/train/good/013",
+    "peach/train/good/014",
+    "peach/train/good/015",
+    "peach/train/good/016",
+    "peach/train/good/017",
+    "peach/train/good/018",
+    "peach/train/good/019",
+    "peach/train/good/020",
+    "peach/train/good/021",
+    "peach/train/good/022",
+    "peach/train/good/023",
+    "peach/train/good/024",
+    "peach/train/good/025",
+    "peach/train/good/026",
+    "peach/train/good/027",
+    "peach/train/good/028",
+    "peach/train/good/029",
+    "peach/train/good/030",
+    "peach/train/good/031",
+    "peach/train/good/032",
+    "peach/train/good/033",
+    "peach/train/good/034",
+    "peach/train/good/035",
+    "peach/train/good/036",
+    "peach/train/good/037",
+    "peach/train/good/038",
+    "peach/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.08184073865413666,
+      "scale": 0.03485077530518174
+    },
+    "depth": {
+      "median": 0.1149369329214096,
+      "scale": 0.06392257137000561
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}

@@ -1,0 +1,12 @@
+category,delta_E7_minus_E4,ci_lo,ci_hi,n_bootstrap,excludes_zero
+bagel,0.0279,-0.0238,0.0759,1000,False
+cable_gland,0.0093,-0.1545,0.1734,1000,False
+carrot,-0.0034,-0.0903,0.0887,1000,False
+cookie,-0.1047,-0.222,0.0024,1000,False
+dowel,0.0322,-0.0719,0.1406,1000,False
+foam,0.1019,0.005,0.1963,1000,True
+peach,-0.2398,-0.3866,-0.0972,1000,True
+potato,-0.0479,-0.1854,0.0853,1000,False
+rope,0.0014,-0.0806,0.0767,1000,False
+tire,0.0244,-0.0616,0.1033,1000,False
+POOLED,-0.0399,-0.0687,-0.0124,1000,True

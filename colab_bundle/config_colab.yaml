@@ -1,0 +1,91 @@
+# =====================================================================
+# XMV-AD-H Colab Bundle configuration
+# All paths here are Colab (Linux) paths.  When the bundle is executed
+# locally (no /content), cache_utils.load_config() rewrites the paths to
+# be relative to the bundle directory so every script still runs.
+# =====================================================================
+
+# --- Dataset ---------------------------------------------------------
+categories:
+  - bagel
+  - cable_gland
+  - carrot
+  - cookie
+  - dowel
+  - foam
+  - peach
+  - potato
+  - rope
+  - tire
+
+# Archive names accepted by bootstrap.py inside the Drive dataset folder.
+dataset_archive_names:
+  - mvtec3d.tar.gz
+  - mvtec3d.tar.zst
+  - mvtec3d.tar.xz
+
+include_combined: true   # also treat test/combined/ (multi-defect) as test samples
+
+# --- Paths -----------------------------------------------------------
+bundle_root: /content/xmvad
+work_root:   /content/xmvad_work
+drive_root:  /content/drive/MyDrive/xmvad-ha
+
+data_root:        /content/xmvad_work/data
+dataset_dir:      /content/xmvad_work/data/mvtec3d
+checkpoints_dir:  /content/xmvad_work/checkpoints
+features_dir:     /content/xmvad_work/features
+results_dir:      /content/xmvad/results
+logs_dir:         /content/xmvad/logs
+
+persistent:
+  dataset:       /content/drive/MyDrive/xmvad-ha/dataset
+  checkpoints:   /content/drive/MyDrive/xmvad-ha/checkpoints
+  features:      /content/drive/MyDrive/xmvad-ha/features
+  results:       /content/drive/MyDrive/xmvad-ha/results
+  logs:          /content/drive/MyDrive/xmvad-ha/logs
+
+# --- Backbones -------------------------------------------------------
+# RGB  : DINO ViT-B/8 (timm) - same encoder the M3DM pipeline used.
+# XYZ  : Point-MAE - full architecture of third_party/m3dm/models/models.py
+#        rebuilt with PURE PyTorch grouping ops (no pointnet2_ops / knn_cuda),
+#        loading the SAME pointmae_pretrain.pth checkpoint weights.
+rgb_backbone: dino
+rgb_backbone_name: vit_base_patch8_224_dino
+xyz_backbone: point_mae_pure
+xyz_backbone_name: Point_MAE
+
+num_group: 1024
+group_size: 128
+img_size: 224
+
+# Point-MAE pretrained checkpoint (official Point-MAE release).
+pointmae_url: https://github.com/Pang-Yatian/Point-MAE/releases/download/main/pretrain.pth
+pointmae_expected_bytes: 348288755
+pointmae_expected_sha256_prefix: "27ded93"
+
+# --- Extraction ------------------------------------------------------
+# Largest first; the extractor auto-tunes down on CUDA OOM.
+rgb_batch_tries: [64, 32, 16, 8, 4, 2, 1]
+xyz_batch_tries: [16, 8, 4, 2, 1]
+cache_precision: float16     # shard dtype on disk (float32 or float16)
+# Provenance of the frozen checkpoints recorded in the cache manifest.
+dino_hub_tag: dino_vitbase8_pretrain
+
+# --- Memory bank / scoring (M3DM protocol) ---------------------------
+# f_coreset 0.1 / eps 0.9 matches the published M3DM configuration.
+f_coreset: 0.1
+coreset_eps: 0.9
+n_reweight: 3
+
+# --- Metrics ---------------------------------------------------------
+aupro_integration_limit: 0.3
+aupro_num_thresholds: 100
+
+# --- Published comparator (REPORTED BY PRIOR WORK) -------------------
+m3dm_published:
+  provenance: reported_prior_work
+  model: M3DM
+  I: 0.945
+  P: 0.992
+  AUPRO: 0.964

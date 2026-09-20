@@ -1,0 +1,33 @@
+{
+  "experiment": "E2_baseline_depth",
+  "eval_resolution": [
+    256,
+    256
+  ],
+  "categories": [
+    {
+      "category": "cable_gland",
+      "image_auroc": 0.5145046524356869,
+      "image_auprc": 0.8188587421251713,
+      "pixel_auroc": 0.8637021064799089,
+      "pixel_auprc": 0.015057444208787046,
+      "aupro": 0.6834308757077409,
+      "num_test_images": 108,
+      "num_anomalous": 87,
+      "dev_latency_note": "development-only forward timing, not deployment benchmark",
+      "dev_latency_mean_ms": 23.78279099961219,
+      "dev_latency_p50_ms": 23.989900000742637,
+      "dev_latency_device": "cpu"
+    }
+  ],
+  "mean": {
+    "category": "MEAN",
+    "image_auroc": 0.5145046524356869,
+    "image_auprc": 0.8188587421251713,
+    "pixel_auroc": 0.8637021064799089,
+    "pixel_auprc": 0.015057444208787046,
+    "aupro": 0.6834308757077409,
+    "num_test_images": 108,
+    "num_anomalous": 87
+  }
+}

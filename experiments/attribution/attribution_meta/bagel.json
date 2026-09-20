@@ -1,0 +1,135 @@
+{
+  "category": "bagel",
+  "plan": [
+    [
+      "rgb_only",
+      "color_patch",
+      "mild",
+      {
+        "strength": 0.3
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "medium",
+      {
+        "strength": 0.6
+      }
+    ],
+    [
+      "rgb_only",
+      "color_patch",
+      "strong",
+      {
+        "strength": 1.0
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "mild",
+      {
+        "amplitude": 0.01
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "medium",
+      {
+        "amplitude": 0.03
+      }
+    ],
+    [
+      "depth_only",
+      "dent",
+      "strong",
+      {
+        "amplitude": 0.06
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "mild",
+      {
+        "strength": 0.3,
+        "amplitude": 0.02
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "medium",
+      {
+        "strength": 0.6,
+        "amplitude": 0.05
+      }
+    ],
+    [
+      "joint",
+      "joint_blob",
+      "strong",
+      {
+        "strength": 1.0,
+        "amplitude": 0.08
+      }
+    ]
+  ],
+  "sources": [
+    "bagel/train/good/000",
+    "bagel/train/good/001",
+    "bagel/train/good/002",
+    "bagel/train/good/003",
+    "bagel/train/good/004",
+    "bagel/train/good/005",
+    "bagel/train/good/006",
+    "bagel/train/good/007",
+    "bagel/train/good/008",
+    "bagel/train/good/009",
+    "bagel/train/good/010",
+    "bagel/train/good/011",
+    "bagel/train/good/012",
+    "bagel/train/good/013",
+    "bagel/train/good/014",
+    "bagel/train/good/015",
+    "bagel/train/good/016",
+    "bagel/train/good/017",
+    "bagel/train/good/018",
+    "bagel/train/good/019",
+    "bagel/train/good/020",
+    "bagel/train/good/021",
+    "bagel/train/good/022",
+    "bagel/train/good/023",
+    "bagel/train/good/024",
+    "bagel/train/good/025",
+    "bagel/train/good/026",
+    "bagel/train/good/027",
+    "bagel/train/good/028",
+    "bagel/train/good/029",
+    "bagel/train/good/030",
+    "bagel/train/good/031",
+    "bagel/train/good/032",
+    "bagel/train/good/033",
+    "bagel/train/good/034",
+    "bagel/train/good/035",
+    "bagel/train/good/036",
+    "bagel/train/good/037",
+    "bagel/train/good/038",
+    "bagel/train/good/039"
+  ],
+  "mode": "train_normal_only_injected",
+  "calibration": {
+    "rgb": {
+      "median": 0.07737725973129272,
+      "scale": 0.04542402030341327
+    },
+    "depth": {
+      "median": 0.09228018671274185,
+      "scale": 0.065834022192657
+    }
+  },
+  "depth_norm_method": "robust_median",
+  "seed_rule": "md5(source|kind|subtype|severity)"
+}
