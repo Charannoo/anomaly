@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AppShell from "@/components/AppShell";
 import { fetchProviderStatus, fetchSystemStatus } from "@/lib/api";
 import { Sliders, Shield, Database, FileText, CheckCircle2, AlertCircle, RefreshCw } from "lucide-react";
 
@@ -54,8 +53,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <AppShell title="Settings" breadcrumb="System Configuration & Providers">
-      <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <div>
@@ -234,6 +232,5 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-    </AppShell>
   );
 }

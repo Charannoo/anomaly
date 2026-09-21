@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AppShell from "@/components/AppShell";
 import { fetchResearchAblations } from "@/lib/api";
 import { Copy, Check, Terminal, FileCode2, BookOpen, CheckCircle2 } from "lucide-react";
 
@@ -24,8 +23,7 @@ export default function ResearchPage() {
   };
 
   return (
-    <AppShell title="Research" breadcrumb="Scientific Formulation & Reproducibility">
-      <div className="space-y-8 max-w-5xl">
+    <div className="space-y-8 max-w-5xl mx-auto">
         {/* Header */}
         <div className="border-b border-white/[0.08] pb-4">
           <h1 className="text-xl font-semibold tracking-tight text-[#F3F5F7]">
@@ -200,6 +198,5 @@ export default function ResearchPage() {
           </ul>
         </div>
       </div>
-    </AppShell>
   );
 }

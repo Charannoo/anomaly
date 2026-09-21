@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AppShell from "@/components/AppShell";
 import MetricValue from "@/components/MetricValue";
 import { fetchAnalytics, AnalyticsData } from "@/lib/api";
 import {
@@ -40,8 +39,7 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <AppShell title="Analytics" breadcrumb="Operational Metrology & Historical Metrics">
-      <div className="space-y-6">
+    <div className="space-y-6 max-w-7xl mx-auto">
         {/* Header and Controls */}
         <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <div>
@@ -264,6 +262,5 @@ export default function AnalyticsPage() {
           </div>
         </div>
       </div>
-    </AppShell>
   );
 }

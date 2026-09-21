@@ -22,15 +22,15 @@ import { cn } from "@/lib/utils";
 import { fetchProviderStatus, fetchSystemStatus } from "@/lib/api";
 
 const NAV_ITEMS = [
-  { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "New Inspection", href: "/inspect", icon: PlusCircle },
-  { label: "Inspections", href: "/inspections", icon: History },
-  { label: "Compare", href: "/compare", icon: GitCompare },
-  { label: "Analytics", href: "/analytics", icon: BarChart3 },
-  { label: "Model Explorer", href: "/model", icon: Cpu },
-  { label: "Research", href: "/research", icon: BookOpen },
-  { label: "Demo Mode", href: "/demo", icon: Sparkles },
-  { label: "Settings", href: "/settings", icon: Settings },
+  { label: "Overview", href: "/dashboard", icon: LayoutDashboard, subtitle: "Operational Metrology" },
+  { label: "New Inspection", href: "/inspect", icon: PlusCircle, subtitle: "Dual-Modality Observation" },
+  { label: "Inspections", href: "/inspections", icon: History, subtitle: "Quality Archive" },
+  { label: "Compare", href: "/compare", icon: GitCompare, subtitle: "Side-by-Side Analysis" },
+  { label: "Analytics", href: "/analytics", icon: BarChart3, subtitle: "Operational Metrics" },
+  { label: "Model Explorer", href: "/model", icon: Cpu, subtitle: "Architecture & Verification" },
+  { label: "Research", href: "/research", icon: BookOpen, subtitle: "Scientific Formulation" },
+  { label: "Demo Mode", href: "/demo", icon: Sparkles, subtitle: "Faculty Demonstration" },
+  { label: "Settings", href: "/settings", icon: Settings, subtitle: "Configuration & Providers" },
 ];
 
 interface AppShellProps {
@@ -140,38 +140,45 @@ export const AppShell: React.FC<AppShellProps> = ({ children, title, breadcrumb 
       {/* Main Container */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Bar */}
-        <header className="flex h-14 items-center justify-between border-b border-border-default bg-bg-subtle px-6">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-text-primary">
-              {title || NAV_ITEMS.find((n) => pathname === n.href || (n.href !== "/dashboard" && pathname.startsWith(n.href)))?.label || "Inspection System"}
-            </span>
-            <span className="text-xs text-text-muted">/</span>
-            <span className="text-xs text-text-secondary font-mono">
-              {breadcrumb || "Multimodal RGB–3D"}
-            </span>
-          </div>
+        {(() => {
+          const activeNav = NAV_ITEMS.find((n) => pathname === n.href || (n.href !== "/dashboard" && pathname.startsWith(n.href)));
+          const displayTitle = title || activeNav?.label || "Inspection System";
+          const displayBreadcrumb = breadcrumb || activeNav?.subtitle || "Multimodal RGB–3D";
+          return (
+            <header className="flex h-14 items-center justify-between border-b border-border-default bg-bg-subtle px-6">
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-semibold text-text-primary">
+                  {displayTitle}
+                </span>
+                <span className="text-xs text-text-muted">/</span>
+                <span className="text-xs text-text-secondary font-mono">
+                  {displayBreadcrumb}
+                </span>
+              </div>
 
-          <div className="flex items-center gap-4">
-            {/* Frozen Benchmark Badge */}
-            <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded bg-bg-panel border border-border-default text-[11px] font-mono text-text-muted">
-              <span>CANONICAL:</span>
-              <span className="text-status-normal font-semibold">I-AUROC 0.96541</span>
-            </div>
+              <div className="flex items-center gap-4">
+                {/* Frozen Benchmark Badge */}
+                <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded bg-bg-panel border border-border-default text-[11px] font-mono text-text-muted">
+                  <span>CANONICAL:</span>
+                  <span className="text-status-normal font-semibold">I-AUROC 0.96541</span>
+                </div>
 
-            {/* Provider Pill */}
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-accent-subtle border border-border-subtle text-[11px] font-mono text-accent-primary">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-primary animate-pulse" />
-              <span className="capitalize">{providerInfo.provider}</span>
-              <span className="text-text-muted">Active</span>
-            </div>
+                {/* Provider Pill */}
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-accent-subtle border border-border-subtle text-[11px] font-mono text-accent-primary">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-primary animate-pulse" />
+                  <span className="capitalize">{providerInfo.provider}</span>
+                  <span className="text-text-muted">Active</span>
+                </div>
 
-            {/* System Status Pill */}
-            <div className="flex items-center gap-1.5 text-[11px] font-mono text-status-normal">
-              <CheckCircle2 size={12} />
-              <span>{systemInfo.status}</span>
-            </div>
-          </div>
-        </header>
+                {/* System Status Pill */}
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-status-normal">
+                  <CheckCircle2 size={12} />
+                  <span>{systemInfo.status}</span>
+                </div>
+              </div>
+            </header>
+          );
+        })()}
 
         {/* Workspace Content */}
         <main className="flex-1 overflow-y-auto bg-bg-app p-6">

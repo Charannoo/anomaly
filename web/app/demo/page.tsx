@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AppShell from "@/components/AppShell";
 import { fetchDemoCases, fetchInspection, DemoCase } from "@/lib/api";
 import StatusIndicator from "@/components/StatusIndicator";
 import ImageViewer from "@/components/ImageViewer";
@@ -75,11 +74,7 @@ export default function DemoPage() {
   const primaryDefect = defects[0] || null;
 
   return (
-    <AppShell
-      title="Faculty Presentation Mode"
-      breadcrumb="End-to-End Multimodal Inspection Demonstration"
-    >
-      <div className={`space-y-6 ${isPresentationMode ? "fixed inset-0 z-50 bg-[#0B0D10] p-6 overflow-y-auto" : ""}`}>
+    <div className={`space-y-6 ${isPresentationMode ? "fixed inset-0 z-50 bg-[#0B0D10] p-6 overflow-y-auto" : "max-w-7xl mx-auto"}`}>
         {/* Top Control Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/[0.08] pb-4">
           <div>
@@ -379,6 +374,5 @@ export default function DemoPage() {
           defect={primaryDefect}
         />
       </div>
-    </AppShell>
   );
 }

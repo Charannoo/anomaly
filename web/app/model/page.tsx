@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AppShell from "@/components/AppShell";
 import { fetchModelInfo } from "@/lib/api";
 import { Cpu, Lock, CheckCircle2, AlertTriangle, Layers, GitFork, ShieldCheck } from "lucide-react";
 
@@ -17,8 +16,7 @@ export default function ModelExplorerPage() {
   }, []);
 
   return (
-    <AppShell title="Model Explorer" breadcrumb="Architecture Specification & Benchmark Verification">
-      <div className="space-y-8 max-w-6xl">
+    <div className="space-y-8 max-w-6xl mx-auto">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-white/[0.08] pb-5">
           <div>
@@ -207,6 +205,5 @@ export default function ModelExplorerPage() {
           </div>
         </div>
       </div>
-    </AppShell>
   );
 }
