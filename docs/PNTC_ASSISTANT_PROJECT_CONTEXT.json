@@ -1,0 +1,38 @@
+{
+  "project_name": "XMV-AD / PNTC Industrial Anomaly Detection",
+  "method_name": "Paired Neighborhood Topology Consistency (PNTC)",
+  "frozen_tag": "h5d-pntc-verified",
+  "canonical_metrics": {
+    "I-AUROC": "0.96541000",
+    "P-AUROC": "0.99416000",
+    "AUPRO@0.3": "0.96939000"
+  },
+  "architecture": {
+    "rgb_backbone": "DINOv2 (ViT-S/14)",
+    "point_backbone": "Point-MAE",
+    "coreset_size": 2500,
+    "top_k_neighbors": 8,
+    "fusion": "Topology consistency gating via Jensen-Shannon divergence over paired neighborhood graph",
+    "feature_alignment": "Paired cross-modal prototype memory indexed by synchronized surface patches"
+  },
+  "inspection_suite": {
+    "modules": [
+      "PNTC Core Anomaly Detection",
+      "PNTC Explain (Morphological characterization, defect bounding, contour extraction)",
+      "PNTC Inspection Suite (3D surface deviation, signed depth, missing/excess volume, Normal Twin prototype retrieval, Prototype Trace, Review Guard)"
+    ]
+  },
+  "assistant_principles": {
+    "role": "Explanation and conversational query interface over verified structured inspection JSON",
+    "llm_detection_role": "None. The LLM does NOT detect defects, compute anomaly scores, or alter metrics.",
+    "scientific_integrity": "Ground truth facts originate exclusively from deterministic PNTC detectors and physical 3D measurements."
+  },
+  "viva_qna_reference": {
+    "why_multimodal": "Surface anomalies often exhibit purely geometric deformations without significant RGB contrast change (e.g., subtle shallow depressions), or texture/color blemishes without structural surface alteration. Multimodal RGB+XYZ covers both orthogonal failure modes.",
+    "why_dinov2": "DINOv2 self-supervised visual features preserve fine-grained semantic and texture patch representations across varied industrial materials without task-specific supervised bias.",
+    "why_point_mae": "Point-MAE captures robust self-supervised local geometric surface patches from unstructured XYZ point clouds, invariant to minor pose shifts.",
+    "why_pntc": "Standard concatenation ignores topological dissonance between modalities. PNTC computes topological agreement between the RGB neighborhood and the XYZ neighborhood retrieved from memory. If the two modalities point to conflicting normal prototype regimes, the Jensen-Shannon topology divergence spikes, signalling anomalous behavior.",
+    "what_is_the_gate": "The cross-modal anomaly gate dynamically balances individual modality anomaly evidence with topology consistency disagreement, avoiding false alarms when both modalities agree on normal topology.",
+    "why_llm": "The LLM serves strictly as an operator-friendly verbalization layer. It translates complex multidimensional signed deviations, prototype traces, and topology scores into clear, grounded natural language without human misinterpretation."
+  }
+}
