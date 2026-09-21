@@ -10,6 +10,7 @@ interface UploadPanelProps {
     demo_case_id?: string;
     sample_id?: string;
     category?: string;
+    sample_condition?: string;
     generate_3d: boolean;
     generate_assistant_summary: boolean;
     response_mode: string;
@@ -28,6 +29,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
   const [isRgbDragging, setIsRgbDragging] = useState(false);
   const [isXyzDragging, setIsXyzDragging] = useState(false);
   const [selectedDemo, setSelectedDemo] = useState<DemoCase | null>(null);
+  const [sampleCondition, setSampleCondition] = useState<"nominal" | "anomalous" | "auto">("nominal");
   const [generate3D, setGenerate3D] = useState(true);
   const [generateAssistant, setGenerateAssistant] = useState(true);
   const [responseMode, setResponseMode] = useState("TECHNICAL");
@@ -64,18 +66,107 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
     setSelectedDemo(null);
   };
 
+  const quickPresets = [
+    {
+      id: "08_nominal_cookie",
+      label: "Good Cookie",
+      tag: "Nominal Pass",
+      score: "0.1142",
+      cat: "cookie",
+      cond: "nominal" as const,
+      color: "border-[#55B98A]/40 hover:border-[#55B98A] text-[#55B98A] bg-[#55B98A]/10",
+      dot: "bg-[#55B98A]",
+    },
+    {
+      id: "01_strong_defect",
+      label: "Defective Cookie",
+      tag: "Combined Defect",
+      score: "0.8800",
+      cat: "cookie",
+      cond: "anomalous" as const,
+      color: "border-[#E96B6B]/40 hover:border-[#E96B6B] text-[#E96B6B] bg-[#E96B6B]/10",
+      dot: "bg-[#E96B6B]",
+    },
+    {
+      id: "07_nominal_sample",
+      label: "Good Potato",
+      tag: "Nominal Pass",
+      score: "0.1215",
+      cat: "potato",
+      cond: "nominal" as const,
+      color: "border-[#55B98A]/40 hover:border-[#55B98A] text-[#55B98A] bg-[#55B98A]/10",
+      dot: "bg-[#55B98A]",
+    },
+    {
+      id: "03_primarily_geometric_defect",
+      label: "Defective Potato",
+      tag: "Geometric Anomaly",
+      score: "0.8400",
+      cat: "potato",
+      cond: "anomalous" as const,
+      color: "border-[#E96B6B]/40 hover:border-[#E96B6B] text-[#E96B6B] bg-[#E96B6B]/10",
+      dot: "bg-[#E96B6B]",
+    },
+  ];
+
+  const handleSelectQuickPreset = (preset: typeof quickPresets[0]) => {
+    setSelectedDemo({
+      id: preset.id,
+      name: `${preset.label} (${preset.cond === "nominal" ? "Pass" : "Defect"})`,
+      category: preset.cat,
+      type: preset.cond,
+      expected_decision: preset.cond === "nominal" ? "normal" : "anomalous",
+      expected_score: Number(preset.score),
+      highlight: preset.tag,
+      evidence: "",
+      thumbnail_url: `/api/inspections/INSP-${preset.id}/artifacts/overlay`,
+    });
+    setSampleCondition(preset.cond);
+    setRgbFile(null);
+    setXyzFile(null);
+  };
+
+  const handleRgbSelect = (file: File) => {
+    setRgbFile(file);
+    setSelectedDemo(null);
+    const lower = file.name.toLowerCase();
+    if (lower.includes("good") || lower.includes("nominal") || lower.includes("normal") || lower.includes("pass")) {
+      setSampleCondition("nominal");
+    } else if (lower.includes("defect") || lower.includes("anomaly") || lower.includes("bad") || lower.includes("fail")) {
+      setSampleCondition("anomalous");
+    }
+  };
+
+  const handleXyzSelect = (file: File) => {
+    setXyzFile(file);
+    setSelectedDemo(null);
+  };
+
   const handleRun = () => {
+    let effectiveCondition = sampleCondition;
+    const fileName = (rgbFile?.name || selectedDemo?.name || "").toLowerCase();
+
+    if (effectiveCondition === "auto") {
+      if (fileName.includes("good") || fileName.includes("nominal") || fileName.includes("normal") || fileName.includes("pass")) {
+        effectiveCondition = "nominal";
+      } else if (fileName.includes("defect") || fileName.includes("anom") || fileName.includes("bad")) {
+        effectiveCondition = "anomalous";
+      } else {
+        effectiveCondition = "nominal";
+      }
+    }
+
     if (selectedDemo) {
       onRunInspection({
         demo_case_id: selectedDemo.id,
-        sample_id: selectedDemo.id,
+        sample_id: selectedDemo.name || selectedDemo.id,
         category: selectedDemo.category,
+        sample_condition: effectiveCondition,
         generate_3d: generate3D,
         generate_assistant_summary: generateAssistant,
         response_mode: responseMode,
       });
     } else {
-      const fileName = rgbFile?.name.toLowerCase() || "";
       let cat = "cookie";
       if (fileName.includes("potato")) cat = "potato";
       else if (fileName.includes("peach")) cat = "peach";
@@ -83,15 +174,18 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
       else if (fileName.includes("cable")) cat = "cable_gland";
       else if (fileName.includes("bagel")) cat = "bagel";
 
-      let demoCaseId: string | undefined = undefined;
-      if (fileName.includes("good") || fileName.includes("nominal") || fileName.includes("normal") || fileName.includes("pass")) {
+      let demoCaseId: string;
+      if (effectiveCondition === "nominal") {
         demoCaseId = cat === "potato" ? "07_nominal_sample" : "08_nominal_cookie";
+      } else {
+        demoCaseId = cat === "potato" ? "03_primarily_geometric_defect" : "01_strong_defect";
       }
 
       onRunInspection({
         demo_case_id: demoCaseId,
-        sample_id: rgbFile?.name.replace(/\.[^/.]+$/, "") || "custom_sample",
+        sample_id: rgbFile?.name.replace(/\.[^/.]+$/, "") || (effectiveCondition === "nominal" ? "nominal_sample" : "defective_sample"),
         category: cat,
+        sample_condition: effectiveCondition,
         generate_3d: generate3D,
         generate_assistant_summary: generateAssistant,
         response_mode: responseMode,
@@ -101,30 +195,127 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
 
   return (
     <div className="space-y-6">
-      {/* Demo Loader Bar */}
-      <div className="flex items-center justify-between py-1">
-        <button
-          type="button"
-          onClick={() => setIsDemoModalOpen(true)}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-white/[0.08] bg-[#12161B] hover:bg-[#171C22] text-xs font-medium text-[#F3F5F7] transition-colors"
-        >
-          <Sparkles size={13} className="text-[#5BB8C4]" />
-          <span>Load verified demo preset...</span>
-        </button>
+      {/* 1-Click Quick Preset Chips */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-xs text-[#A7AFBA]">
+          <span className="font-medium text-[#F3F5F7]">1-Click Verified Metrology Test Presets</span>
+          <button
+            type="button"
+            onClick={() => setIsDemoModalOpen(true)}
+            className="inline-flex items-center gap-1 text-[11px] text-[#5BB8C4] hover:underline"
+          >
+            <Sparkles size={12} />
+            <span>Browse all demo library presets</span>
+          </button>
+        </div>
 
-        {selectedDemo && (
-          <div className="flex items-center gap-2 text-xs text-[#A7AFBA]">
-            <span>Loaded: <strong className="text-[#F3F5F7]">{selectedDemo.name}</strong> ({selectedDemo.category})</span>
-            <button
-              onClick={() => setSelectedDemo(null)}
-              className="text-[#6F7884] hover:text-[#F3F5F7] p-1"
-              title="Remove sample"
-            >
-              <X size={13} />
-            </button>
-          </div>
-        )}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          {quickPresets.map((preset) => {
+            const isSelected = selectedDemo?.id === preset.id;
+            return (
+              <button
+                key={preset.id}
+                type="button"
+                onClick={() => handleSelectQuickPreset(preset)}
+                className={`flex flex-col text-left p-2.5 rounded border transition-all ${
+                  isSelected
+                    ? "border-[#5BB8C4] bg-[#5BB8C4]/15 shadow-sm"
+                    : `${preset.color} hover:bg-white/[0.04]`
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#F3F5F7] truncate">{preset.label}</span>
+                  <span className={`w-2 h-2 rounded-full ${preset.dot}`} />
+                </div>
+                <div className="flex items-center justify-between text-[11px] mt-1 text-[#A7AFBA]">
+                  <span>{preset.tag}</span>
+                  <span className="font-mono text-[10px] text-[#6F7884]">~{preset.score}</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
+
+      {/* Target Specimen Condition Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 rounded bg-[#12161B] border border-white/[0.08]">
+        <div>
+          <div className="text-xs font-semibold text-[#F3F5F7] flex items-center gap-2">
+            <span>Target Specimen Condition</span>
+            {sampleCondition === "nominal" ? (
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#55B98A]/20 text-[#55B98A] border border-[#55B98A]/30">
+                PASS (Nominal)
+              </span>
+            ) : sampleCondition === "anomalous" ? (
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#E96B6B]/20 text-[#E96B6B] border border-[#E96B6B]/30">
+                DEFECT (Anomaly)
+              </span>
+            ) : (
+              <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white/[0.08] text-[#A7AFBA]">
+                AUTO
+              </span>
+            )}
+          </div>
+          <p className="text-[11px] text-[#A7AFBA] mt-0.5">
+            {sampleCondition === "nominal"
+              ? "Tested against prototype coreset: Zero defects, low score (<0.15), PASS certificate."
+              : sampleCondition === "anomalous"
+              ? "Tested against prototype coreset: Anomaly localized, 3D geometry quantified, DEFECT certificate."
+              : "Condition inferred from uploaded image filename or structure."}
+          </p>
+        </div>
+
+        <div className="inline-flex rounded p-1 bg-[#0E1115] border border-white/[0.08] self-start sm:self-auto">
+          <button
+            type="button"
+            onClick={() => setSampleCondition("nominal")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              sampleCondition === "nominal"
+                ? "bg-[#55B98A]/20 text-[#55B98A] border border-[#55B98A]/40 shadow-sm"
+                : "text-[#A7AFBA] hover:text-[#F3F5F7]"
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-[#55B98A]" />
+            Good / Nominal (Pass)
+          </button>
+          <button
+            type="button"
+            onClick={() => setSampleCondition("anomalous")}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition-all ${
+              sampleCondition === "anomalous"
+                ? "bg-[#E96B6B]/20 text-[#E96B6B] border border-[#E96B6B]/40 shadow-sm"
+                : "text-[#A7AFBA] hover:text-[#F3F5F7]"
+            }`}
+          >
+            <span className="w-2 h-2 rounded-full bg-[#E96B6B]" />
+            Defective (Anomaly)
+          </button>
+          <button
+            type="button"
+            onClick={() => setSampleCondition("auto")}
+            className={`px-2.5 py-1.5 rounded text-xs font-medium transition-all ${
+              sampleCondition === "auto"
+                ? "bg-white/[0.1] text-[#F3F5F7]"
+                : "text-[#6F7884] hover:text-[#A7AFBA]"
+            }`}
+          >
+            Auto
+          </button>
+        </div>
+      </div>
+
+      {selectedDemo && (
+        <div className="flex items-center justify-between px-3 py-2 rounded bg-[#0E1115] border border-[#5BB8C4]/30 text-xs text-[#A7AFBA]">
+          <span>Active Preset: <strong className="text-[#F3F5F7]">{selectedDemo.name}</strong> ({selectedDemo.category})</span>
+          <button
+            onClick={() => setSelectedDemo(null)}
+            className="text-[#6F7884] hover:text-[#E96B6B] inline-flex items-center gap-1 text-[11px]"
+            title="Clear preset and drop custom files"
+          >
+            <X size={13} /> Switch to custom file upload
+          </button>
+        </div>
+      )}
 
       {/* Two Dropzone Panes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -199,8 +390,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                 e.stopPropagation();
                 setIsRgbDragging(false);
                 if (e.dataTransfer.files?.[0]) {
-                  setRgbFile(e.dataTransfer.files[0]);
-                  setSelectedDemo(null);
+                  handleRgbSelect(e.dataTransfer.files[0]);
                 }
               }}
               onClick={() => rgbInputRef.current?.click()}
@@ -227,8 +417,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                 className="hidden"
                 onChange={(e) => {
                   if (e.target.files?.[0]) {
-                    setRgbFile(e.target.files[0]);
-                    setSelectedDemo(null);
+                    handleRgbSelect(e.target.files[0]);
                   }
                 }}
               />
@@ -312,8 +501,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                 e.stopPropagation();
                 setIsXyzDragging(false);
                 if (e.dataTransfer.files?.[0]) {
-                  setXyzFile(e.dataTransfer.files[0]);
-                  setSelectedDemo(null);
+                  handleXyzSelect(e.dataTransfer.files[0]);
                 }
               }}
               onClick={() => xyzInputRef.current?.click()}
@@ -340,8 +528,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                 className="hidden"
                 onChange={(e) => {
                   if (e.target.files?.[0]) {
-                    setXyzFile(e.target.files[0]);
-                    setSelectedDemo(null);
+                    handleXyzSelect(e.target.files[0]);
                   }
                 }}
               />

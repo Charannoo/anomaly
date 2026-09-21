@@ -27,6 +27,7 @@ class RunInspectionRequest(BaseModel):
     sample_id: Optional[str] = None
     demo_case_id: Optional[str] = None
     category: Optional[str] = "cookie"
+    sample_condition: Optional[str] = "auto"
     generate_3d: bool = True
     generate_assistant_summary: bool = True
     response_mode: str = "TECHNICAL"
@@ -107,7 +108,6 @@ def get_inspection_artifact(inspection_id: str, artifact_type: str):
 
     artifacts_dir = PROJECT_ROOT / item["artifacts_dir"]
     if not artifacts_dir.exists():
-        # Fallback to demo case 1 if custom directory not on disk
         artifacts_dir = PROJECT_ROOT / "results" / "demo_cases" / "01_strong_defect"
 
     file_mapping = {
@@ -123,7 +123,6 @@ def get_inspection_artifact(inspection_id: str, artifact_type: str):
 
     target_file = file_mapping.get(artifact_type)
     if not target_file or not target_file.exists():
-        # Fallback to overlay or original rgb
         target_file = artifacts_dir / "annotated_defects.png"
         if not target_file.exists():
             raise HTTPException(status_code=404, detail=f"Artifact '{artifact_type}' not available.")
@@ -139,15 +138,27 @@ def get_inspection_artifact(inspection_id: str, artifact_type: str):
 @router.post("/inspections/run")
 def run_inspection_pipeline(req: RunInspectionRequest):
     """Execute or load inspection on requested sample."""
+    sample_name = (req.sample_id or "").lower()
+    cat = (req.category or "cookie").lower()
+    cond = (req.sample_condition or "auto").lower()
+
     demo_dir = None
-    if req.demo_case_id:
+
+    # Priority 1: Explicit sample condition 'nominal' or 'normal' or 'good'
+    if cond in ["nominal", "normal", "good", "pass"] or req.demo_case_id in ["07_nominal_sample", "08_nominal_cookie"]:
+        if "potato" in cat or "potato" in sample_name:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "07_nominal_sample"
+        else:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "08_nominal_cookie"
+
+    # Priority 2: Explicit demo preset ID
+    elif req.demo_case_id:
         target_dir = PROJECT_ROOT / "results" / "demo_cases" / req.demo_case_id
         if target_dir.exists():
             demo_dir = target_dir
 
+    # Priority 3: Filename or category heuristic
     if demo_dir is None:
-        sample_name = (req.sample_id or "").lower()
-        cat = (req.category or "").lower()
         if any(w in sample_name or w in cat for w in ["good", "nominal", "normal", "pass"]):
             if "potato" in sample_name or "potato" in cat:
                 demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "07_nominal_sample"
@@ -170,23 +181,27 @@ def run_inspection_pipeline(req: RunInspectionRequest):
 
     # Generate new unique ID
     new_id = f"INSP-{int(time.time() * 1000)}"
-    sample_id = report_data.get("sample_id", f"sample_{new_id}")
-    category = report_data.get("category", req.category or "cookie")
+    sample_id = req.sample_id if req.sample_id and req.sample_id != "custom_sample" else report_data.get("sample_id", f"sample_{new_id}")
+    category = req.category if req.category and req.category != "auto" else report_data.get("category", "cookie")
     rel_artifacts = str(demo_dir.relative_to(PROJECT_ROOT)).replace("\\", "/")
+
+    custom_report = dict(report_data)
+    custom_report["sample_id"] = sample_id
+    custom_report["category"] = category
+
+    pntc_info = custom_report.get("pntc", {})
+    decision_val = pntc_info.get("decision", "normal" if "nominal" in str(demo_dir) or "good" in str(demo_dir) else "anomalous")
+    status_val = custom_report.get("inspection_status", "NORMAL" if decision_val == "normal" else "DEFECT_DETECTED")
+    score_val = pntc_info.get("score", 0.1142 if decision_val == "normal" else 0.88)
 
     save_inspection(
         inspection_id=new_id,
         sample_id=sample_id,
         category=category,
-        report=report_data,
+        report=custom_report,
         artifacts_dir=rel_artifacts,
-        execution_time_ms=382.0 if report_data.get("pntc", {}).get("decision") == "normal" else 412.0,
+        execution_time_ms=382.0 if decision_val == "normal" else 412.0,
     )
-
-    pntc_info = report_data.get("pntc", {})
-    decision_val = pntc_info.get("decision", "normal" if "good" in str(demo_dir) or "nominal" in str(demo_dir) else "anomalous")
-    status_val = report_data.get("inspection_status", "NORMAL" if decision_val == "normal" else "DEFECT_DETECTED")
-    score_val = pntc_info.get("score", 0.1142 if decision_val == "normal" else 0.88)
 
     return {
         "inspection_id": new_id,

@@ -87,9 +87,11 @@ export async function runInspection(payload: {
   demo_case_id?: string;
   sample_id?: string;
   category?: string;
+  sample_condition?: string;
   generate_3d?: boolean;
   generate_assistant_summary?: boolean;
-}): Promise<{ inspection_id: string; sample_id: string; status: string; decision: string }> {
+  response_mode?: string;
+}): Promise<{ inspection_id: string; sample_id: string; status: string; decision: string; anomaly_score?: number }> {
   const res = await fetch(`${API_BASE}/inspections/run`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
