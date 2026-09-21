@@ -12,6 +12,12 @@ from pathlib import Path
 root_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(root_dir / "src"))
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(root_dir / ".env")
+except ImportError:
+    pass
+
 import uvicorn
 from xmvad.api.database import init_db
 
