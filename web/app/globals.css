@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-app: #0B0D10;
+  --bg-subtle: #101318;
+  --bg-panel: #15191F;
+  --bg-surface: #191E25;
+  --bg-active: #212832;
+
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-emphasized: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #F3F5F7;
+  --text-secondary: #A7AFBA;
+  --text-muted: #6F7884;
+
+  --accent-primary: #5BB8C4;
+  --accent-hover: #71C7D1;
+
+  --status-normal: #55B98A;
+  --status-anomaly: #E96B6B;
+  --status-review: #D4A95B;
+  --status-info: #6C96D8;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enforce tabular numerals across numbers and measurements */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom precision industrial scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0D10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F2633;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2D3748;
+}

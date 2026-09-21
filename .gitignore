@@ -38,3 +38,10 @@ experiments/artifacts/
 data/
 features_dinov2/
 rate
+
+# Web application build & dependencies
+web/node_modules/
+web/.next/
+web/out/
+web/.vercel/
+web/*.tsbuildinfo
