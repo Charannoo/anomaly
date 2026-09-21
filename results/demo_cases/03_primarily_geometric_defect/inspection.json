@@ -1,0 +1,244 @@
+{
+  "sample_id": "03_primarily_geometric_defect_foam_color_000",
+  "category": "foam",
+  "pntc": {
+    "decision": "anomalous",
+    "score": 0.82,
+    "threshold": 0.5
+  },
+  "inspection_status": "DEFECT_DETECTED",
+  "decision_certainty": "High",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 1,
+  "defects": [
+    {
+      "id": 1,
+      "representative_patch": [
+        22,
+        26
+      ],
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          119,
+          103
+        ],
+        "centroid_normalized": [
+          0.5376,
+          0.4516
+        ]
+      },
+      "morphology": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.0,
+        "circularity": 0.847,
+        "area_px": 729,
+        "major_length_mm": 16.51,
+        "minor_length_mm": 16.42,
+        "projected_area_mm2": 212.87,
+        "surface_area_3d_mm2": 181.09
+      },
+      "geometry": {
+        "label": "raised protrusion",
+        "mean_deviation": 1.124,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 1.58,
+        "measurement_confidence": 0.94
+      },
+      "volume": {
+        "missing_material": 0.0,
+        "excess_material": 162.74,
+        "net_signed_volume": 162.74,
+        "volume_unit": "mm3",
+        "physical_volume_available": true,
+        "reference_model_type": "robust_plane",
+        "fit_residual": 0.2838,
+        "fit_confidence": 0.81,
+        "measurement_confidence": 0.81,
+        "explanation": "Localized surface protrusion: estimated excess material volume of 162.7 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.81)."
+      },
+      "normal_twin": {
+        "prototype_id": 5016,
+        "training_sample_id": "train/foam/good/017",
+        "spatial_coord": [
+          49,
+          40
+        ],
+        "source": "train/foam/good/017 [patch: 49,40]",
+        "rgb_distance": 0.327,
+        "xyz_distance": 0.1928,
+        "joint_score": 0.2599,
+        "rgb_similarity": "Low",
+        "xyz_similarity": "High",
+        "alignment_confidence": 1.0,
+        "interpretation": "This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.260). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction."
+      },
+      "prototype_trace": {
+        "patch_coord": [
+          22,
+          26
+        ],
+        "rgb_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 3640,
+            "distance": 0.2027,
+            "category": "foam",
+            "source_sample": "train/foam/good/000",
+            "source_patch": [
+              40,
+              27
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 7857,
+            "distance": 0.2292,
+            "category": "foam",
+            "source_sample": "train/foam/good/022",
+            "source_patch": [
+              4,
+              54
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 132,
+            "distance": 0.2478,
+            "category": "foam",
+            "source_sample": "train/foam/good/001",
+            "source_patch": [
+              47,
+              38
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 13474,
+            "distance": 0.3311,
+            "category": "foam",
+            "source_sample": "train/foam/good/027",
+            "source_patch": [
+              25,
+              6
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 10596,
+            "distance": 0.3393,
+            "category": "foam",
+            "source_sample": "train/foam/good/012",
+            "source_patch": [
+              7,
+              11
+            ]
+          }
+        ],
+        "xyz_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 5016,
+            "distance": 0.1928,
+            "category": "foam",
+            "source_sample": "train/foam/good/017",
+            "source_patch": [
+              49,
+              40
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 11419,
+            "distance": 0.2931,
+            "category": "foam",
+            "source_sample": "train/foam/good/010",
+            "source_patch": [
+              7,
+              41
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 8561,
+            "distance": 0.2946,
+            "category": "foam",
+            "source_sample": "train/foam/good/013",
+            "source_patch": [
+              4,
+              8
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 8254,
+            "distance": 0.301,
+            "category": "foam",
+            "source_sample": "train/foam/good/024",
+            "source_patch": [
+              23,
+              48
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 12422,
+            "distance": 0.3139,
+            "category": "foam",
+            "source_sample": "train/foam/good/010",
+            "source_patch": [
+              47,
+              41
+            ]
+          }
+        ],
+        "shared_ids": 0,
+        "union_ids": 10,
+        "jaccard": 0.0,
+        "rank_overlap": 0.0,
+        "js_divergence": 0.9999,
+        "gate": 0.31,
+        "lambda": 0.35,
+        "base_evidence": 0.7315,
+        "topology_contribution": 0.1085,
+        "final_pntc_evidence": 0.84,
+        "why_flagged": "RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.31), this topological inconsistency contributes +0.109 additional anomaly evidence through PNTC."
+      },
+      "quality": {
+        "xyz_valid_fraction": 1.0,
+        "missing_xyz_fraction": 0.0,
+        "surface_fit_confidence": 0.81,
+        "boundary_proximity": 0.12,
+        "retrieval_stability": "high",
+        "retrieval_margin_gap": 0.06
+      },
+      "review_guard": {
+        "status": "DEFECT_DETECTED",
+        "decision_certainty": "High",
+        "measurement_reliability": "High",
+        "reasons": [
+          "LOW_RGB_QUALITY: Low visual contrast / potential illumination saturation"
+        ],
+        "recommendation": "DEFECT DETECTED. PNTC anomaly evidence is strong with high certainty and high measurement reliability."
+      },
+      "explanation": "Defect #1 at central surface region (compact circular region, Localized surface protrusion: estimated excess material volume of 162.7 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.81).). Cross-modal retrieval identifies Prototype #5016 as the nearest normal analogue. RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.31), this topological inconsistency contributes +0.109 additional anomaly evidence through PNTC."
+    }
+  ],
+  "overall_quality": {
+    "xyz_valid_fraction": 1.0,
+    "surface_fit_confidence": 0.85,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "anomalous",
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "High",
+    "measurement_reliability": "High",
+    "reasons": [
+      "LOW_RGB_QUALITY: Low visual contrast / potential illumination saturation"
+    ],
+    "recommendation": "DEFECT DETECTED. PNTC anomaly evidence is strong with high certainty and high measurement reliability."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: 03_primarily_geometric_defect_foam_color_000\nCATEGORY:  FOAM\n\nSTATUS:\nDEFECT DETECTED\n\nPNTC anomaly score:\n0.8200\n\nDecision certainty:\nHigh\n\nCanonical PNTC Decision:\nANOMALOUS\n\nNumber of detected defect regions: 1\n\nDEFECT #1\n\nLocation:\nCentral surface region\n\nShape:\nCompact circular region\n\nPhysical size:\n16.5 \u00d7 16.4 mm\n\nSurface area:\n181.1 mm\u00b2\n\nStructure:\nRaised protrusion\n\nMaximum protrusion:\n1.58 mm\n\nEstimated excess material:\n162.7 mm\u00b3\n\nRGB evidence:\nLow\n\n3D evidence:\nHigh\n\nRGB\u20133D topology disagreement:\nVery High\n\nNearest normal reference:\nPrototype #5016\nSource: train/foam/good/017\n\nRGB/XYZ top-5 overlap:\n0/5\n\nJS divergence:\n1.00\n\nPNTC Score Decomposition:\n  Base evidence A_base(p) : 0.732\n  Topology divergence T(p): 1.000\n  Confidence gate G(p)    : 0.310\n  Weight lambda           : 0.35\n  Topology addition       : +0.108\n  Final PNTC evidence     : 0.840\n\nWHY FLAGGED:\nRGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.31), this topological inconsistency contributes +0.109 additional anomaly evidence through PNTC.\n\nREFERENCE:\nThis is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.260). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.\n\nMEASUREMENT RELIABILITY:\nHigh\n\nInspection Warnings / Review Triggers:\n  - LOW_RGB_QUALITY: Low visual contrast / potential illumination saturation\n\n--------------------------------------------------"
+}

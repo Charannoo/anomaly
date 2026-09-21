@@ -1,0 +1,84 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: 03_primarily_geometric_defect_foam_color_000
+CATEGORY:  FOAM
+
+STATUS:
+DEFECT DETECTED
+
+PNTC anomaly score:
+0.8200
+
+Decision certainty:
+High
+
+Canonical PNTC Decision:
+ANOMALOUS
+
+Number of detected defect regions: 1
+
+DEFECT #1
+
+Location:
+Central surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+16.5 × 16.4 mm
+
+Surface area:
+181.1 mm²
+
+Structure:
+Raised protrusion
+
+Maximum protrusion:
+1.58 mm
+
+Estimated excess material:
+162.7 mm³
+
+RGB evidence:
+Low
+
+3D evidence:
+High
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #5016
+Source: train/foam/good/017
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.732
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.310
+  Weight lambda           : 0.35
+  Topology addition       : +0.108
+  Final PNTC evidence     : 0.840
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.31), this topological inconsistency contributes +0.109 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.260). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+High
+
+Inspection Warnings / Review Triggers:
+  - LOW_RGB_QUALITY: Low visual contrast / potential illumination saturation
+
+--------------------------------------------------

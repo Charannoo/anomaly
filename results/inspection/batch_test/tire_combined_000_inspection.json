@@ -1,0 +1,456 @@
+{
+  "sample_id": "tire_combined_000",
+  "category": "tire",
+  "pntc": {
+    "decision": "normal",
+    "score": 0.47461920976638794,
+    "threshold": 0.5
+  },
+  "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+  "decision_certainty": "Borderline",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 2,
+  "defects": [
+    {
+      "id": 1,
+      "representative_patch": [
+        27,
+        25
+      ],
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          100,
+          111
+        ],
+        "centroid_normalized": [
+          0.4484,
+          0.4978
+        ]
+      },
+      "morphology": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.02,
+        "circularity": 1.0,
+        "area_px": 53,
+        "major_length_mm": 3.62,
+        "minor_length_mm": 3.49,
+        "projected_area_mm2": 9.93,
+        "surface_area_3d_mm2": 11.33
+      },
+      "geometry": {
+        "label": "raised protrusion",
+        "mean_deviation": 0.597,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 0.68,
+        "measurement_confidence": 0.94
+      },
+      "volume": {
+        "missing_material": 0.0,
+        "excess_material": 6.144,
+        "net_signed_volume": 6.144,
+        "volume_unit": "mm3",
+        "physical_volume_available": true,
+        "reference_model_type": "robust_plane",
+        "fit_residual": 0.1364,
+        "fit_confidence": 0.91,
+        "measurement_confidence": 0.91,
+        "explanation": "Localized surface protrusion: estimated excess material volume of 6.1 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.91)."
+      },
+      "normal_twin": {
+        "prototype_id": 3809,
+        "training_sample_id": "train/tire/good/028",
+        "spatial_coord": [
+          33,
+          22
+        ],
+        "source": "train/tire/good/028 [patch: 33,22]",
+        "rgb_distance": 0.2649,
+        "xyz_distance": 0.1834,
+        "joint_score": 0.2242,
+        "rgb_similarity": "Moderate",
+        "xyz_similarity": "High",
+        "alignment_confidence": 1.0,
+        "interpretation": "This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.224). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction."
+      },
+      "prototype_trace": {
+        "patch_coord": [
+          27,
+          25
+        ],
+        "rgb_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 11131,
+            "distance": 0.1841,
+            "category": "tire",
+            "source_sample": "train/tire/good/024",
+            "source_patch": [
+              29,
+              19
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 4594,
+            "distance": 0.2361,
+            "category": "tire",
+            "source_sample": "train/tire/good/000",
+            "source_patch": [
+              32,
+              36
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 9451,
+            "distance": 0.237,
+            "category": "tire",
+            "source_sample": "train/tire/good/007",
+            "source_patch": [
+              47,
+              51
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 7998,
+            "distance": 0.2736,
+            "category": "tire",
+            "source_sample": "train/tire/good/014",
+            "source_patch": [
+              49,
+              46
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 5022,
+            "distance": 0.3013,
+            "category": "tire",
+            "source_sample": "train/tire/good/027",
+            "source_patch": [
+              25,
+              23
+            ]
+          }
+        ],
+        "xyz_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 3809,
+            "distance": 0.1834,
+            "category": "tire",
+            "source_sample": "train/tire/good/028",
+            "source_patch": [
+              33,
+              22
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 5612,
+            "distance": 0.1924,
+            "category": "tire",
+            "source_sample": "train/tire/good/015",
+            "source_patch": [
+              9,
+              3
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 8356,
+            "distance": 0.2061,
+            "category": "tire",
+            "source_sample": "train/tire/good/016",
+            "source_patch": [
+              30,
+              15
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 10524,
+            "distance": 0.232,
+            "category": "tire",
+            "source_sample": "train/tire/good/028",
+            "source_patch": [
+              0,
+              0
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 4912,
+            "distance": 0.2435,
+            "category": "tire",
+            "source_sample": "train/tire/good/005",
+            "source_patch": [
+              7,
+              17
+            ]
+          }
+        ],
+        "shared_ids": 0,
+        "union_ids": 10,
+        "jaccard": 0.0,
+        "rank_overlap": 0.0,
+        "js_divergence": 1.0,
+        "gate": 0.3295,
+        "lambda": 0.35,
+        "base_evidence": 0.4368,
+        "topology_contribution": 0.1153,
+        "final_pntc_evidence": 0.5521,
+        "why_flagged": "RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.33), this topological inconsistency contributes +0.115 additional anomaly evidence through PNTC."
+      },
+      "quality": {
+        "xyz_valid_fraction": 1.0,
+        "missing_xyz_fraction": 0.0,
+        "surface_fit_confidence": 0.91,
+        "boundary_proximity": 0.06,
+        "retrieval_stability": "high",
+        "retrieval_margin_gap": 0.06
+      },
+      "review_guard": {
+        "status": "MANUAL_REVIEW_RECOMMENDED",
+        "decision_certainty": "Borderline",
+        "measurement_reliability": "High",
+        "reasons": [
+          "NEAR_DECISION_THRESHOLD: PNTC score (0.475) lies within 0.025 of operating threshold (0.500)"
+        ],
+        "recommendation": "MANUAL INSPECTION RECOMMENDED. Sample is below operating threshold (0.475 < 0.500), but score is near the boundary; visual spot-check recommended."
+      },
+      "explanation": "Defect #1 at central surface region (compact circular region, Localized surface protrusion: estimated excess material volume of 6.1 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.91).). Cross-modal retrieval identifies Prototype #3809 as the nearest normal analogue. RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.33), this topological inconsistency contributes +0.115 additional anomaly evidence through PNTC."
+    },
+    {
+      "id": 2,
+      "representative_patch": [
+        34,
+        35
+      ],
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          142,
+          139
+        ],
+        "centroid_normalized": [
+          0.6368,
+          0.6233
+        ]
+      },
+      "morphology": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.39,
+        "circularity": 1.0,
+        "area_px": 18,
+        "major_length_mm": 2.19,
+        "minor_length_mm": 1.59,
+        "projected_area_mm2": 2.74,
+        "surface_area_3d_mm2": 3.66
+      },
+      "geometry": {
+        "label": "raised protrusion",
+        "mean_deviation": 0.504,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 0.53,
+        "measurement_confidence": 0.9
+      },
+      "volume": {
+        "missing_material": 0.0,
+        "excess_material": 1.787,
+        "net_signed_volume": 1.787,
+        "volume_unit": "mm3",
+        "physical_volume_available": true,
+        "reference_model_type": "robust_plane",
+        "fit_residual": 0.1611,
+        "fit_confidence": 0.89,
+        "measurement_confidence": 0.89,
+        "explanation": "Localized surface protrusion: estimated excess material volume of 1.8 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.89)."
+      },
+      "normal_twin": {
+        "prototype_id": 1774,
+        "training_sample_id": "train/tire/good/010",
+        "spatial_coord": [
+          29,
+          22
+        ],
+        "source": "train/tire/good/010 [patch: 29,22]",
+        "rgb_distance": 0.2715,
+        "xyz_distance": 0.1973,
+        "joint_score": 0.2344,
+        "rgb_similarity": "Moderate",
+        "xyz_similarity": "High",
+        "alignment_confidence": 1.0,
+        "interpretation": "This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.234). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction."
+      },
+      "prototype_trace": {
+        "patch_coord": [
+          34,
+          35
+        ],
+        "rgb_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 12319,
+            "distance": 0.1877,
+            "category": "tire",
+            "source_sample": "train/tire/good/014",
+            "source_patch": [
+              44,
+              31
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 5624,
+            "distance": 0.1962,
+            "category": "tire",
+            "source_sample": "train/tire/good/024",
+            "source_patch": [
+              40,
+              48
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 3476,
+            "distance": 0.2129,
+            "category": "tire",
+            "source_sample": "train/tire/good/006",
+            "source_patch": [
+              53,
+              3
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 5948,
+            "distance": 0.3247,
+            "category": "tire",
+            "source_sample": "train/tire/good/002",
+            "source_patch": [
+              1,
+              49
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 12223,
+            "distance": 0.3419,
+            "category": "tire",
+            "source_sample": "train/tire/good/013",
+            "source_patch": [
+              37,
+              27
+            ]
+          }
+        ],
+        "xyz_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 2321,
+            "distance": 0.1633,
+            "category": "tire",
+            "source_sample": "train/tire/good/020",
+            "source_patch": [
+              9,
+              39
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 4324,
+            "distance": 0.183,
+            "category": "tire",
+            "source_sample": "train/tire/good/028",
+            "source_patch": [
+              3,
+              48
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 1774,
+            "distance": 0.1973,
+            "category": "tire",
+            "source_sample": "train/tire/good/010",
+            "source_patch": [
+              29,
+              22
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 8379,
+            "distance": 0.297,
+            "category": "tire",
+            "source_sample": "train/tire/good/013",
+            "source_patch": [
+              38,
+              22
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 9135,
+            "distance": 0.2984,
+            "category": "tire",
+            "source_sample": "train/tire/good/027",
+            "source_patch": [
+              55,
+              5
+            ]
+          }
+        ],
+        "shared_ids": 0,
+        "union_ids": 10,
+        "jaccard": 0.0,
+        "rank_overlap": 0.0,
+        "js_divergence": 0.9999,
+        "gate": 0.2476,
+        "lambda": 0.35,
+        "base_evidence": 0.431,
+        "topology_contribution": 0.0867,
+        "final_pntc_evidence": 0.5177,
+        "why_flagged": "RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.25), this topological inconsistency contributes +0.087 additional anomaly evidence through PNTC."
+      },
+      "quality": {
+        "xyz_valid_fraction": 1.0,
+        "missing_xyz_fraction": 0.0,
+        "surface_fit_confidence": 0.89,
+        "boundary_proximity": 0.26,
+        "retrieval_stability": "high",
+        "retrieval_margin_gap": 0.06
+      },
+      "review_guard": {
+        "status": "MANUAL_REVIEW_RECOMMENDED",
+        "decision_certainty": "Borderline",
+        "measurement_reliability": "High",
+        "reasons": [
+          "NEAR_DECISION_THRESHOLD: PNTC score (0.475) lies within 0.025 of operating threshold (0.500)"
+        ],
+        "recommendation": "MANUAL INSPECTION RECOMMENDED. Sample is below operating threshold (0.475 < 0.500), but score is near the boundary; visual spot-check recommended."
+      },
+      "explanation": "Defect #2 at central surface region (compact circular region, Localized surface protrusion: estimated excess material volume of 1.8 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.89).). Cross-modal retrieval identifies Prototype #1774 as the nearest normal analogue. RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.25), this topological inconsistency contributes +0.087 additional anomaly evidence through PNTC."
+    }
+  ],
+  "overall_quality": {
+    "xyz_valid_fraction": 1.0,
+    "surface_fit_confidence": 0.85,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "normal",
+    "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+    "decision_certainty": "Borderline",
+    "measurement_reliability": "High",
+    "reasons": [
+      "NEAR_DECISION_THRESHOLD: PNTC score (0.475) lies within 0.025 of operating threshold (0.500)"
+    ],
+    "recommendation": "MANUAL INSPECTION RECOMMENDED. Sample is below operating threshold (0.475 < 0.500), but score is near the boundary; visual spot-check recommended."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: tire_combined_000\nCATEGORY:  TIRE\n\nSTATUS:\nMANUAL REVIEW RECOMMENDED\n\nPNTC anomaly score:\n0.4746\n\nDecision certainty:\nBorderline\n\nCanonical PNTC Decision:\nNORMAL\n\nNumber of detected defect regions: 2\n\nDEFECT #1\n\nLocation:\nCentral surface region\n\nShape:\nCompact circular region\n\nPhysical size:\n3.6 \u00d7 3.5 mm\n\nSurface area:\n11.3 mm\u00b2\n\nStructure:\nRaised protrusion\n\nMaximum protrusion:\n0.68 mm\n\nEstimated excess material:\n6.1 mm\u00b3\n\nRGB evidence:\nModerate\n\n3D evidence:\nHigh\n\nRGB\u20133D topology disagreement:\nVery High\n\nNearest normal reference:\nPrototype #3809\nSource: train/tire/good/028\n\nRGB/XYZ top-5 overlap:\n0/5\n\nJS divergence:\n1.00\n\nPNTC Score Decomposition:\n  Base evidence A_base(p) : 0.437\n  Topology divergence T(p): 1.000\n  Confidence gate G(p)    : 0.330\n  Weight lambda           : 0.35\n  Topology addition       : +0.115\n  Final PNTC evidence     : 0.552\n\nWHY FLAGGED:\nRGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.33), this topological inconsistency contributes +0.115 additional anomaly evidence through PNTC.\n\nREFERENCE:\nThis is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.224). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.\n\nMEASUREMENT RELIABILITY:\nHigh\n\nInspection Warnings / Review Triggers:\n  - NEAR_DECISION_THRESHOLD: PNTC score (0.475) lies within 0.025 of operating threshold (0.500)\n\nDEFECT #2\n\nLocation:\nCentral surface region\n\nShape:\nCompact circular region\n\nPhysical size:\n2.2 \u00d7 1.6 mm\n\nSurface area:\n3.7 mm\u00b2\n\nStructure:\nRaised protrusion\n\nMaximum protrusion:\n0.53 mm\n\nEstimated excess material:\n1.8 mm\u00b3\n\nRGB evidence:\nModerate\n\n3D evidence:\nHigh\n\nRGB\u20133D topology disagreement:\nVery High\n\nNearest normal reference:\nPrototype #1774\nSource: train/tire/good/010\n\nRGB/XYZ top-5 overlap:\n0/5\n\nJS divergence:\n1.00\n\nPNTC Score Decomposition:\n  Base evidence A_base(p) : 0.431\n  Topology divergence T(p): 1.000\n  Confidence gate G(p)    : 0.248\n  Weight lambda           : 0.35\n  Topology addition       : +0.087\n  Final PNTC evidence     : 0.518\n\nWHY FLAGGED:\nRGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.25), this topological inconsistency contributes +0.087 additional anomaly evidence through PNTC.\n\nREFERENCE:\nThis is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.234). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.\n\nMEASUREMENT RELIABILITY:\nHigh\n\nInspection Warnings / Review Triggers:\n  - NEAR_DECISION_THRESHOLD: PNTC score (0.475) lies within 0.025 of operating threshold (0.500)\n\n--------------------------------------------------"
+}

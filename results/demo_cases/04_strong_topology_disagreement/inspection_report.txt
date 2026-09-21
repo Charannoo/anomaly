@@ -1,0 +1,81 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: 04_strong_topology_disagreement_cable_gland_bent_000
+CATEGORY:  CABLE_GLAND
+
+STATUS:
+DEFECT DETECTED
+
+PNTC anomaly score:
+0.7400
+
+Decision certainty:
+High
+
+Canonical PNTC Decision:
+ANOMALOUS
+
+Number of detected defect regions: 1
+
+DEFECT #1
+
+Location:
+Central surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+11.3 × 11.3 mm
+
+Surface area:
+133.1 mm²
+
+Structure:
+Localized depression
+
+Maximum depression:
+1.47 mm
+
+Estimated missing material:
+148.7 mm³
+
+RGB evidence:
+Moderate
+
+3D evidence:
+High
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #10972
+Source: train/cable_gland/good/020
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.651
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.281
+  Weight lambda           : 0.35
+  Topology addition       : +0.099
+  Final PNTC evidence     : 0.750
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.28), this topological inconsistency contributes +0.098 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.214). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+High
+
+--------------------------------------------------

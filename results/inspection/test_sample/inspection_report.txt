@@ -1,0 +1,140 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: cookie_combined_000
+CATEGORY:  COOKIE
+
+STATUS:
+DEFECT DETECTED
+
+PNTC anomaly score:
+0.6571
+
+Decision certainty:
+Moderate
+
+Canonical PNTC Decision:
+ANOMALOUS
+
+Number of detected defect regions: 2
+
+DEFECT #1
+
+Location:
+Mid right surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+9.7 × 8.1 mm
+
+Surface area:
+68.5 mm²
+
+Structure:
+Rough raised protrusion
+
+Maximum protrusion:
+0.77 mm
+
+Estimated excess material:
+32.1 mm³
+
+RGB evidence:
+High
+
+3D evidence:
+Low
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #3962
+Source: train/cookie/good/004
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.633
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.338
+  Weight lambda           : 0.35
+  Topology addition       : +0.118
+  Final PNTC evidence     : 0.751
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.34), this topological inconsistency contributes +0.118 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.241). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+High
+
+DEFECT #2
+
+Location:
+Central surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+6.1 × 5.8 mm
+
+Surface area:
+31.2 mm²
+
+Structure:
+Raised protrusion
+
+Maximum protrusion:
+0.66 mm
+
+Estimated excess material:
+14.2 mm³
+
+RGB evidence:
+Low
+
+3D evidence:
+Moderate
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #7709
+Source: train/cookie/good/023
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.502
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.417
+  Weight lambda           : 0.35
+  Topology addition       : +0.146
+  Final PNTC evidence     : 0.648
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.42), this topological inconsistency contributes +0.146 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.286). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+High
+
+--------------------------------------------------

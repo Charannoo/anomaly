@@ -1,0 +1,85 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: 06_failure_limitation_boundary_dowel_bent_000
+CATEGORY:  DOWEL
+
+STATUS:
+MANUAL REVIEW RECOMMENDED
+
+PNTC anomaly score:
+0.6100
+
+Decision certainty:
+Moderate
+
+Canonical PNTC Decision:
+ANOMALOUS
+
+Number of detected defect regions: 1
+
+DEFECT #1
+
+Location:
+Mid right surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+18.2 × 13.6 mm
+
+Surface area:
+26.5 mm²
+
+Structure:
+Localized depression
+
+Maximum depression:
+1.99 mm
+
+Estimated missing material:
+26.4 mm³
+
+RGB evidence:
+Low
+
+3D evidence:
+High
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #7630
+Source: train/dowel/good/007
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.495
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.386
+  Weight lambda           : 0.35
+  Topology addition       : +0.135
+  Final PNTC evidence     : 0.630
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.39), this topological inconsistency contributes +0.135 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.246). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+Low
+
+Inspection Warnings / Review Triggers:
+  - LOW_XYZ_COVERAGE: Only 41.1% valid 3D points inside defect region
+  - OBJECT_BOUNDARY_REGION: Defect lies in close proximity to object silhouette edge (0.99)
+
+--------------------------------------------------

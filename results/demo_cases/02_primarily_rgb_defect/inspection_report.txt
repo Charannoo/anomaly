@@ -1,0 +1,81 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: 02_primarily_rgb_defect_peach_combined_000
+CATEGORY:  PEACH
+
+STATUS:
+DEFECT DETECTED
+
+PNTC anomaly score:
+0.7600
+
+Decision certainty:
+High
+
+Canonical PNTC Decision:
+ANOMALOUS
+
+Number of detected defect regions: 1
+
+DEFECT #1
+
+Location:
+Central surface region
+
+Shape:
+Compact circular region
+
+Physical size:
+13.8 × 13.7 mm
+
+Surface area:
+164.0 mm²
+
+Structure:
+Localized depression
+
+Maximum depression:
+1.03 mm
+
+Estimated missing material:
+124.5 mm³
+
+RGB evidence:
+Moderate
+
+3D evidence:
+Moderate
+
+RGB–3D topology disagreement:
+Very High
+
+Nearest normal reference:
+Prototype #3458
+Source: train/peach/good/022
+
+RGB/XYZ top-5 overlap:
+0/5
+
+JS divergence:
+1.00
+
+PNTC Score Decomposition:
+  Base evidence A_base(p) : 0.600
+  Topology divergence T(p): 1.000
+  Confidence gate G(p)    : 0.515
+  Weight lambda           : 0.35
+  Topology addition       : +0.180
+  Final PNTC evidence     : 0.780
+
+WHY FLAGGED:
+RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.51), this topological inconsistency contributes +0.180 additional anomaly evidence through PNTC.
+
+REFERENCE:
+This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.259). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.
+
+MEASUREMENT RELIABILITY:
+High
+
+--------------------------------------------------

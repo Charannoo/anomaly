@@ -1,0 +1,244 @@
+{
+  "sample_id": "peach_combined_000",
+  "category": "peach",
+  "pntc": {
+    "decision": "anomalous",
+    "score": 0.5237240791320801,
+    "threshold": 0.5
+  },
+  "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+  "decision_certainty": "Borderline",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 1,
+  "defects": [
+    {
+      "id": 1,
+      "representative_patch": [
+        28,
+        37
+      ],
+      "location": {
+        "label": "mid-right surface",
+        "centroid_px": [
+          148,
+          115
+        ],
+        "centroid_normalized": [
+          0.6637,
+          0.5157
+        ]
+      },
+      "morphology": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.05,
+        "circularity": 1.0,
+        "area_px": 144,
+        "major_length_mm": 5.85,
+        "minor_length_mm": 5.4,
+        "projected_area_mm2": 24.81,
+        "surface_area_3d_mm2": 32.21
+      },
+      "geometry": {
+        "label": "raised protrusion",
+        "mean_deviation": 0.785,
+        "max_depression_mm": null,
+        "max_protrusion_mm": 1.0,
+        "measurement_confidence": 0.95
+      },
+      "volume": {
+        "missing_material": 0.0,
+        "excess_material": 22.182,
+        "net_signed_volume": 22.182,
+        "volume_unit": "mm3",
+        "physical_volume_available": true,
+        "reference_model_type": "robust_plane",
+        "fit_residual": 0.1473,
+        "fit_confidence": 0.9,
+        "measurement_confidence": 0.9,
+        "explanation": "Localized surface protrusion: estimated excess material volume of 22.2 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.90)."
+      },
+      "normal_twin": {
+        "prototype_id": 14732,
+        "training_sample_id": "train/peach/good/019",
+        "spatial_coord": [
+          11,
+          50
+        ],
+        "source": "train/peach/good/019 [patch: 11,50]",
+        "rgb_distance": 0.37,
+        "xyz_distance": 0.1655,
+        "joint_score": 0.2677,
+        "rgb_similarity": "Low",
+        "xyz_similarity": "High",
+        "alignment_confidence": 1.0,
+        "interpretation": "This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.268). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction."
+      },
+      "prototype_trace": {
+        "patch_coord": [
+          28,
+          37
+        ],
+        "rgb_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 2373,
+            "distance": 0.1879,
+            "category": "peach",
+            "source_sample": "train/peach/good/027",
+            "source_patch": [
+              44,
+              43
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 6746,
+            "distance": 0.2177,
+            "category": "peach",
+            "source_sample": "train/peach/good/010",
+            "source_patch": [
+              32,
+              40
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 12316,
+            "distance": 0.289,
+            "category": "peach",
+            "source_sample": "train/peach/good/019",
+            "source_patch": [
+              33,
+              26
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 7197,
+            "distance": 0.3188,
+            "category": "peach",
+            "source_sample": "train/peach/good/028",
+            "source_patch": [
+              54,
+              8
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 133,
+            "distance": 0.332,
+            "category": "peach",
+            "source_sample": "train/peach/good/012",
+            "source_patch": [
+              15,
+              31
+            ]
+          }
+        ],
+        "xyz_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 14732,
+            "distance": 0.1655,
+            "category": "peach",
+            "source_sample": "train/peach/good/019",
+            "source_patch": [
+              11,
+              50
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 7698,
+            "distance": 0.217,
+            "category": "peach",
+            "source_sample": "train/peach/good/025",
+            "source_patch": [
+              18,
+              29
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 5640,
+            "distance": 0.2758,
+            "category": "peach",
+            "source_sample": "train/peach/good/006",
+            "source_patch": [
+              8,
+              27
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 645,
+            "distance": 0.2939,
+            "category": "peach",
+            "source_sample": "train/peach/good/017",
+            "source_patch": [
+              39,
+              35
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 11187,
+            "distance": 0.3132,
+            "category": "peach",
+            "source_sample": "train/peach/good/029",
+            "source_patch": [
+              26,
+              25
+            ]
+          }
+        ],
+        "shared_ids": 0,
+        "union_ids": 10,
+        "jaccard": 0.0,
+        "rank_overlap": 0.0,
+        "js_divergence": 0.9999,
+        "gate": 0.2653,
+        "lambda": 0.35,
+        "base_evidence": 0.5414,
+        "topology_contribution": 0.0929,
+        "final_pntc_evidence": 0.6343,
+        "why_flagged": "RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.27), this topological inconsistency contributes +0.093 additional anomaly evidence through PNTC."
+      },
+      "quality": {
+        "xyz_valid_fraction": 1.0,
+        "missing_xyz_fraction": 0.0,
+        "surface_fit_confidence": 0.9,
+        "boundary_proximity": 0.16,
+        "retrieval_stability": "high",
+        "retrieval_margin_gap": 0.06
+      },
+      "review_guard": {
+        "status": "MANUAL_REVIEW_RECOMMENDED",
+        "decision_certainty": "Borderline",
+        "measurement_reliability": "High",
+        "reasons": [
+          "NEAR_DECISION_THRESHOLD: PNTC score (0.524) lies within 0.024 of operating threshold (0.500)"
+        ],
+        "recommendation": "MANUAL INSPECTION RECOMMENDED. PNTC detected an abnormal region (score: 0.524 vs threshold: 0.500), but 1 inspection warnings were triggered. The canonical anomaly detection decision is preserved, but geometric/depth estimates require manual validation."
+      },
+      "explanation": "Defect #1 at mid-right surface region (compact circular region, Localized surface protrusion: estimated excess material volume of 22.2 mm\u00b3 above the expected robust_plane (point coverage: 100.0%, confidence: 0.90).). Cross-modal retrieval identifies Prototype #14732 as the nearest normal analogue. RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.27), this topological inconsistency contributes +0.093 additional anomaly evidence through PNTC."
+    }
+  ],
+  "overall_quality": {
+    "xyz_valid_fraction": 1.0,
+    "surface_fit_confidence": 0.85,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "anomalous",
+    "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+    "decision_certainty": "Borderline",
+    "measurement_reliability": "High",
+    "reasons": [
+      "NEAR_DECISION_THRESHOLD: PNTC score (0.524) lies within 0.024 of operating threshold (0.500)"
+    ],
+    "recommendation": "MANUAL INSPECTION RECOMMENDED. PNTC detected an abnormal region (score: 0.524 vs threshold: 0.500), but 1 inspection warnings were triggered. The canonical anomaly detection decision is preserved, but geometric/depth estimates require manual validation."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: peach_combined_000\nCATEGORY:  PEACH\n\nSTATUS:\nMANUAL REVIEW RECOMMENDED\n\nPNTC anomaly score:\n0.5237\n\nDecision certainty:\nBorderline\n\nCanonical PNTC Decision:\nANOMALOUS\n\nNumber of detected defect regions: 1\n\nDEFECT #1\n\nLocation:\nMid right surface region\n\nShape:\nCompact circular region\n\nPhysical size:\n5.8 \u00d7 5.4 mm\n\nSurface area:\n32.2 mm\u00b2\n\nStructure:\nRaised protrusion\n\nMaximum protrusion:\n1.00 mm\n\nEstimated excess material:\n22.2 mm\u00b3\n\nRGB evidence:\nLow\n\n3D evidence:\nHigh\n\nRGB\u20133D topology disagreement:\nVery High\n\nNearest normal reference:\nPrototype #14732\nSource: train/peach/good/019\n\nRGB/XYZ top-5 overlap:\n0/5\n\nJS divergence:\n1.00\n\nPNTC Score Decomposition:\n  Base evidence A_base(p) : 0.541\n  Topology divergence T(p): 1.000\n  Confidence gate G(p)    : 0.265\n  Weight lambda           : 0.35\n  Topology addition       : +0.093\n  Final PNTC evidence     : 0.634\n\nWHY FLAGGED:\nRGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.27), this topological inconsistency contributes +0.093 additional anomaly evidence through PNTC.\n\nREFERENCE:\nThis is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.268). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.\n\nMEASUREMENT RELIABILITY:\nHigh\n\nInspection Warnings / Review Triggers:\n  - NEAR_DECISION_THRESHOLD: PNTC score (0.524) lies within 0.024 of operating threshold (0.500)\n\n--------------------------------------------------"
+}

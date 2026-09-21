@@ -1,0 +1,29 @@
+{
+  "sample_id": "rope_contamination_000",
+  "category": "rope",
+  "pntc": {
+    "decision": "normal",
+    "score": 0.28427374362945557,
+    "threshold": 0.5
+  },
+  "inspection_status": "ACCEPT_NORMAL",
+  "decision_certainty": "High",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 0,
+  "defects": [],
+  "overall_quality": {
+    "xyz_valid_fraction": 1.0,
+    "surface_fit_confidence": 0.85,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "normal",
+    "inspection_status": "ACCEPT_NORMAL",
+    "decision_certainty": "High",
+    "measurement_reliability": "High",
+    "reasons": [],
+    "recommendation": "ACCEPT NOMINAL. Sample conforms to normal prototype manifold with high certainty."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: rope_contamination_000\nCATEGORY:  ROPE\n\nSTATUS:\nACCEPT NORMAL\n\nPNTC anomaly score:\n0.2843\n\nDecision certainty:\nHigh\n\nCanonical PNTC Decision:\nNORMAL\n\nNumber of detected defect regions: 0\n\nNo anomalous regions exceed operating threshold.\nComponent surface and texture are consistent with the nominal training manifold.\n\nOVERALL MEASUREMENT RELIABILITY:\nHigh\n--------------------------------------------------"
+}

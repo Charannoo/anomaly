@@ -1,0 +1,240 @@
+{
+  "sample_id": "04_strong_topology_disagreement_cable_gland_bent_000",
+  "category": "cable_gland",
+  "pntc": {
+    "decision": "anomalous",
+    "score": 0.74,
+    "threshold": 0.5
+  },
+  "inspection_status": "DEFECT_DETECTED",
+  "decision_certainty": "High",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 1,
+  "defects": [
+    {
+      "id": 1,
+      "representative_patch": [
+        21,
+        28
+      ],
+      "location": {
+        "label": "central surface",
+        "centroid_px": [
+          116,
+          99
+        ],
+        "centroid_normalized": [
+          0.5215,
+          0.4301
+        ]
+      },
+      "morphology": {
+        "label": "compact circular region",
+        "aspect_ratio": 1.01,
+        "circularity": 1.0,
+        "area_px": 552,
+        "major_length_mm": 11.34,
+        "minor_length_mm": 11.29,
+        "projected_area_mm2": 100.57,
+        "surface_area_3d_mm2": 133.11
+      },
+      "geometry": {
+        "label": "localized depression",
+        "mean_deviation": -1.294,
+        "max_depression_mm": 1.47,
+        "max_protrusion_mm": null,
+        "measurement_confidence": 0.96
+      },
+      "volume": {
+        "missing_material": 148.737,
+        "excess_material": 0.0,
+        "net_signed_volume": -148.737,
+        "volume_unit": "mm3",
+        "physical_volume_available": true,
+        "reference_model_type": "robust_plane",
+        "fit_residual": 0.188,
+        "fit_confidence": 0.87,
+        "measurement_confidence": 0.87,
+        "explanation": "Localized surface depression: estimated missing material volume of 148.7 mm\u00b3 below the expected robust_plane (point coverage: 100.0%, confidence: 0.87)."
+      },
+      "normal_twin": {
+        "prototype_id": 10972,
+        "training_sample_id": "train/cable_gland/good/020",
+        "spatial_coord": [
+          33,
+          12
+        ],
+        "source": "train/cable_gland/good/020 [patch: 33,12]",
+        "rgb_distance": 0.2425,
+        "xyz_distance": 0.1864,
+        "joint_score": 0.2144,
+        "rgb_similarity": "Moderate",
+        "xyz_similarity": "High",
+        "alignment_confidence": 1.0,
+        "interpretation": "This is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.214). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction."
+      },
+      "prototype_trace": {
+        "patch_coord": [
+          21,
+          28
+        ],
+        "rgb_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 8774,
+            "distance": 0.1824,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/002",
+            "source_patch": [
+              24,
+              17
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 11147,
+            "distance": 0.1972,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/008",
+            "source_patch": [
+              6,
+              7
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 5377,
+            "distance": 0.2637,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/019",
+            "source_patch": [
+              31,
+              27
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 5148,
+            "distance": 0.2692,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/026",
+            "source_patch": [
+              37,
+              53
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 13769,
+            "distance": 0.318,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/011",
+            "source_patch": [
+              4,
+              48
+            ]
+          }
+        ],
+        "xyz_topk": [
+          {
+            "rank": 1,
+            "prototype_id": 10972,
+            "distance": 0.1864,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/020",
+            "source_patch": [
+              33,
+              12
+            ]
+          },
+          {
+            "rank": 2,
+            "prototype_id": 3227,
+            "distance": 0.2147,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/011",
+            "source_patch": [
+              31,
+              48
+            ]
+          },
+          {
+            "rank": 3,
+            "prototype_id": 8176,
+            "distance": 0.2745,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/029",
+            "source_patch": [
+              27,
+              45
+            ]
+          },
+          {
+            "rank": 4,
+            "prototype_id": 6728,
+            "distance": 0.2747,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/021",
+            "source_patch": [
+              17,
+              55
+            ]
+          },
+          {
+            "rank": 5,
+            "prototype_id": 3520,
+            "distance": 0.319,
+            "category": "cable_gland",
+            "source_sample": "train/cable_gland/good/013",
+            "source_patch": [
+              18,
+              36
+            ]
+          }
+        ],
+        "shared_ids": 0,
+        "union_ids": 10,
+        "jaccard": 0.0,
+        "rank_overlap": 0.0,
+        "js_divergence": 0.9999,
+        "gate": 0.2814,
+        "lambda": 0.35,
+        "base_evidence": 0.6515,
+        "topology_contribution": 0.0985,
+        "final_pntc_evidence": 0.75,
+        "why_flagged": "RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.28), this topological inconsistency contributes +0.098 additional anomaly evidence through PNTC."
+      },
+      "quality": {
+        "xyz_valid_fraction": 1.0,
+        "missing_xyz_fraction": 0.0,
+        "surface_fit_confidence": 0.87,
+        "boundary_proximity": 0.16,
+        "retrieval_stability": "high",
+        "retrieval_margin_gap": 0.06
+      },
+      "review_guard": {
+        "status": "DEFECT_DETECTED",
+        "decision_certainty": "High",
+        "measurement_reliability": "High",
+        "reasons": [],
+        "recommendation": "DEFECT DETECTED. PNTC anomaly evidence is strong with high certainty and high measurement reliability."
+      },
+      "explanation": "Defect #1 at central surface region (compact circular region, Localized surface depression: estimated missing material volume of 148.7 mm\u00b3 below the expected robust_plane (point coverage: 100.0%, confidence: 0.87).). Cross-modal retrieval identifies Prototype #10972 as the nearest normal analogue. RGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.28), this topological inconsistency contributes +0.098 additional anomaly evidence through PNTC."
+    }
+  ],
+  "overall_quality": {
+    "xyz_valid_fraction": 1.0,
+    "surface_fit_confidence": 0.85,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "anomalous",
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "High",
+    "measurement_reliability": "High",
+    "reasons": [],
+    "recommendation": "DEFECT DETECTED. PNTC anomaly evidence is strong with high certainty and high measurement reliability."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: 04_strong_topology_disagreement_cable_gland_bent_000\nCATEGORY:  CABLE_GLAND\n\nSTATUS:\nDEFECT DETECTED\n\nPNTC anomaly score:\n0.7400\n\nDecision certainty:\nHigh\n\nCanonical PNTC Decision:\nANOMALOUS\n\nNumber of detected defect regions: 1\n\nDEFECT #1\n\nLocation:\nCentral surface region\n\nShape:\nCompact circular region\n\nPhysical size:\n11.3 \u00d7 11.3 mm\n\nSurface area:\n133.1 mm\u00b2\n\nStructure:\nLocalized depression\n\nMaximum depression:\n1.47 mm\n\nEstimated missing material:\n148.7 mm\u00b3\n\nRGB evidence:\nModerate\n\n3D evidence:\nHigh\n\nRGB\u20133D topology disagreement:\nVery High\n\nNearest normal reference:\nPrototype #10972\nSource: train/cable_gland/good/020\n\nRGB/XYZ top-5 overlap:\n0/5\n\nJS divergence:\n1.00\n\nPNTC Score Decomposition:\n  Base evidence A_base(p) : 0.651\n  Topology divergence T(p): 1.000\n  Confidence gate G(p)    : 0.281\n  Weight lambda           : 0.35\n  Topology addition       : +0.099\n  Final PNTC evidence     : 0.750\n\nWHY FLAGGED:\nRGB and XYZ individually retrieve plausible normal samples, but they map the same physical test region to largely different normal prototype neighborhoods. Their top-5 overlap is 0/5 (disjoint normal neighborhoods) and normalized JS divergence is very high (1.00). Under a confidence gate (0.28), this topological inconsistency contributes +0.098 additional anomaly evidence through PNTC.\n\nREFERENCE:\nThis is the closest paired normal reference found in the frozen normal memory for the selected anomalous patch (joint compatibility score: 0.214). It serves as a retrieved normal analogue indicating the nominal texture and surface structure expected at this anatomical location, without implying generative reconstruction.\n\nMEASUREMENT RELIABILITY:\nHigh\n\n--------------------------------------------------"
+}

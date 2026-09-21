@@ -1,0 +1,102 @@
+[
+  {
+    "sample_id": "bagel_combined_000",
+    "category": "bagel",
+    "pntc_score": 0.6185261011123657,
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "Moderate",
+    "num_defects": 3,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 46.394
+  },
+  {
+    "sample_id": "cable_gland_bent_000",
+    "category": "cable_gland",
+    "pntc_score": 0.4350338876247406,
+    "inspection_status": "ACCEPT_NORMAL",
+    "decision_certainty": "Moderate",
+    "num_defects": 1,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 5.392
+  },
+  {
+    "sample_id": "carrot_combined_000",
+    "category": "carrot",
+    "pntc_score": 0.6501677632331848,
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "Moderate",
+    "num_defects": 1,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 53.108
+  },
+  {
+    "sample_id": "cookie_combined_000",
+    "category": "cookie",
+    "pntc_score": 0.657149076461792,
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "Moderate",
+    "num_defects": 2,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 52.63
+  },
+  {
+    "sample_id": "dowel_bent_000",
+    "category": "dowel",
+    "pntc_score": 0.4886077046394348,
+    "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+    "decision_certainty": "Borderline",
+    "num_defects": 1,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 15.442
+  },
+  {
+    "sample_id": "foam_color_000",
+    "category": "foam",
+    "pntc_score": 0.5785878896713257,
+    "inspection_status": "DEFECT_DETECTED",
+    "decision_certainty": "Moderate",
+    "num_defects": 3,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 21.524
+  },
+  {
+    "sample_id": "peach_combined_000",
+    "category": "peach",
+    "pntc_score": 0.5237240791320801,
+    "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+    "decision_certainty": "Borderline",
+    "num_defects": 1,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 22.182
+  },
+  {
+    "sample_id": "potato_combined_000",
+    "category": "potato",
+    "pntc_score": 0.3615913987159729,
+    "inspection_status": "ACCEPT_NORMAL",
+    "decision_certainty": "Moderate",
+    "num_defects": 0,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 0.0
+  },
+  {
+    "sample_id": "rope_contamination_000",
+    "category": "rope",
+    "pntc_score": 0.28427374362945557,
+    "inspection_status": "ACCEPT_NORMAL",
+    "decision_certainty": "High",
+    "num_defects": 0,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 0.0
+  },
+  {
+    "sample_id": "tire_combined_000",
+    "category": "tire",
+    "pntc_score": 0.47461920976638794,
+    "inspection_status": "MANUAL_REVIEW_RECOMMENDED",
+    "decision_certainty": "Borderline",
+    "num_defects": 2,
+    "primary_defect_missing_vol": 0.0,
+    "primary_defect_excess_vol": 6.144
+  }
+]
