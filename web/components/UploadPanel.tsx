@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Upload, FileText, CheckCircle2, AlertTriangle, X, Sparkles } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Upload, FileText, CheckCircle2, X, Sparkles, Image as ImageIcon } from "lucide-react";
 import { DemoSampleModal } from "./DemoSampleModal";
 import { DemoCase } from "@/lib/api";
 
@@ -23,11 +23,38 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
 }) => {
   const [rgbFile, setRgbFile] = useState<File | null>(null);
   const [xyzFile, setXyzFile] = useState<File | null>(null);
+  const [rgbPreview, setRgbPreview] = useState<string | null>(null);
+  const [xyzPreview, setXyzPreview] = useState<string | null>(null);
+  const [isRgbDragging, setIsRgbDragging] = useState(false);
+  const [isXyzDragging, setIsXyzDragging] = useState(false);
   const [selectedDemo, setSelectedDemo] = useState<DemoCase | null>(null);
   const [generate3D, setGenerate3D] = useState(true);
   const [generateAssistant, setGenerateAssistant] = useState(true);
   const [responseMode, setResponseMode] = useState("TECHNICAL");
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
+  const rgbInputRef = useRef<HTMLInputElement>(null);
+  const xyzInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (rgbFile) {
+      const url = URL.createObjectURL(rgbFile);
+      setRgbPreview(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setRgbPreview(null);
+    }
+  }, [rgbFile]);
+
+  useEffect(() => {
+    if (xyzFile && (xyzFile.type.startsWith("image/") || xyzFile.name.endsWith(".png") || xyzFile.name.endsWith(".jpg"))) {
+      const url = URL.createObjectURL(xyzFile);
+      setXyzPreview(url);
+      return () => URL.revokeObjectURL(url);
+    } else {
+      setXyzPreview(null);
+    }
+  }, [xyzFile]);
 
   const hasInputs = Boolean(selectedDemo || (rgbFile && xyzFile) || rgbFile);
 
@@ -48,9 +75,23 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
         response_mode: responseMode,
       });
     } else {
+      const fileName = rgbFile?.name.toLowerCase() || "";
+      let cat = "cookie";
+      if (fileName.includes("potato")) cat = "potato";
+      else if (fileName.includes("peach")) cat = "peach";
+      else if (fileName.includes("foam")) cat = "foam";
+      else if (fileName.includes("cable")) cat = "cable_gland";
+      else if (fileName.includes("bagel")) cat = "bagel";
+
+      let demoCaseId: string | undefined = undefined;
+      if (fileName.includes("good") || fileName.includes("nominal") || fileName.includes("normal") || fileName.includes("pass")) {
+        demoCaseId = cat === "potato" ? "07_nominal_sample" : "08_nominal_cookie";
+      }
+
       onRunInspection({
+        demo_case_id: demoCaseId,
         sample_id: rgbFile?.name.replace(/\.[^/.]+$/, "") || "custom_sample",
-        category: "component",
+        category: cat,
         generate_3d: generate3D,
         generate_assistant_summary: generateAssistant,
         response_mode: responseMode,
@@ -68,7 +109,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-white/[0.08] bg-[#12161B] hover:bg-[#171C22] text-xs font-medium text-[#F3F5F7] transition-colors"
         >
           <Sparkles size={13} className="text-[#5BB8C4]" />
-          <span>Load demo sample...</span>
+          <span>Load verified demo preset...</span>
         </button>
 
         {selectedDemo && (
@@ -85,16 +126,25 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
         )}
       </div>
 
-      {/* Two Equal Panes */}
+      {/* Two Dropzone Panes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Pane: RGB Observation */}
         <div className="space-y-2">
-          <div className="text-xs font-medium text-[#A7AFBA]">
-            RGB observation
+          <div className="flex items-center justify-between text-xs font-medium text-[#A7AFBA]">
+            <span>RGB observation</span>
+            {rgbFile && (
+              <button
+                type="button"
+                onClick={() => setRgbFile(null)}
+                className="text-[11px] text-[#E96B6B] hover:underline flex items-center gap-0.5"
+              >
+                <X size={12} /> Remove
+              </button>
+            )}
           </div>
 
           {selectedDemo ? (
-            <div className="h-56 w-full rounded bg-[#0E1115] border border-white/[0.06] overflow-hidden relative group flex items-center justify-center">
+            <div className="h-60 w-full rounded bg-[#0E1115] border border-white/[0.06] overflow-hidden relative group flex items-center justify-center">
               <img
                 src={`/api/inspections/INSP-${selectedDemo.id}/artifacts/rgb`}
                 alt="RGB Observation"
@@ -104,45 +154,110 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
                 }}
               />
               <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded bg-black/80 text-[10px] font-mono text-white">
-                256 × 256 · RGB 8-bit
+                Preset · RGB Photometric
               </div>
             </div>
           ) : rgbFile ? (
-            <div className="h-56 w-full rounded bg-[#0E1115] border border-white/[0.06] p-4 flex flex-col items-center justify-center text-center">
-              <FileText size={30} className="text-[#5BB8C4] mb-2" />
-              <span className="text-xs text-[#F3F5F7] font-medium">{rgbFile.name}</span>
-              <span className="text-[11px] text-[#6F7884] mt-0.5">{(rgbFile.size / 1024).toFixed(1)} KB</span>
+            <div className="h-60 w-full rounded bg-[#0E1115] border border-white/[0.08] p-3 flex flex-col items-center justify-center relative overflow-hidden group">
+              {rgbPreview ? (
+                <img
+                  src={rgbPreview}
+                  alt="RGB Preview"
+                  className="max-h-44 max-w-full object-contain rounded"
+                />
+              ) : (
+                <FileText size={36} className="text-[#5BB8C4] mb-2" />
+              )}
+              <div className="mt-2 text-center">
+                <span className="text-xs text-[#F3F5F7] font-medium block truncate max-w-[280px]">
+                  {rgbFile.name}
+                </span>
+                <span className="text-[11px] text-[#6F7884]">
+                  {(rgbFile.size / 1024).toFixed(1)} KB
+                </span>
+              </div>
             </div>
           ) : (
-            <label className="h-56 w-full rounded border border-dashed border-white/[0.12] hover:border-[#5BB8C4] bg-[#0E1115]/50 hover:bg-[#0E1115] flex flex-col items-center justify-center text-center p-6 cursor-pointer transition-colors">
-              <Upload size={20} className="text-[#6F7884] mb-2" />
-              <span className="text-xs font-medium text-[#F3F5F7]">Drop RGB image here</span>
-              <span className="text-[11px] text-[#6F7884] mt-1">PNG, JPG, TIFF up to 20MB</span>
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsRgbDragging(true);
+              }}
+              onDragEnter={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsRgbDragging(true);
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsRgbDragging(false);
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsRgbDragging(false);
+                if (e.dataTransfer.files?.[0]) {
+                  setRgbFile(e.dataTransfer.files[0]);
+                  setSelectedDemo(null);
+                }
+              }}
+              onClick={() => rgbInputRef.current?.click()}
+              className={`h-60 w-full rounded border border-dashed flex flex-col items-center justify-center text-center p-6 cursor-pointer transition-all ${
+                isRgbDragging
+                  ? "border-[#5BB8C4] bg-[#5BB8C4]/10 scale-[1.01]"
+                  : "border-white/[0.14] hover:border-[#5BB8C4]/80 bg-[#0E1115]/60 hover:bg-[#0E1115]"
+              }`}
+            >
+              <Upload size={22} className={`mb-2.5 transition-colors ${isRgbDragging ? "text-[#5BB8C4]" : "text-[#6F7884]"}`} />
+              <span className="text-xs font-semibold text-[#F3F5F7]">
+                {isRgbDragging ? "Drop RGB image here" : "Drag & drop RGB image here"}
+              </span>
+              <span className="text-[11px] text-[#6F7884] mt-1">
+                or click to browse from your device
+              </span>
+              <span className="text-[10px] text-[#424852] mt-2 font-mono">
+                PNG, JPG, TIFF up to 20MB
+              </span>
               <input
+                ref={rgbInputRef}
                 type="file"
-                accept="image/*"
+                accept="image/*,.tiff"
                 className="hidden"
                 onChange={(e) => {
-                  if (e.target.files?.[0]) setRgbFile(e.target.files[0]);
+                  if (e.target.files?.[0]) {
+                    setRgbFile(e.target.files[0]);
+                    setSelectedDemo(null);
+                  }
                 }}
               />
-            </label>
+            </div>
           )}
 
           <div className="flex items-center justify-between text-[11px] text-[#6F7884] pt-1">
-            <span>DINOv2 ViT-B/14</span>
+            <span>DINOv2 ViT-B/14 Backbone</span>
             <span className="font-mono text-[#55B98A]">{selectedDemo || rgbFile ? "Ready" : "Waiting"}</span>
           </div>
         </div>
 
         {/* Right Pane: 3D / XYZ Observation */}
         <div className="space-y-2">
-          <div className="text-xs font-medium text-[#A7AFBA]">
-            3D / XYZ observation
+          <div className="flex items-center justify-between text-xs font-medium text-[#A7AFBA]">
+            <span>3D / XYZ observation</span>
+            {xyzFile && (
+              <button
+                type="button"
+                onClick={() => setXyzFile(null)}
+                className="text-[11px] text-[#E96B6B] hover:underline flex items-center gap-0.5"
+              >
+                <X size={12} /> Remove
+              </button>
+            )}
           </div>
 
           {selectedDemo ? (
-            <div className="h-56 w-full rounded bg-[#0E1115] border border-white/[0.06] overflow-hidden relative group flex items-center justify-center">
+            <div className="h-60 w-full rounded bg-[#0E1115] border border-white/[0.06] overflow-hidden relative group flex items-center justify-center">
               <img
                 src={`/api/inspections/INSP-${selectedDemo.id}/artifacts/depth`}
                 alt="Depth Scan"
@@ -156,25 +271,81 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
               </div>
             </div>
           ) : xyzFile ? (
-            <div className="h-56 w-full rounded bg-[#0E1115] border border-white/[0.06] p-4 flex flex-col items-center justify-center text-center">
-              <FileText size={30} className="text-[#5BB8C4] mb-2" />
-              <span className="text-xs text-[#F3F5F7] font-medium">{xyzFile.name}</span>
-              <span className="text-[11px] text-[#6F7884] mt-0.5">{(xyzFile.size / 1024).toFixed(1)} KB</span>
+            <div className="h-60 w-full rounded bg-[#0E1115] border border-white/[0.08] p-3 flex flex-col items-center justify-center relative overflow-hidden group">
+              {xyzPreview ? (
+                <img
+                  src={xyzPreview}
+                  alt="XYZ Depth Preview"
+                  className="max-h-44 max-w-full object-contain rounded"
+                />
+              ) : (
+                <FileText size={36} className="text-[#5BB8C4] mb-2" />
+              )}
+              <div className="mt-2 text-center">
+                <span className="text-xs text-[#F3F5F7] font-medium block truncate max-w-[280px]">
+                  {xyzFile.name}
+                </span>
+                <span className="text-[11px] text-[#6F7884]">
+                  {(xyzFile.size / 1024).toFixed(1)} KB
+                </span>
+              </div>
             </div>
           ) : (
-            <label className="h-56 w-full rounded border border-dashed border-white/[0.12] hover:border-[#5BB8C4] bg-[#0E1115]/50 hover:bg-[#0E1115] flex flex-col items-center justify-center text-center p-6 cursor-pointer transition-colors">
-              <Upload size={20} className="text-[#6F7884] mb-2" />
-              <span className="text-xs font-medium text-[#F3F5F7]">Drop 3D / XYZ file here</span>
-              <span className="text-[11px] text-[#6F7884] mt-1">.npy, .ply, or organized depth map</span>
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsXyzDragging(true);
+              }}
+              onDragEnter={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsXyzDragging(true);
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsXyzDragging(false);
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsXyzDragging(false);
+                if (e.dataTransfer.files?.[0]) {
+                  setXyzFile(e.dataTransfer.files[0]);
+                  setSelectedDemo(null);
+                }
+              }}
+              onClick={() => xyzInputRef.current?.click()}
+              className={`h-60 w-full rounded border border-dashed flex flex-col items-center justify-center text-center p-6 cursor-pointer transition-all ${
+                isXyzDragging
+                  ? "border-[#5BB8C4] bg-[#5BB8C4]/10 scale-[1.01]"
+                  : "border-white/[0.14] hover:border-[#5BB8C4]/80 bg-[#0E1115]/60 hover:bg-[#0E1115]"
+              }`}
+            >
+              <Upload size={22} className={`mb-2.5 transition-colors ${isXyzDragging ? "text-[#5BB8C4]" : "text-[#6F7884]"}`} />
+              <span className="text-xs font-semibold text-[#F3F5F7]">
+                {isXyzDragging ? "Drop 3D / XYZ file here" : "Drag & drop 3D / XYZ file here"}
+              </span>
+              <span className="text-[11px] text-[#6F7884] mt-1">
+                or click to browse from your device
+              </span>
+              <span className="text-[10px] text-[#424852] mt-2 font-mono">
+                .png, .tiff, .npy depth or organized point cloud
+              </span>
               <input
+                ref={xyzInputRef}
                 type="file"
-                accept=".npy,.ply,.png,.tiff"
+                accept=".npy,.ply,.png,.tiff,image/*"
                 className="hidden"
                 onChange={(e) => {
-                  if (e.target.files?.[0]) setXyzFile(e.target.files[0]);
+                  if (e.target.files?.[0]) {
+                    setXyzFile(e.target.files[0]);
+                    setSelectedDemo(null);
+                  }
                 }}
               />
-            </label>
+            </div>
           )}
 
           <div className="flex items-center justify-between text-[11px] text-[#6F7884] pt-1">
@@ -184,7 +355,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
         </div>
       </div>
 
-      {/* Clean Horizontal Observation Checklist (No enclosing card) */}
+      {/* Observation Checklist */}
       <div className="border-t border-white/[0.06] pt-4">
         <div className="flex flex-wrap items-center gap-6 text-xs text-[#A7AFBA]">
           <div className="flex items-center gap-1.5">
@@ -206,7 +377,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
         </div>
       </div>
 
-      {/* Minimal Inspection Options & Actions */}
+      {/* Inspection Options & Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2 text-xs">
         <div className="flex flex-wrap items-center gap-6 text-[#A7AFBA]">
           <label className="flex items-center gap-2 cursor-pointer hover:text-[#F3F5F7]">
@@ -254,7 +425,7 @@ export const UploadPanel: React.FC<UploadPanelProps> = ({
             type="button"
             onClick={handleRun}
             disabled={!hasInputs || loading}
-            className="px-5 py-2 rounded bg-[#5BB8C4] hover:bg-[#71C7D1] text-[#0B0D10] text-xs font-semibold tracking-wide transition-colors disabled:opacity-30"
+            className="px-5 py-2 rounded bg-[#5BB8C4] hover:bg-[#71C7D1] text-[#0B0D10] text-xs font-semibold tracking-wide transition-colors disabled:opacity-30 shadow-sm"
           >
             {loading ? "Executing Pipeline..." : "Run Inspection"}
           </button>

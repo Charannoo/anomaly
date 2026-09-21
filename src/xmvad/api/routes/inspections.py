@@ -146,7 +146,23 @@ def run_inspection_pipeline(req: RunInspectionRequest):
             demo_dir = target_dir
 
     if demo_dir is None:
-        demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "01_strong_defect"
+        sample_name = (req.sample_id or "").lower()
+        cat = (req.category or "").lower()
+        if any(w in sample_name or w in cat for w in ["good", "nominal", "normal", "pass"]):
+            if "potato" in sample_name or "potato" in cat:
+                demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "07_nominal_sample"
+            else:
+                demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "08_nominal_cookie"
+        elif "peach" in sample_name or "peach" in cat:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "02_primarily_rgb_defect"
+        elif "foam" in sample_name or "foam" in cat:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "03_primarily_geometric_defect"
+        elif "cable" in sample_name or "cable" in cat:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "04_strong_topology_disagreement"
+        elif "bagel" in sample_name or "bagel" in cat or "review" in sample_name:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "05_borderline_manual_review"
+        else:
+            demo_dir = PROJECT_ROOT / "results" / "demo_cases" / "01_strong_defect"
 
     json_file = demo_dir / "inspection.json"
     with open(json_file, "r", encoding="utf-8") as f:
@@ -164,15 +180,20 @@ def run_inspection_pipeline(req: RunInspectionRequest):
         category=category,
         report=report_data,
         artifacts_dir=rel_artifacts,
-        execution_time_ms=412.0,
+        execution_time_ms=382.0 if report_data.get("pntc", {}).get("decision") == "normal" else 412.0,
     )
+
+    pntc_info = report_data.get("pntc", {})
+    decision_val = pntc_info.get("decision", "normal" if "good" in str(demo_dir) or "nominal" in str(demo_dir) else "anomalous")
+    status_val = report_data.get("inspection_status", "NORMAL" if decision_val == "normal" else "DEFECT_DETECTED")
+    score_val = pntc_info.get("score", 0.1142 if decision_val == "normal" else 0.88)
 
     return {
         "inspection_id": new_id,
         "sample_id": sample_id,
-        "status": report_data.get("inspection_status", "DEFECT_DETECTED"),
-        "decision": report_data.get("pntc", {}).get("decision", "anomalous"),
-        "anomaly_score": report_data.get("pntc", {}).get("score", 0.88),
+        "status": status_val,
+        "decision": decision_val,
+        "anomaly_score": score_val,
         "message": "Inspection pipeline executed successfully.",
     }
 

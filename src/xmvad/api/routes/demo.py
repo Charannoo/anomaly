@@ -82,7 +82,7 @@ def list_demo_cases() -> List[Dict[str, Any]]:
         },
         {
             "id": "07_nominal_sample",
-            "name": "07 — Nominal Reference Part (Normal)",
+            "name": "07 — Nominal Potato (Normal / Pass)",
             "category": "potato",
             "type": "Nominal Production",
             "expected_decision": "normal",
@@ -90,6 +90,17 @@ def list_demo_cases() -> List[Dict[str, Any]]:
             "highlight": "Zero defects detected; full compliance with nominal surface envelope",
             "evidence": "All modalities nominal",
             "thumbnail_url": "/api/inspections/INSP-07_nominal_sample/artifacts/overlay",
+        },
+        {
+            "id": "08_nominal_cookie",
+            "name": "08 — Nominal Cookie (Normal / Pass)",
+            "category": "cookie",
+            "type": "Nominal Production",
+            "expected_decision": "normal",
+            "expected_score": 0.11,
+            "highlight": "Zero defects detected; nominal appearance and physical surface envelope",
+            "evidence": "All modalities nominal",
+            "thumbnail_url": "/api/inspections/INSP-08_nominal_cookie/artifacts/rgb",
         },
     ]
     return cases

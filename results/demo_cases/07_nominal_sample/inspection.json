@@ -1,0 +1,31 @@
+{
+  "sample_id": "07_nominal_sample_potato_good_000",
+  "category": "potato",
+  "pntc": {
+    "decision": "normal",
+    "score": 0.1215,
+    "threshold": 0.5,
+    "image_aggregation": "mean top 0.5%",
+    "top_k": 5
+  },
+  "inspection_status": "NORMAL",
+  "decision_certainty": "High",
+  "coordinate_unit": "mm",
+  "physical_measurements_available": true,
+  "num_defects": 0,
+  "defects": [],
+  "overall_quality": {
+    "xyz_valid_fraction": 0.992,
+    "surface_fit_confidence": 0.98,
+    "retrieval_stability": "high"
+  },
+  "overall_review_guard": {
+    "pntc_decision": "normal",
+    "inspection_status": "NORMAL",
+    "decision_certainty": "High",
+    "measurement_reliability": "High",
+    "reasons": [],
+    "recommendation": "NOMINAL. Component complies fully with bilateral surface and appearance tolerances."
+  },
+  "technical_report": "--------------------------------------------------\nPNTC INDUSTRIAL INSPECTION REPORT\n--------------------------------------------------\n\nSAMPLE ID: 07_nominal_sample_potato_good_000\nCATEGORY:  POTATO\n\nSTATUS:\nNORMAL (COMPLIANT)\n\nPNTC anomaly score:\n0.1215\n\nDecision certainty:\nHigh\n\nCanonical PNTC Decision:\nNORMAL\n\nNumber of detected defect regions: 0\n\nNo defect regions exceed detection criteria.\nMeasurement Reliability: High\n--------------------------------------------------"
+}

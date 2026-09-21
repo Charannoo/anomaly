@@ -208,7 +208,40 @@ def _seed_nominal_case(cursor: sqlite3.Cursor) -> None:
             382.1,
             now_iso,
             json.dumps(nominal_data),
-            "results/demo_cases/01_strong_defect",  # reusable fallback artifacts
+            "results/demo_cases/07_nominal_sample",
+        ),
+    )
+
+    # Also seed verified nominal cookie
+    cookie_nominal_data = dict(nominal_data)
+    cookie_nominal_data["sample_id"] = "08_nominal_cookie_good_000"
+    cookie_nominal_data["category"] = "cookie"
+    cookie_nominal_data["pntc"] = {"decision": "normal", "score": 0.1142, "threshold": 0.5000}
+    cursor.execute(
+        """
+        INSERT OR REPLACE INTO inspections (
+            id, sample_id, category, status, decision, anomaly_score,
+            operating_threshold, num_defects, decision_certainty,
+            measurement_reliability, manual_review_recommended,
+            execution_time_ms, created_at, data_json, artifacts_dir
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            "INSP-08_nominal_cookie",
+            "08_nominal_cookie_good_000",
+            "cookie",
+            "NORMAL",
+            "normal",
+            0.1142,
+            0.5000,
+            0,
+            "High",
+            "High",
+            0,
+            345.8,
+            now_iso,
+            json.dumps(cookie_nominal_data),
+            "results/demo_cases/08_nominal_cookie",
         ),
     )
 

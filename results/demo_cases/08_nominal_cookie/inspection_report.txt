@@ -1,0 +1,24 @@
+--------------------------------------------------
+PNTC INDUSTRIAL INSPECTION REPORT
+--------------------------------------------------
+
+SAMPLE ID: 08_nominal_cookie_cookie_good_000
+CATEGORY:  COOKIE
+
+STATUS:
+NORMAL (COMPLIANT)
+
+PNTC anomaly score:
+0.1142
+
+Decision certainty:
+High
+
+Canonical PNTC Decision:
+NORMAL
+
+Number of detected defect regions: 0
+
+No defect regions exceed detection criteria.
+Measurement Reliability: High
+--------------------------------------------------
