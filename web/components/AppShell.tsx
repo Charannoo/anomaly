@@ -24,7 +24,6 @@ const PRIMARY_NAV = [
   { label: "Inspections", href: "/inspections", icon: History },
   { label: "Compare", href: "/compare", icon: GitCompare },
   { label: "Analytics", href: "/analytics", icon: BarChart3 },
-  { label: "Demo Mode", href: "/demo", icon: Sparkles },
 ];
 
 const SECONDARY_NAV = [
