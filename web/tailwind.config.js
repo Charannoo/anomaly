@@ -11,15 +11,16 @@ module.exports = {
       colors: {
         bg: {
           app: "#0B0D10",
+          sidebar: "#0E1115",
           subtle: "#101318",
-          panel: "#15191F",
-          surface: "#191E25",
-          active: "#212832",
+          surface: "#12161B",
+          elevated: "#171C22",
+          active: "#1C222A",
         },
         border: {
-          default: "rgba(255, 255, 255, 0.08)",
-          subtle: "rgba(255, 255, 255, 0.05)",
-          emphasized: "rgba(255, 255, 255, 0.14)",
+          default: "rgba(255, 255, 255, 0.06)",
+          subtle: "rgba(255, 255, 255, 0.04)",
+          emphasized: "rgba(255, 255, 255, 0.12)",
           focus: "#5BB8C4",
         },
         text: {

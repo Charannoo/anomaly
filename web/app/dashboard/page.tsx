@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { PlusCircle, ShieldCheck, ArrowRight, RefreshCw } from "lucide-react";
-import { MetricValue } from "@/components/MetricValue";
+import { PlusCircle, ArrowRight } from "lucide-react";
 import { InspectionTable } from "@/components/InspectionTable";
 import { fetchAnalytics, fetchInspections, AnalyticsData, InspectionListItem } from "@/lib/api";
 
@@ -33,28 +32,22 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-border-default">
+    <div className="space-y-10 max-w-[1440px] mx-auto">
+      {/* Clean Operational Header */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-text-primary">
+          <h1 className="text-[28px] font-semibold tracking-tight text-[#F3F5F7]">
             PNTC Inspect
           </h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            Multimodal RGB–3D Industrial Inspection & Metrology Core
+          <p className="text-xs text-[#A7AFBA] mt-0.5">
+            Industrial RGB–3D Inspection
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
-          <button
-            onClick={loadData}
-            className="p-1.5 rounded-DEFAULT text-text-muted hover:text-text-primary border border-border-default bg-bg-panel hover:bg-bg-surface transition-colors"
-            title="Refresh dashboard data"
-          >
-            <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
-          </button>
+
+        <div>
           <Link
             href="/inspect"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-DEFAULT bg-accent-primary text-bg-app text-xs font-semibold hover:bg-accent-hover transition-colors shadow-subtle"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#5BB8C4] text-[#0B0D10] text-xs font-medium hover:bg-[#71C7D1] transition-colors"
           >
             <PlusCircle size={14} />
             <span>New Inspection</span>
@@ -62,125 +55,54 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* KPI Strip */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 border border-border-default bg-bg-panel rounded-md p-4">
-        <MetricValue
-          label="Total Inspections"
-          value={analytics?.total_inspections ?? "—"}
-          subtext="Processed samples"
-        />
-        <MetricValue
-          label="Defects Detected"
-          value={analytics?.anomalies ?? "—"}
-          subtext="Anomalous components"
-        />
-        <MetricValue
-          label="Nominal Parts"
-          value={analytics?.normal ?? "—"}
-          subtext="Toleranced nominal"
-        />
-        <MetricValue
-          label="Manual Review"
-          value={analytics?.manual_review ?? "—"}
-          subtext={`${analytics?.manual_review_rate ?? 0}% review guard rate`}
-        />
-      </div>
-
-      {/* Technical Model Status Panel */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2 border border-border-default rounded-md bg-bg-panel p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between border-b border-border-subtle pb-2.5 mb-3">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-text-secondary">
-                  PNTC Architecture Pipeline
-                </span>
-                <span className="px-1.5 py-0.5 rounded bg-status-normal-bg text-status-normal text-[10px] font-mono font-medium">
-                  READY
-                </span>
-              </div>
-              <span className="text-[11px] font-mono text-text-muted">RGB + XYZ Inputs</span>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-              <div className="bg-bg-subtle p-2.5 rounded border border-border-subtle">
-                <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">RGB Backbone</div>
-                <div className="font-mono text-text-primary text-[12px] font-medium">DINOv2 ViT-B/14</div>
-                <div className="text-[10px] text-text-muted mt-0.5">768-dim tokens</div>
-              </div>
-              <div className="bg-bg-subtle p-2.5 rounded border border-border-subtle">
-                <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">Geometry Backbone</div>
-                <div className="font-mono text-text-primary text-[12px] font-medium">Point-MAE</div>
-                <div className="text-[10px] text-text-muted mt-0.5">1152-dim point patches</div>
-              </div>
-              <div className="bg-bg-subtle p-2.5 rounded border border-border-subtle col-span-2 sm:col-span-1">
-                <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">Topology Divergence</div>
-                <div className="font-mono text-text-primary text-[12px] font-medium">Jensen-Shannon</div>
-                <div className="text-[10px] text-text-muted mt-0.5">k=5, lambda=0.35</div>
-              </div>
-            </div>
+      {/* Spacious Horizontal KPI Row (No outer card, subtle dividers) */}
+      <div className="flex flex-wrap items-center divide-x divide-white/[0.06] py-1">
+        <div className="pr-8 sm:pr-12">
+          <div className="text-3xl font-semibold text-[#F3F5F7] tracking-tight tabular-nums">
+            {analytics?.total_inspections ?? "—"}
           </div>
-
-          <div className="mt-4 pt-2.5 border-t border-border-subtle flex items-center justify-between text-xs">
-            <span className="text-text-muted text-[11px]">
-              Prototype Coreset Memory: <span className="font-mono text-text-secondary">15,000 paired normals</span>
-            </span>
-            <Link href="/model" className="inline-flex items-center gap-1 text-accent-primary hover:underline text-[11px]">
-              <span>Model Explorer</span>
-              <ArrowRight size={12} />
-            </Link>
-          </div>
+          <div className="text-xs text-[#6F7884] mt-1">Inspections</div>
         </div>
 
-        {/* Frozen Canonical Benchmark */}
-        <div className="border border-border-default rounded-md bg-bg-panel p-4 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between border-b border-border-subtle pb-2.5 mb-3">
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-text-secondary">
-                Frozen Benchmark
-              </span>
-              <span className="text-[10px] font-mono text-text-muted flex items-center gap-1">
-                <ShieldCheck size={11} className="text-status-normal" />
-                h5d-pntc-verified
-              </span>
-            </div>
-
-            <div className="space-y-2.5 font-mono">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-text-secondary">Image AUROC</span>
-                <span className="text-sm font-semibold tabular-nums text-status-normal">96.541%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-text-secondary">Pixel AUROC</span>
-                <span className="text-sm font-semibold tabular-nums text-status-normal">99.416%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-text-secondary">AUPRO@0.3</span>
-                <span className="text-sm font-semibold tabular-nums text-status-normal">96.939%</span>
-              </div>
-            </div>
+        <div className="px-8 sm:px-12">
+          <div className="text-3xl font-semibold text-[#E96B6B] tracking-tight tabular-nums">
+            {analytics?.anomalies ?? "—"}
           </div>
+          <div className="text-xs text-[#6F7884] mt-1">Anomalies</div>
+        </div>
 
-          <div className="mt-4 pt-2.5 border-t border-border-subtle text-[10px] text-text-muted leading-relaxed">
-            Preserved verification baseline on MVTec-3D. SOTA multimodal anomaly localization.
+        <div className="px-8 sm:px-12">
+          <div className="text-3xl font-semibold text-[#55B98A] tracking-tight tabular-nums">
+            {analytics?.normal ?? "—"}
           </div>
+          <div className="text-xs text-[#6F7884] mt-1">Normal</div>
+        </div>
+
+        <div className="pl-8 sm:pl-12">
+          <div className="text-3xl font-semibold text-[#D4A95B] tracking-tight tabular-nums">
+            {analytics?.manual_review ?? "—"}
+          </div>
+          <div className="text-xs text-[#6F7884] mt-1">Review</div>
         </div>
       </div>
 
-      {/* Recent Inspections Table */}
-      <div className="space-y-3">
+      <div className="border-t border-white/[0.06]" />
+
+      {/* Main Content: Recent Inspections */}
+      <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold tracking-tight text-text-primary uppercase tracking-wide font-mono">
-            Recent Inspections
+          <h2 className="text-[17px] font-semibold text-[#F3F5F7]">
+            Recent inspections
           </h2>
           <Link
             href="/inspections"
-            className="text-xs text-text-muted hover:text-accent-primary transition-colors flex items-center gap-1"
+            className="text-xs text-[#6F7884] hover:text-[#5BB8C4] transition-colors flex items-center gap-1"
           >
-            <span>View All History</span>
+            <span>View all</span>
             <ArrowRight size={12} />
           </Link>
         </div>
+
         <InspectionTable inspections={recentInspections} />
       </div>
     </div>

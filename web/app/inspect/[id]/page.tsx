@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { Download, Cuboid, MessageSquare, ChevronRight, AlertTriangle, CheckCircle2, ShieldAlert } from "lucide-react";
+import { Download, Cuboid, ChevronRight } from "lucide-react";
 import { fetchInspection, InspectionDetail } from "@/lib/api";
 import { ImageViewer } from "@/components/ImageViewer";
 import { DefectInspector } from "@/components/DefectInspector";
@@ -40,19 +40,19 @@ export default function InspectionResultPage() {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center p-24 text-text-muted text-xs font-mono">
-        Loading verified inspection certificate...
+      <div className="flex flex-col items-center justify-center p-24 text-text-muted text-xs">
+        Loading inspection data...
       </div>
     );
   }
 
   if (!inspection) {
     return (
-      <div className="max-w-xl mx-auto p-12 text-center border border-border-default rounded bg-bg-panel space-y-3">
-        <h2 className="text-base font-semibold text-text-primary">Inspection Not Found</h2>
-        <p className="text-xs text-text-muted">The requested inspection certificate could not be resolved from local persistence.</p>
-        <Link href="/inspections" className="inline-block text-xs text-accent-primary hover:underline font-mono">
-          ← Back to Inspection History
+      <div className="max-w-xl mx-auto p-12 text-center border border-white/[0.06] rounded bg-bg-surface space-y-3">
+        <h2 className="text-base font-semibold text-text-primary">Inspection not found</h2>
+        <p className="text-xs text-text-muted">The requested inspection record could not be resolved from local persistence.</p>
+        <Link href="/inspections" className="inline-block text-xs text-accent-primary hover:underline">
+          ← Back to inspections
         </Link>
       </div>
     );
@@ -78,55 +78,55 @@ export default function InspectionResultPage() {
   };
 
   return (
-    <div className="space-y-4 max-w-[1920px] mx-auto h-[calc(100vh-80px)] flex flex-col">
+    <div className="space-y-5 max-w-[1920px] mx-auto min-h-[calc(100vh-100px)] flex flex-col">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-border-default flex-shrink-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-white/[0.05] flex-shrink-0">
         <div>
-          <div className="flex items-center gap-2 text-xs text-text-muted font-mono mb-1">
-            <Link href="/inspections" className="hover:text-text-primary">
+          <div className="flex items-center gap-1.5 text-xs text-text-muted mb-1">
+            <Link href="/inspections" className="hover:text-text-primary transition-colors">
               Inspections
             </Link>
-            <ChevronRight size={11} />
-            <span className="text-text-secondary">{inspection.category}</span>
-            <ChevronRight size={11} />
-            <span className="text-accent-primary">{inspection.id}</span>
+            <ChevronRight size={12} />
+            <span className="text-text-secondary capitalize">{inspection.category}</span>
+            <ChevronRight size={12} />
+            <span className="text-text-primary font-mono">{inspection.id}</span>
           </div>
-          <h1 className="text-lg font-semibold tracking-tight text-text-primary flex items-center gap-2">
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-text-primary flex items-center gap-2">
             <span>Inspection {inspection.id}</span>
-            <span className="text-xs font-mono font-normal text-text-muted">
+            <span className="text-xs font-normal text-text-muted">
               ({inspection.sample_id})
             </span>
           </h1>
         </div>
 
         {/* Top Action Toolbar */}
-        <div className="flex items-center gap-2 relative">
+        <div className="flex items-center gap-2.5 relative">
           <button
             onClick={() => setIs3DModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-DEFAULT bg-bg-panel border border-border-default hover:border-accent-primary text-text-primary hover:text-accent-primary text-xs font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-bg-surface hover:bg-bg-elevated border border-white/[0.08] text-text-primary text-xs font-medium transition-colors"
           >
             <Cuboid size={14} className="text-accent-primary" />
-            <span>3D Metrology View</span>
+            <span>3D metrology view</span>
           </button>
 
           {/* Export Dropdown Menu */}
           <div className="relative">
             <button
               onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-DEFAULT bg-bg-panel border border-border-default hover:border-border-emphasized text-text-primary text-xs font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-bg-surface hover:bg-bg-elevated border border-white/[0.08] text-text-primary text-xs font-medium transition-colors"
             >
               <Download size={14} />
-              <span>Export Report</span>
+              <span>Export</span>
             </button>
 
             {isExportMenuOpen && (
-              <div className="absolute right-0 mt-1 w-48 border border-border-default rounded bg-bg-panel shadow-panel py-1 z-50 text-xs font-mono">
+              <div className="absolute right-0 mt-1 w-52 border border-white/[0.08] rounded bg-bg-surface shadow-xl py-1 z-50 text-xs">
                 <a
                   href={`/api/inspections/${inspectionId}/export/html`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setIsExportMenuOpen(false)}
-                  className="block px-3 py-1.5 hover:bg-bg-surface text-text-secondary hover:text-text-primary"
+                  className="block px-3.5 py-2 hover:bg-bg-elevated text-text-secondary hover:text-text-primary transition-colors"
                 >
                   Printable ISO HTML / PDF
                 </a>
@@ -134,17 +134,17 @@ export default function InspectionResultPage() {
                   href={`/api/inspections/${inspectionId}/export/json`}
                   download
                   onClick={() => setIsExportMenuOpen(false)}
-                  className="block px-3 py-1.5 hover:bg-bg-surface text-text-secondary hover:text-text-primary"
+                  className="block px-3.5 py-2 hover:bg-bg-elevated text-text-secondary hover:text-text-primary transition-colors"
                 >
-                  Machine JSON Output
+                  Machine JSON output
                 </a>
                 <a
                   href={`/api/inspections/${inspectionId}/export/text`}
                   download
                   onClick={() => setIsExportMenuOpen(false)}
-                  className="block px-3 py-1.5 hover:bg-bg-surface text-text-secondary hover:text-text-primary"
+                  className="block px-3.5 py-2 hover:bg-bg-elevated text-text-secondary hover:text-text-primary transition-colors"
                 >
-                  Technical Report (TXT)
+                  Technical summary (TXT)
                 </a>
               </div>
             )}
@@ -152,18 +152,9 @@ export default function InspectionResultPage() {
         </div>
       </div>
 
-      {/* Restrained Status Banner (with accent line) */}
-      <div
-        className={cn(
-          "flex flex-wrap items-center justify-between gap-4 p-3 rounded-md bg-bg-panel border border-border-default flex-shrink-0 text-xs font-mono",
-          isReview
-            ? "border-l-4 border-l-status-review"
-            : isAnomaly
-            ? "border-l-4 border-l-status-anomaly"
-            : "border-l-4 border-l-status-normal"
-        )}
-      >
-        <div className="flex items-center gap-3">
+      {/* Quiet Metric Strip - No Heavy Enclosure */}
+      <div className="flex flex-wrap items-center justify-between gap-4 py-2 border-b border-white/[0.04] text-xs flex-shrink-0">
+        <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span
               className={cn(
@@ -173,43 +164,47 @@ export default function InspectionResultPage() {
             />
             <span
               className={cn(
-                "font-bold tracking-wide",
+                "font-semibold",
                 isReview ? "text-status-review" : isAnomaly ? "text-status-anomaly" : "text-status-normal"
               )}
             >
-              {report.inspection_status || (isAnomaly ? "DEFECT DETECTED" : "NORMAL")}
+              {isReview ? "Manual review" : isAnomaly ? "Defect detected" : "Normal"}
             </span>
           </div>
-          <span className="text-text-muted">|</span>
+          <span className="text-white/[0.1]">|</span>
           <span className="text-text-secondary">
-            PNTC Score:{" "}
-            <strong className="text-text-primary tabular-nums font-semibold">
+            Score:{" "}
+            <strong className="text-text-primary tabular-nums font-mono">
               {formatMetric(pntc.score, 4)}
             </strong>
           </span>
-          <span className="text-text-muted">|</span>
+          <span className="text-white/[0.1]">|</span>
           <span className="text-text-secondary">
-            Threshold: <strong className="text-text-primary tabular-nums">{pntc.threshold || 0.5}</strong>
+            Threshold:{" "}
+            <span className="text-text-primary tabular-nums font-mono">
+              {pntc.threshold || 0.5}
+            </span>
           </span>
         </div>
 
-        <div className="flex items-center gap-4 text-text-muted">
+        <div className="flex items-center gap-5 text-text-muted">
           <div>
-            Certainty: <strong className="text-text-primary">{report.decision_certainty || "High"}</strong>
+            Certainty: <strong className="text-text-primary font-medium">{report.decision_certainty || "High"}</strong>
           </div>
           <div>
-            Detected Regions:{" "}
-            <strong className="text-text-primary tabular-nums">{defects.length}</strong>
+            Regions:{" "}
+            <strong className="text-text-primary tabular-nums font-mono">{defects.length}</strong>
           </div>
           <div>
-            Execution: <strong className="text-text-primary font-mono">{formatMetric(inspection.execution_time_ms, 1)} ms</strong>
+            Execution:{" "}
+            <strong className="text-text-primary font-mono">{formatMetric(inspection.execution_time_ms, 1)} ms</strong>
           </div>
         </div>
       </div>
 
       {/* Main Three-Column Workspace */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 min-h-0 overflow-hidden">
-        {/* LEFT COLUMN: Visual Inspection (approx 45% -> 5 cols) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0 overflow-hidden pt-2">
+        {/* LEFT COLUMN: Visual Inspection (5 cols) */}
         <div className="lg:col-span-5 h-full overflow-hidden flex flex-col">
           <ImageViewer
             inspectionId={inspectionId}
@@ -220,7 +215,7 @@ export default function InspectionResultPage() {
           />
         </div>
 
-        {/* CENTER COLUMN: Defect Inspector (approx 30% -> 4 cols) */}
+        {/* CENTER COLUMN: Defect Inspector (4 cols) */}
         <div className="lg:col-span-4 h-full overflow-y-auto">
           <DefectInspector
             defect={activeDefect}
@@ -229,17 +224,17 @@ export default function InspectionResultPage() {
           />
         </div>
 
-        {/* RIGHT COLUMN: Inspector Drawer Context (approx 25% -> 3 cols) */}
-        <div className="lg:col-span-3 h-full border border-border-default rounded-md bg-bg-panel flex flex-col overflow-hidden">
+        {/* RIGHT COLUMN: Inspector Drawer Context (3 cols) */}
+        <div className="lg:col-span-3 h-full border border-white/[0.06] rounded-md bg-bg-surface flex flex-col overflow-hidden">
           {/* Drawer Tabs */}
-          <div className="flex items-center border-b border-border-default bg-bg-subtle px-2 py-1.5 gap-1 font-mono text-[11px] overflow-x-auto flex-shrink-0">
+          <div className="flex items-center border-b border-white/[0.05] bg-bg-subtle px-3 py-2 gap-1 text-xs overflow-x-auto flex-shrink-0">
             <button
               onClick={() => setActiveRightTab("explain")}
               className={cn(
-                "px-2 py-1 rounded transition-colors whitespace-nowrap",
+                "px-2.5 py-1 rounded transition-colors whitespace-nowrap text-xs",
                 activeRightTab === "explain"
-                  ? "bg-bg-active text-accent-primary font-bold border border-border-subtle"
-                  : "text-text-muted hover:text-text-primary hover:bg-bg-surface"
+                  ? "bg-bg-elevated text-text-primary font-semibold"
+                  : "text-text-muted hover:text-text-primary"
               )}
             >
               Explain
@@ -247,21 +242,21 @@ export default function InspectionResultPage() {
             <button
               onClick={() => setActiveRightTab("normal_twin")}
               className={cn(
-                "px-2 py-1 rounded transition-colors whitespace-nowrap",
+                "px-2.5 py-1 rounded transition-colors whitespace-nowrap text-xs",
                 activeRightTab === "normal_twin"
-                  ? "bg-bg-active text-accent-primary font-bold border border-border-subtle"
-                  : "text-text-muted hover:text-text-primary hover:bg-bg-surface"
+                  ? "bg-bg-elevated text-text-primary font-semibold"
+                  : "text-text-muted hover:text-text-primary"
               )}
             >
-              Normal Twin
+              Normal twin
             </button>
             <button
               onClick={() => setActiveRightTab("trace")}
               className={cn(
-                "px-2 py-1 rounded transition-colors whitespace-nowrap",
+                "px-2.5 py-1 rounded transition-colors whitespace-nowrap text-xs",
                 activeRightTab === "trace"
-                  ? "bg-bg-active text-accent-primary font-bold border border-border-subtle"
-                  : "text-text-muted hover:text-text-primary hover:bg-bg-surface"
+                  ? "bg-bg-elevated text-text-primary font-semibold"
+                  : "text-text-muted hover:text-text-primary"
               )}
             >
               Trace
@@ -269,10 +264,10 @@ export default function InspectionResultPage() {
             <button
               onClick={() => setActiveRightTab("quality")}
               className={cn(
-                "px-2 py-1 rounded transition-colors whitespace-nowrap",
+                "px-2.5 py-1 rounded transition-colors whitespace-nowrap text-xs",
                 activeRightTab === "quality"
-                  ? "bg-bg-active text-accent-primary font-bold border border-border-subtle"
-                  : "text-text-muted hover:text-text-primary hover:bg-bg-surface"
+                  ? "bg-bg-elevated text-text-primary font-semibold"
+                  : "text-text-muted hover:text-text-primary"
               )}
             >
               Quality
@@ -280,7 +275,7 @@ export default function InspectionResultPage() {
           </div>
 
           {/* Drawer Content */}
-          <div className="flex-1 p-3.5 overflow-y-auto">
+          <div className="flex-1 p-4 overflow-y-auto">
             {activeRightTab === "explain" && (
               <AssistantPanel
                 sampleId={inspectionId}

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { GitCompare, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { fetchInspections, fetchInspection, InspectionListItem, InspectionDetail } from "@/lib/api";
 import { StatusIndicator } from "@/components/StatusIndicator";
 import { formatMetric } from "@/lib/utils";
@@ -38,27 +38,27 @@ export default function ComparePage() {
   }, [leftId, rightId]);
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
+    <div className="max-w-[1500px] mx-auto space-y-8">
       {/* Header */}
-      <div className="pb-4 border-b border-border-default flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-6 border-b border-white/[0.05]">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight text-text-primary">
-            Compare Inspections Side-by-Side
+          <h1 className="text-2xl sm:text-[28px] font-semibold tracking-tight text-text-primary">
+            Compare
           </h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            Bilateral cross-examination of anomalous vs nominal samples or evolving defect geometries.
+          <p className="text-sm text-text-muted mt-1">
+            Side-by-side multimodal cross-examination of sample geometries and defect signatures.
           </p>
         </div>
       </div>
 
-      {/* Selectors Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border border-border-default rounded-md bg-bg-panel p-3 text-xs font-mono">
-        <div className="flex items-center gap-2">
-          <span className="text-text-muted text-[11px] whitespace-nowrap">Sample A:</span>
+      {/* Selectors Bar - Clean strip */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+        <div className="flex items-center gap-3">
+          <span className="text-text-muted text-xs font-medium shrink-0">Sample A</span>
           <select
             value={leftId}
             onChange={(e) => setLeftId(e.target.value)}
-            className="w-full bg-bg-app border border-border-default rounded px-2.5 py-1 text-xs text-text-primary outline-none"
+            className="w-full bg-bg-surface border border-white/[0.08] rounded px-3 py-2 text-xs text-text-primary outline-none focus:border-accent-primary cursor-pointer"
           >
             {inspectionsList.map((i) => (
               <option key={`left-${i.id}`} value={i.id}>
@@ -68,12 +68,12 @@ export default function ComparePage() {
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-text-muted text-[11px] whitespace-nowrap">Sample B:</span>
+        <div className="flex items-center gap-3">
+          <span className="text-text-muted text-xs font-medium shrink-0">Sample B</span>
           <select
             value={rightId}
             onChange={(e) => setRightId(e.target.value)}
-            className="w-full bg-bg-app border border-border-default rounded px-2.5 py-1 text-xs text-text-primary outline-none"
+            className="w-full bg-bg-surface border border-white/[0.08] rounded px-3 py-2 text-xs text-text-primary outline-none focus:border-accent-primary cursor-pointer"
           >
             {inspectionsList.map((i) => (
               <option key={`right-${i.id}`} value={i.id}>
@@ -85,11 +85,14 @@ export default function ComparePage() {
       </div>
 
       {/* Comparison Workspace */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {[leftDetail, rightDetail].map((detail, idx) => {
           if (!detail) {
             return (
-              <div key={idx} className="p-12 border border-border-default rounded bg-bg-panel text-center text-xs text-text-muted font-mono">
+              <div
+                key={idx}
+                className="p-16 border border-white/[0.05] rounded-md bg-bg-surface text-center text-xs text-text-muted"
+              >
                 Loading sample...
               </div>
             );
@@ -103,14 +106,20 @@ export default function ComparePage() {
           const vol = d0.volume || {};
 
           return (
-            <div key={detail.id} className="border border-border-default rounded-md bg-bg-panel p-4 space-y-4">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-border-subtle pb-2.5">
+            <div
+              key={detail.id}
+              className="border border-white/[0.06] rounded-md bg-bg-surface p-5 space-y-5"
+            >
+              {/* Card Header */}
+              <div className="flex items-center justify-between border-b border-white/[0.05] pb-3">
                 <div>
-                  <span className="text-[10px] font-mono text-text-muted uppercase block">
+                  <span className="text-[11px] text-text-muted block">
                     Sample {idx === 0 ? "A" : "B"}
                   </span>
-                  <Link href={`/inspect/${detail.id}`} className="text-sm font-semibold text-accent-primary hover:underline">
+                  <Link
+                    href={`/inspect/${detail.id}`}
+                    className="text-base font-semibold text-text-primary hover:text-accent-primary transition-colors"
+                  >
                     {detail.id}
                   </Link>
                   <span className="text-xs text-text-muted ml-2">({detail.category})</span>
@@ -119,7 +128,7 @@ export default function ComparePage() {
               </div>
 
               {/* Visual Overlay Image */}
-              <div className="h-60 rounded bg-bg-app border border-border-subtle overflow-hidden flex items-center justify-center">
+              <div className="h-64 rounded bg-bg-app border border-white/[0.04] overflow-hidden flex items-center justify-center">
                 <img
                   src={`/api/inspections/${detail.id}/artifacts/overlay`}
                   alt="Inspection Overlay"
@@ -130,53 +139,59 @@ export default function ComparePage() {
                 />
               </div>
 
-              {/* Core Quantitative Metrics */}
-              <div className="border border-border-subtle rounded bg-bg-subtle p-3 space-y-2 font-mono text-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-text-muted">PNTC Anomaly Score</span>
-                  <span className="font-bold text-text-primary tabular-nums text-sm">
+              {/* Core Quantitative Metrics - Definition List */}
+              <dl className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs pt-1">
+                <div>
+                  <dt className="text-text-muted text-[11px]">PNTC anomaly score</dt>
+                  <dd className="font-semibold text-text-primary tabular-nums text-sm mt-0.5">
                     {formatMetric(pntc.score, 4)}
-                  </span>
+                  </dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-text-muted">Defects Detected</span>
-                  <span className="font-semibold text-text-primary tabular-nums">
+                <div>
+                  <dt className="text-text-muted text-[11px]">Defects detected</dt>
+                  <dd className="font-semibold text-text-primary tabular-nums text-sm mt-0.5">
                     {rep.defects?.length ?? 0}
-                  </span>
+                  </dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-text-muted">Max Depression Depth</span>
-                  <span className="text-status-anomaly font-semibold">
+                <div>
+                  <dt className="text-text-muted text-[11px]">Max depression depth</dt>
+                  <dd className="text-status-anomaly font-medium tabular-nums mt-0.5">
                     {geom.max_depression_mm !== undefined && geom.max_depression_mm !== null
                       ? `${formatMetric(geom.max_depression_mm, 2)} mm`
                       : "0.00 mm"}
-                  </span>
+                  </dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-text-muted">Missing Material Volume</span>
-                  <span className="text-status-anomaly font-semibold">
+                <div>
+                  <dt className="text-text-muted text-[11px]">Missing material volume</dt>
+                  <dd className="text-status-anomaly font-medium tabular-nums mt-0.5">
                     {vol.missing_material !== undefined
                       ? `${formatMetric(vol.missing_material, 1)} mm³`
                       : "0.0 mm³"}
-                  </span>
+                  </dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-text-muted">Surface Area</span>
-                  <span className="text-text-primary">
+                <div>
+                  <dt className="text-text-muted text-[11px]">Surface area</dt>
+                  <dd className="text-text-primary tabular-nums mt-0.5">
                     {morph.surface_area_3d_mm2 !== undefined
                       ? `${formatMetric(morph.surface_area_3d_mm2, 1)} mm²`
                       : "—"}
-                  </span>
+                  </dd>
                 </div>
-              </div>
+                <div>
+                  <dt className="text-text-muted text-[11px]">Threshold</dt>
+                  <dd className="text-text-secondary tabular-nums mt-0.5">
+                    {pntc.threshold || 0.5}
+                  </dd>
+                </div>
+              </dl>
 
-              <div className="pt-2 text-right">
+              <div className="pt-2 border-t border-white/[0.04] text-right">
                 <Link
                   href={`/inspect/${detail.id}`}
-                  className="inline-flex items-center gap-1 text-xs text-accent-primary hover:underline font-mono"
+                  className="inline-flex items-center gap-1.5 text-xs text-accent-primary hover:text-accent-hover font-medium transition-colors"
                 >
-                  <span>Open Full Metrology Report</span>
-                  <ArrowRight size={12} />
+                  <span>View full metrology report</span>
+                  <ArrowRight size={13} />
                 </Link>
               </div>
             </div>

@@ -404,7 +404,7 @@ def get_analytics_summary() -> Dict[str, Any]:
         "normal": normal,
         "manual_review": manual_review,
         "average_anomaly_score": avg_score,
-        "manual_review_rate": round(manual_review / max(1, total) * 100.0, 1),
+        "manual_review_rate": round(manual_review / max(1, total), 4),
         "by_category": by_category,
         "by_status": by_status,
     }

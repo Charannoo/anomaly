@@ -22,13 +22,13 @@ export default function NewInspectionPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
-      <div className="pb-4 border-b border-border-default">
-        <h1 className="text-xl font-semibold tracking-tight text-text-primary">
+    <div className="max-w-[1240px] mx-auto space-y-8">
+      <div>
+        <h1 className="text-[28px] font-semibold tracking-tight text-[#F3F5F7]">
           New Inspection
         </h1>
-        <p className="text-xs text-text-muted mt-0.5">
-          Provide corresponding RGB and XYZ observations for automated PNTC multimodal characterization.
+        <p className="text-xs text-[#A7AFBA] mt-0.5">
+          Provide corresponding RGB and XYZ observations.
         </p>
       </div>
 
