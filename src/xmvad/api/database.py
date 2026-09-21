@@ -280,7 +280,10 @@ def get_inspection_by_id(inspection_id: str) -> Optional[Dict[str, Any]]:
     """Retrieve full inspection report and metadata by ID."""
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM inspections WHERE id = ? OR sample_id = ?", (inspection_id, inspection_id))
+    cursor.execute(
+        "SELECT * FROM inspections WHERE id = ? OR sample_id = ? OR id = ? OR sample_id LIKE ?",
+        (inspection_id, inspection_id, f"INSP-{inspection_id}", f"{inspection_id}%"),
+    )
     row = cursor.fetchone()
     conn.close()
 
